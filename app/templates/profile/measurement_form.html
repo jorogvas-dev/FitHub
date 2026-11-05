@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}{{ 'Edit' if entry else 'Add' }} bodyweight · FitHub{% endblock %}
+{% block content %}
+<section class="form-card">
+  <a href="{{ url_for('profile.history') }}">← Bodyweight history</a>
+  <h1>{{ 'Edit' if entry else 'Add' }} measurement</h1>
+  {% set values = request.form if request.method == 'POST' else (entry or {}) %}
+  <form method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Date<input type="date" name="measured_on" max="{{ today }}" required value="{{ values.get('measured_on',today) }}"></label>
+    <label>Weight (kg)<input type="number" name="weight_kg" min="20" max="500" step="0.01" required value="{{ values.get('weight_kg','') }}"></label>
+    <p class="note">Record one measurement per date, up to today. Weight can have up to two decimal places.</p>
+    <button class="button">Save measurement</button>
+  </form>
+</section>
+{% endblock %}

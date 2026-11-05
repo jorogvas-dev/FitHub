@@ -1,0 +1,3 @@
+{% extends 'base.html' %}{% block title %}Delete diary entry · FitHub{% endblock %}
+{% block content %}{% include 'nutrition/_nav.html' %}<section class="form-card"><a href="{{ url_for('nutrition.diary',date=entry.logged_on.isoformat()) }}">← Cancel</a><h1>Delete this entry?</h1><p><strong>{{ entry.food_name }}</strong> · {{ entry.grams|nutrition_amount }} g on {{ entry.logged_on }} ({{ entry.meal }})</p><p>Your saved food library is kept.</p>
+<form method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><label class="checkbox"><input type="checkbox" name="confirm" value="delete" required> Delete this diary entry.</label><button class="button danger-button">Delete entry</button></form></section>{% endblock %}

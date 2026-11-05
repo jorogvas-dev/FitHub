@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Manage exercises · FitHub{% endblock %}
+{% block content %}
+<p><a href="{{ url_for('food_library.admin_list') }}">Manage shared food library</a></p>
+<div class="page-heading"><div><p class="eyebrow">ADMINISTRATION</p><h1>Manage exercises</h1><p class="lead">Maintain the library without removing training history.</p></div><a class="button" href="{{ url_for('admin.edit') }}">+ Create exercise</a></div>
+<form class="search" method="get"><input name="q" maxlength="100" value="{{ query }}" placeholder="Name, muscle or equipment" aria-label="Search exercises"><button class="button secondary">Search</button>{% if query %}<a class="button secondary" href="{{ url_for('admin.index') }}">Clear</a>{% endif %}</form>
+<p class="note">{{ exercises|length }} matching exercises. Timed movements can be browsed; duration targets and logs are outside this phase.</p>
+{% if exercises %}<div class="table-wrap"><table><thead><tr><th>Exercise</th><th>Muscle / equipment</th><th>Tracking</th><th>Status</th><th>Actions</th></tr></thead><tbody>
+{% for e in exercises %}<tr><td><strong>{{ e.name }}</strong></td><td>{{ e.muscle_group }}<br><small>{{ e.equipment }}</small></td><td>{{ 'Timed' if e.tracking_type == 'duration' else 'Repetitions' }}</td><td><span class="badge {{ 'muted-badge' if not e.is_active }}">{{ 'Active' if e.is_active else 'Inactive' }}</span></td><td><div class="actions"><a href="{{ url_for('admin.edit',exercise_id=e.exercise_id) }}">Edit</a>{% if e.is_active %}<a class="danger-link" href="{{ url_for('admin.deactivate',exercise_id=e.exercise_id) }}">Deactivate</a>{% else %}<form method="post" action="{{ url_for('admin.activate',exercise_id=e.exercise_id) }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="quiet">Activate</button></form>{% endif %}</div></td></tr>{% endfor %}
+</tbody></table></div>{% else %}<article class="empty-state"><h2>No exercises found</h2><p>Try another search or create an exercise.</p><a href="{{ url_for('admin.edit') }}">Create an exercise</a></article>{% endif %}
+{% endblock %}

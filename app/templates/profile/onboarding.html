@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Set up your training profile · FitHub{% endblock %}
+{% block content %}
+<section class="form-card onboarding">
+  <p class="eyebrow">YOUR STARTING POINT</p><h1>Make FitHub yours.</h1>
+  <p class="lead">A few details to keep your training and progress in one place.</p>
+  <p class="note">We only fill missing details. Your existing profile and measurements stay as recorded.</p>
+  <form method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Height (cm)<input name="height_cm" type="number" min="50" max="300" step="0.1" required {% if profile.height_cm is defined and profile.height_cm is not none %}readonly value="{{ profile.height_cm }}"{% else %}value="{{ request.form.get('height_cm','') }}"{% endif %}></label>
+    {% if profile.height_cm is defined and profile.height_cm is not none %}<p class="field-help">Your saved height is kept. You can change it later in Profile.</p>{% endif %}
+    <label>Training goal<select name="goal" required {% if profile.goal %}disabled{% endif %}><option value="">Choose your goal</option>{% for value,label in goals %}<option value="{{ value }}" {% if (profile.goal or request.form.get('goal')) == value %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>
+    <label>Experience<select name="experience" required {% if profile.experience %}disabled{% endif %}><option value="">Choose your experience</option>{% for value,label in experience_levels %}<option value="{{ value }}" {% if (profile.experience or request.form.get('experience')) == value %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>
+    <fieldset><legend>Current bodyweight</legend>
+      {% if todays_weight %}
+        <div class="notice">You already recorded <strong>{{ todays_weight.weight_kg }} kg</strong> today ({{ today }}). This entry will stay unchanged.</div>
+        <label class="checkbox"><input type="checkbox" name="weight_action" value="keep_today" required> Use today's existing measurement.</label>
+        <p><a href="{{ url_for('profile.measurement_edit',measurement_id=todays_weight.measurement_id) }}">Edit today's measurement in Bodyweight</a></p>
+      {% else %}
+        {% if latest %}<p class="note">Latest entry: {{ latest.weight_kg }} kg on {{ latest.measured_on }}.</p>
+        <label class="checkbox"><input type="radio" name="weight_action" value="keep_latest" {% if request.form.get('weight_action','keep_latest') == 'keep_latest' %}checked{% endif %}> Keep this measurement for now.</label>
+        <label class="checkbox"><input type="radio" name="weight_action" value="add_today" {% if request.form.get('weight_action') == 'add_today' %}checked{% endif %}> Add a new measurement for today.</label>{% endif %}
+        <label>Weight (kg)<input name="weight_kg" type="number" min="20" max="500" step="0.01" {% if not latest %}required{% endif %} value="{{ request.form.get('weight_kg','') }}"></label>
+        <p class="field-help">20–500 kg, up to two decimal places. A new entry is dated {{ today }}.</p>
+      {% endif %}
+    </fieldset>
+    <div class="form-actions"><button class="button">Save and open dashboard</button><a href="{{ url_for('main.dashboard') }}">Do this later</a></div>
+  </form>
+</section>
+{% endblock %}

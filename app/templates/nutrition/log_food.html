@@ -1,0 +1,6 @@
+{% extends 'base.html' %}{% block title %}Log saved food · FitHub{% endblock %}
+{% block content %}{% include 'nutrition/_nav.html' %}<section class="form-card"><a href="{{ url_for('nutrition.foods',date=day.isoformat()) }}">← My foods</a><h1>Log {{ food.name }}</h1>
+{% include 'nutrition/_provenance.html' %}<p>Current values per 100 g:</p><dl class="food-facts">{% for key,label,unit in nutrients %}<div><dt>{{ label }}</dt><dd>{{ food[key+'_100g']|nutrition_amount }} {{ unit if food[key+'_100g'] is not none }}</dd></div>{% endfor %}</dl>
+<p class="note">Saving copies the food's current values into this diary entry. Later food edits will not change it.</p>
+{% set values = request.form if request.method == 'POST' else {} %}<form method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}">{% include 'nutrition/_portion.html' %}<div class="form-actions"><button class="button">Log this food</button><a href="{{ url_for('nutrition.foods',date=day.isoformat()) }}">Cancel</a></div></form>
+{% include 'nutrition/_warning.html' %}</section>{% endblock %}

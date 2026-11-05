@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Delete measurement · FitHub{% endblock %}
+{% block content %}
+<section class="form-card">
+  <a href="{{ url_for('profile.history') }}">← Cancel</a>
+  <h1>Delete measurement?</h1>
+  <p><strong>{{ entry.weight_kg }} kg on {{ entry.measured_on }}</strong></p>
+  <form method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label class="checkbox"><input type="checkbox" name="confirm" value="delete" required> I want to delete this measurement.</label>
+    <button class="button danger-button">Delete permanently</button>
+  </form>
+</section>
+{% endblock %}

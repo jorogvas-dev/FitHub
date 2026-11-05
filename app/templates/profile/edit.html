@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Fitness profile · FitHub{% endblock %}
+{% block content %}
+<section class="form-card">
+  <a href="{{ url_for('main.dashboard') }}">← Dashboard</a>
+  <h1>Fitness profile</h1>
+  <p class="note">Your profile is private. All fields are optional.</p>
+  {% set values = request.form if request.method == 'POST' else profile %}
+  <form method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Height (cm)<input type="number" name="height_cm" min="50" max="300" step="0.1" value="{{ values.get('height_cm') if values.get('height_cm') is not none else '' }}"></label>
+    <label>Goal<select name="goal"><option value="">Not set</option>{% for value, label in goals %}<option value="{{ value }}" {% if values.get('goal') == value %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>
+    <label>Experience<select name="experience"><option value="">Not set</option>{% for value, label in experience_levels %}<option value="{{ value }}" {% if values.get('experience') == value %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>
+    <button class="button">Save profile</button>
+  </form>
+  <p><a href="{{ url_for('profile.history') }}">View bodyweight history</a></p>
+</section>
+{% endblock %}

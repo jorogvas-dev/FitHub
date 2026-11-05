@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}{{ 'Edit' if exercise else 'Create' }} exercise · FitHub{% endblock %}
+{% block content %}
+<section class="form-card"><a href="{{ url_for('admin.index') }}">← Manage exercises</a><p class="eyebrow">ADMINISTRATION</p><h1>{{ 'Edit' if exercise else 'Create' }} exercise</h1>
+{% set values = request.form if request.method == 'POST' else (exercise or {}) %}
+<form method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+<label>Name<input name="name" required maxlength="100" value="{{ values.get('name','') }}"></label>
+<label>Muscle group<input name="muscle_group" required maxlength="40" value="{{ values.get('muscle_group','') }}" placeholder="e.g. Back"></label>
+<label>Equipment<input name="equipment" required maxlength="40" value="{{ values.get('equipment','') }}" placeholder="e.g. Pull-up bar"></label>
+<label>Tracking type<select name="tracking_type" required><option value="reps" {% if values.get('tracking_type','reps') == 'reps' %}selected{% endif %}>Repetitions</option><option value="duration" {% if values.get('tracking_type') == 'duration' %}selected{% endif %}>Timed / duration</option></select></label>
+<p class="field-help">Timed exercises are available as library references. Duration targets and workout logging are not supported yet; never enter seconds as reps. Existing logs and snapshots are retained when metadata changes.</p>
+<label>Instructions<textarea name="description" rows="4" required maxlength="2000">{{ values.get('description','') }}</textarea></label>
+<div class="form-actions"><button class="button">Save exercise</button><a href="{{ url_for('admin.index') }}">Cancel</a></div></form></section>
+{% endblock %}

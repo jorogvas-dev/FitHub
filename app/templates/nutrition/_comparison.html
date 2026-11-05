@@ -1,0 +1,3 @@
+{% if comparison %}
+<p class="note">{% if comparison.difference != 0 %}Your calorie target is <strong>{{ comparison.magnitude|nutrition_amount }} kcal {{ comparison.direction }}</strong> than the {{ comparison.estimated|nutrition_amount }} kcal estimate from your macro targets.{% else %}Your calorie target matches the {{ comparison.estimated|nutrition_amount }} kcal estimate from your macro targets.{% endif %} The estimate uses 4 kcal/g protein, 4 kcal/g carbohydrate and 9 kcal/g fat. Targets stay exactly as entered.</p>
+{% else %}<p class="note">Set calories and all three macro targets to compare their energy estimates. Blank targets stay unset. FitHub does not prescribe targets.</p>{% endif %}

@@ -1,0 +1,108 @@
+name: fithub-school
+services:
+  db:
+    image: postgres:18
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:?Run scripts/setup.ps1 first}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Run scripts/setup.ps1 first}
+      POSTGRES_DB: ${POSTGRES_DB:-fithub}
+    ports:
+      - "127.0.0.1:${POSTGRES_HOST_PORT:-5433}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql
+      - ./db/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    restart: unless-stopped
+  chroma:
+    image: chromadb/chroma:1.5.5
+    volumes:
+      - chromadata:/data
+      - ./deploy/chroma/healthcheck.sh:/usr/local/bin/fithub-healthcheck:ro
+    healthcheck:
+      test: ["CMD", "bash", "/usr/local/bin/fithub-healthcheck"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 15s
+    restart: unless-stopped
+  web:
+    build: .
+    deploy:
+      replicas: 2
+    environment:
+      PGHOST: db
+      PGPORT: "5432"
+      PGUSER: ${POSTGRES_USER}
+      PGPASSWORD: ${POSTGRES_PASSWORD}
+      PGDATABASE: ${POSTGRES_DB:-fithub}
+      SECRET_KEY: ${SECRET_KEY:?Run scripts/setup.ps1 first}
+      CHROMA_URL: http://chroma:8000
+    expose:
+      - "8000"
+    depends_on:
+      db:
+        condition: service_healthy
+      chroma:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=8)"]
+      interval: 10s
+      timeout: 10s
+      retries: 30
+      start_period: 30s
+    restart: unless-stopped
+  nginx:
+    build: ./deploy/nginx
+    environment:
+      HTTPS_PORT: ${HTTPS_PORT:-8443}
+      NGINX_ENVSUBST_FILTER: ^HTTPS_PORT$$
+    ports:
+      # WEB_PORT remains the existing HTTP entry point; only its destination changes.
+      - "127.0.0.1:${WEB_PORT:-8010}:80"
+      - "127.0.0.1:${HTTPS_PORT:-8443}:443"
+    volumes:
+      - tlsdata:/etc/nginx/certs
+    depends_on:
+      web:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--no-check-certificate", "-O", "/dev/null", "https://127.0.0.1/proxy-health"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 10s
+    restart: unless-stopped
+  dozzle:
+    image: amir20/dozzle:v11.4.0
+    environment:
+      DOZZLE_FILTER: label=com.docker.compose.project=fithub-school
+      DOZZLE_NO_ANALYTICS: "true"
+      DOZZLE_ENABLE_ACTIONS: "false"
+      DOZZLE_ENABLE_SHELL: "false"
+      DOZZLE_ENABLE_MCP: "false"
+      DOZZLE_DISABLE_SETUP_WIZARD: "true"
+      DOZZLE_RELEASE_CHECK_MODE: manual
+      DOZZLE_IMAGE_CHECK_MODE: "off"
+      DOZZLE_AUTO_UPDATE: "off"
+    ports:
+      - "127.0.0.1:${DOZZLE_PORT:-8088}:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    depends_on:
+      nginx:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "/dozzle", "healthcheck"]
+      interval: 10s
+      timeout: 10s
+      retries: 6
+      start_period: 10s
+    restart: unless-stopped
+volumes:
+  pgdata:
+  chromadata:
+  tlsdata:

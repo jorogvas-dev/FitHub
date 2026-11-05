@@ -1,0 +1,7 @@
+{% extends 'base.html' %}{% block content %}
+<section class="hero"><p class="eyebrow">YOUR TRAINING. YOUR PROGRESS.</p><h1>Build strength.<br><span>Track the work.</span></h1><p class="lead">Plan your sessions, record every set and see how far you have come.</p><div class="actions"><a class="button" href="{{ url_for('main.dashboard') if g.user else url_for('auth.register') }}">{{ 'Open dashboard' if g.user else 'Create your account' }} →</a><a class="button secondary" href="{{ url_for('main.exercises') }}">Explore exercises</a></div></section>
+<section class="grid" aria-label="Your training toolkit">
+<article><span class="tag">01 / PLAN</span><h2>A routine that fits.</h2><p>Build training days with exercises, sets and rep ranges you can return to.</p><a href="{{ url_for('plans.index') }}">My workout plans →</a></article>
+<article><span class="tag">02 / TRAIN</span><h2>Make each set count.</h2><p>Log your reps, weight and effort. Keep completed sessions in one private history.</p><a href="{{ url_for('workouts.history') }}">Workout history →</a></article>
+<article><span class="tag">03 / PROGRESS</span><h2>Keep your starting point.</h2><p>Save your training goal, experience and bodyweight measurements as you go.</p><a href="{{ url_for('profile.edit') if g.user else url_for('auth.register') }}">Your fitness profile →</a></article>
+</section>{% endblock %}

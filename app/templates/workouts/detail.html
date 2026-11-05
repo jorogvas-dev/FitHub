@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}{{ plan.day_name }} · Workout · FitHub{% endblock %}
+{% block content %}
+<a href="{{ url_for('workouts.history') }}">← Workout history</a>
+<div class="page-heading"><div><p class="eyebrow">{{ 'FINISHED WORKOUT' if workout.finished_at else 'WORKOUT IN PROGRESS' }}</p><h1>{{ plan.day_name }}</h1><p>{{ plan.plan_name }}</p></div>
+{% if not workout.finished_at %}<div class="actions"><a class="button" href="{{ url_for('workouts.set_edit',session_id=workout.session_id) }}">+ Log set</a><form method="post" action="{{ url_for('workouts.finish',session_id=workout.session_id) }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="button">Finish workout</button></form></div>{% endif %}</div>
+<p class="note">Started {{ workout.started_at }}{% if workout.finished_at %} · Finished {{ workout.finished_at }}. This workout is read-only.{% endif %}</p>
+<article class="training-day"><h2>Planned exercises</h2>
+{% if plan.exercises %}<div class="table-wrap"><table><thead><tr><th>Exercise</th><th>Target sets</th><th>Rep range</th></tr></thead><tbody>
+{% for exercise in plan.exercises %}<tr><td>{{ exercise.name }}</td><td>{{ exercise.target_sets }}</td><td>{% if exercise.get('tracking_type') == 'duration' %}Timed exercise: duration target unavailable; legacy values retained.{% else %}{{ exercise.reps_min }}–{{ exercise.reps_max }} reps{% endif %}</td></tr>{% endfor %}
+</tbody></table></div>{% else %}<p>No planned exercises available. Logged sets are shown below.</p>{% endif %}</article>
+<article class="training-day"><h2>Logged sets</h2>
+<p class="note">Historical rep values and original targets remain as recorded. This logger does not store timed durations.</p>
+{% if logs %}<div class="table-wrap"><table><thead><tr><th>Exercise</th><th>Set</th><th>Reps</th><th>Weight</th><th>RIR</th>{% if not workout.finished_at %}<th>Actions</th>{% endif %}</tr></thead><tbody>
+{% for entry in logs %}<tr><td>{{ entry.name }}</td><td>{{ entry.set_number }}</td><td>{{ entry.reps }}</td><td>{{ (entry.weight_kg ~ ' kg') if entry.weight_kg is not none else 'Bodyweight' }}</td><td>{{ entry.rir if entry.rir is not none else '—' }}</td>
+{% if not workout.finished_at %}<td><div class="actions"><a href="{{ url_for('workouts.set_edit',session_id=workout.session_id,set_id=entry.set_id) }}">Edit</a><form method="post" action="{{ url_for('workouts.set_delete',session_id=workout.session_id,set_id=entry.set_id) }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="quiet danger-link">Delete set</button></form></div></td>{% endif %}</tr>{% endfor %}
+</tbody></table></div>{% else %}<p>No sets logged yet.</p>{% endif %}</article>
+{% endblock %}

@@ -1,0 +1,4 @@
+<div class="input-pair"><label>Date<input type="date" name="logged_on" required min="1900-01-01" max="2100-12-31" value="{{ values.get('logged_on',day) }}"></label>
+<label>Meal<select name="meal" required>{% for key,label in meals %}<option value="{{ key }}" {% if values.get('meal',request.args.get('meal','breakfast')) == key %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label></div>
+<label>Grams consumed<input type="number" name="grams" required min="0.01" max="10000" step="0.01" value="{{ values.get('grams','100.00') }}"></label>
+<p class="field-help">0.01–10000 g per entry, up to two decimal places.</p>

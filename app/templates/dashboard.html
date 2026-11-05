@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<p class="eyebrow">MEMBER DASHBOARD</p>
+<h1>Hey, {{ g.user.username }}.</h1>
+<p class="lead">Your training starts here.</p>
+<p><a href="{{ url_for('profile.edit') }}">Edit fitness profile</a> · <a href="{{ url_for('nutrition.diary') }}">Nutrition diary</a></p>
+{% if setup_required %}<article class="setup-card"><div><p class="eyebrow">A GOOD PLACE TO START</p><h2>Complete your training profile</h2><p>Save your height, experience, goal and starting bodyweight. Your existing details stay unchanged.</p></div><a class="button" href="{{ url_for('profile.onboarding') }}">Finish setup →</a></article>{% endif %}
+<div class="grid">
+  <article><span class="tag">YOUR PLANS</span><h2 class="metric">{{ plans }}</h2><p><a href="{{ url_for('plans.index') }}">Manage your plans →</a></p></article>
+  <article><span class="tag">WORKOUTS LOGGED</span><h2 class="metric">{{ workouts }}</h2><p><a href="{{ url_for('workouts.history') }}">View workout history →</a></p></article>
+  <article>
+    <span class="tag">LATEST BODYWEIGHT</span>
+    <h2 class="metric">{{ measurement[0] ~ ' kg' if measurement else '—' }}</h2>
+    {% if measurement %}
+      <p>Recorded {{ measurement[1] }}</p>
+      {% if weight_change is not none %}<p>{{ '+' if weight_change > 0 else '' }}{{ weight_change }} kg since {{ previous_measurement[1] }}</p>
+      {% else %}<p>Add another measurement to see your change.</p>{% endif %}
+    {% else %}<p>No measurements recorded.</p>{% endif %}
+    <p><a href="{{ url_for('profile.history') }}">Bodyweight history</a> · <a href="{{ url_for('profile.measurement_edit') }}">Add measurement</a></p>
+  </article>
+</div>
+<article><h2>Build your training plan</h2><p>Choose training days, add exercises, and set your rep targets.</p><a class="button" href="{{ url_for('plans.index') }}">My workout plans →</a></article>
+{% endblock %}

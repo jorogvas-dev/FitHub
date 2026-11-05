@@ -1,0 +1,5 @@
+<fieldset><legend>Nutrition per 100 g</legend>
+<p class="note">Leave a value blank if it is unknown. Enter 0 only when you know it is zero. Up to {{ precision|default(2) }} decimal places.</p>
+<div class="input-pair">{% for key,label,unit in nutrients %}<label>{{ label }} ({{ unit }} / 100 g)<input name="{{ key }}_100g" type="number" min="0" max="{{ 1000 if key == 'kcal' else 100 }}" step="{{ '0.000001' if precision|default(2) == 6 else '0.01' }}" value="{{ values.get(key+'_100g','') if values.get(key+'_100g') is not none else '' }}"></label>{% endfor %}</div>
+<p class="field-help">Bounds per 100 g: 0–1000 kcal, and 0–100 g for each macro.</p>
+</fieldset>

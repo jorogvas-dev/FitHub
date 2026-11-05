@@ -1,0 +1,7 @@
+{% extends 'base.html' %}{% block title %}Exercise library · FitHub{% endblock %}{% block content %}
+<div class="page-heading"><div><p class="eyebrow">MOVE WITH PURPOSE</p><h1>Exercise library</h1><p class="lead">Calisthenics, free weights and machines. Find your next movement.</p></div>{% if g.user and g.user.is_admin %}<a class="button secondary" href="{{ url_for('admin.index') }}">Manage exercises</a>{% endif %}</div>
+<form class="search" method="get"><input name="q" maxlength="100" value="{{ query }}" placeholder="Name, muscle or equipment" aria-label="Search exercises"><button class="button">Search</button>{% if query %}<a class="button secondary" href="{{ url_for('main.exercises') }}">Clear</a>{% endif %}</form>
+<p class="note">Timed exercises are library references in this phase. Duration targets and logs are not available; do not enter seconds as reps.</p>
+<section class="grid">{% for name,muscle,equipment,description,tracking_type in exercises %}
+<article class="exercise-card"><div class="card-meta"><span class="tag">{{ muscle }}</span><span class="badge {{ 'muted-badge' if tracking_type == 'duration' }}">{{ 'Timed' if tracking_type == 'duration' else 'Repetitions' }}</span></div><h2>{{ name }}</h2><p>{{ description }}</p><small>{{ equipment }}</small></article>
+{% else %}<article class="empty-state"><h2>No matching exercises</h2><p>Try another name, muscle group or piece of equipment.</p><a href="{{ url_for('main.exercises') }}">Clear search</a></article>{% endfor %}</section>{% endblock %}

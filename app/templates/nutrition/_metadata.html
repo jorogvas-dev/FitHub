@@ -1,0 +1,7 @@
+<fieldset><legend>Ingredient and allergen review</legend>
+<p class="note">Separate from nutrition provenance. Unknown is the default. This review does not establish cross-contact safety.</p>
+{% if metadata_labels|default(true) %}<label>Ingredient labels (comma separated)<input name="ingredient_labels" maxlength="1000" value="{{ request.form.get('ingredient_labels','') if request.method == 'POST' else (food.ingredient_labels|join(', ') if food else '') }}" placeholder="e.g. oats, banana"></label>
+<p class="field-help">Include all constituent ingredients, including compound foods, to support unwanted-ingredient exclusions.</p>{% endif %}
+<label class="checkbox"><input type="checkbox" name="allergen_complete" value="yes" {% if (request.method == 'POST' and request.form.get('allergen_complete') == 'yes') or (request.method != 'POST' and food and food.allergen_complete) %}checked{% endif %}> I reviewed all ingredients and their declared allergens. Unchecked means incomplete / unknown.</label>
+<div class="input-pair">{% for allergen in allergens %}<label class="checkbox"><input type="checkbox" name="allergens" value="{{ allergen }}" {% if allergen in (request.form.getlist('allergens') if request.method == 'POST' else (food.allergens if food else [])) %}checked{% endif %}> {{ allergen }}</label>{% endfor %}</div>
+</fieldset>

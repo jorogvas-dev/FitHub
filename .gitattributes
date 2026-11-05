@@ -1,0 +1,8 @@
+# Keep scripts executed inside Linux containers usable after a Windows clone.
+* text=auto
+*.sh text eol=lf
+*.sql text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+Dockerfile text eol=lf
+*.conf.template text eol=lf

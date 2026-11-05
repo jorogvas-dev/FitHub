@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Bodyweight history · FitHub{% endblock %}
+{% block content %}
+<a href="{{ url_for('main.dashboard') }}">← Dashboard</a>
+<div class="page-heading"><div><p class="eyebrow">YOUR PROGRESS</p><h1>Bodyweight history</h1></div><a class="button" href="{{ url_for('profile.measurement_edit') }}">+ Add measurement</a></div>
+<article>
+{% if measurements %}
+  <div class="table-wrap"><table><thead><tr><th>Date</th><th>Weight</th><th>Actions</th></tr></thead><tbody>
+  {% for entry in measurements %}
+    <tr><td>{{ entry.measured_on }}</td><td>{{ entry.weight_kg }} kg</td><td><div class="actions"><a href="{{ url_for('profile.measurement_edit',measurement_id=entry.measurement_id) }}">Edit</a><a class="danger-link" href="{{ url_for('profile.measurement_delete',measurement_id=entry.measurement_id) }}">Delete</a></div></td></tr>
+  {% endfor %}
+  </tbody></table></div>
+{% else %}<h2>No measurements yet</h2><p>Add your first bodyweight measurement to start tracking your progress.</p>{% endif %}
+</article>
+{% endblock %}

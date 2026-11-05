@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101713"><title>{% block title %}FitHub · Train with intent{% endblock %}</title><link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}"></head>
+<body><a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header"><a class="brand" href="{{ url_for('main.index') }}">FitHub<span>TRAIN WITH INTENT</span></a>
+<nav aria-label="Main navigation">
+{% macro navlink(endpoint,label,active) %}<a href="{{ url_for(endpoint) }}" {% if active %}aria-current="page"{% endif %}>{{ label }}</a>{% endmacro %}
+{% if g.user %}{{ navlink('main.dashboard','Dashboard',request.endpoint == 'main.dashboard') }}{{ navlink('plans.index','My plans',request.blueprint == 'plans') }}{{ navlink('workouts.history','Workouts',request.blueprint == 'workouts') }}{% endif %}
+{{ navlink('main.exercises','Exercises',request.endpoint == 'main.exercises') }}
+{% if g.user %}
+{{ navlink('profile.history','Bodyweight',request.endpoint in ('profile.history','profile.measurement_edit','profile.measurement_delete')) }}
+{{ navlink('profile.edit','Profile',request.endpoint in ('profile.edit','profile.onboarding')) }}
+{{ navlink('nutrition.diary','Nutrition',request.blueprint in ('nutrition','food_library','meals')) }}
+{% if g.user.is_admin %}{{ navlink('admin.index','Admin',request.blueprint == 'admin') }}{% endif %}
+<form method="post" action="{{ url_for('auth.logout') }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="quiet">Log out</button></form>
+{% else %}{{ navlink('auth.login','Log in',request.endpoint == 'auth.login') }}<a class="button small" href="{{ url_for('auth.register') }}">Join FitHub</a>{% endif %}
+</nav></header>
+<main id="main-content">{% for message in get_flashed_messages() %}<div class="notice" role="alert">{{ message }}</div>{% endfor %}{% block content %}{% endblock %}</main>
+<footer><strong>FitHub</strong> · Train with intent. Track your progress.</footer></body></html>

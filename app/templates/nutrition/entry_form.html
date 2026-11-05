@@ -1,0 +1,8 @@
+{% extends 'base.html' %}{% block title %}{{ 'Edit' if entry else 'Add' }} diary entry · FitHub{% endblock %}
+{% block content %}{% include 'nutrition/_nav.html' %}<section class="form-card"><a href="{{ url_for('nutrition.diary',date=day.isoformat()) }}">← Diary</a><h1>{{ 'Edit' if entry else 'Add manual' }} food entry</h1>
+<p class="note">{% if entry %}These are this entry's saved values. Correcting them changes only this entry, not your food library.{% else %}Enter the food's nutrition per 100 g and the amount consumed. Unknown values can be left blank.{% endif %}</p>
+{% set values = request.form if request.method == 'POST' else (entry or {}) %}
+<form method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><label>Food name<input name="food_name" required maxlength="{{ 300 if entry and entry.provenance else 100 }}" value="{{ values.get('food_name','') }}"></label>
+{% include 'nutrition/_portion.html' %}{% include 'nutrition/_rates.html' %}
+{% if not entry %}<label class="checkbox"><input type="checkbox" name="save_food" value="yes" {% if request.form.get('save_food') == 'yes' %}checked{% endif %}> Also save a copy in My foods for future use.</label>{% endif %}
+<div class="form-actions"><button class="button">Save diary entry</button><a href="{{ url_for('nutrition.diary',date=day.isoformat()) }}">Cancel</a></div></form>{% include 'nutrition/_warning.html' %}</section>{% endblock %}

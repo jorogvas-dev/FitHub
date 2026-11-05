@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Workout history · FitHub{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">YOUR TRAINING</p><h1>Workout history</h1></div><a class="button" href="{{ url_for('plans.index') }}">Start from a training day</a></div>
+{% for session in sessions %}
+<article class="training-day">
+  <span class="tag">{{ 'FINISHED' if session.finished_at else 'IN PROGRESS' }}</span>
+  <h2><a href="{{ url_for('workouts.detail',session_id=session.session_id) }}">{{ session.plan.day_name }}</a></h2>
+  <p>{{ session.plan.plan_name }} · Started {{ session.started_at }} · {{ session.set_count }} sets logged</p>
+  {% if session.finished_at %}<p>Finished {{ session.finished_at }}</p>{% endif %}
+</article>
+{% else %}<article><h2>No workouts yet</h2><p>Open a plan and start a training day to log your first workout.</p></article>{% endfor %}
+{% endblock %}

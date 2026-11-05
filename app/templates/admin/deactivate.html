@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}Deactivate exercise · FitHub{% endblock %}
+{% block content %}
+<section class="form-card"><a href="{{ url_for('admin.index') }}">← Cancel</a><h1>Deactivate {{ exercise.name }}?</h1><p>It will no longer be available for new prescriptions. Existing plans, logged sets and workout snapshots are retained.</p>
+<form method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><label class="checkbox"><input name="confirm" type="checkbox" value="deactivate" required> Deactivate this exercise.</label><button class="button danger-button">Deactivate exercise</button></form></section>
+{% endblock %}
