@@ -149,13 +149,17 @@ def foods():
     preparation = request.args.get('preparation', '')
     if preparation not in ('', 'raw', 'uncooked', 'cooked', 'as described'):
         abort(400)
+    sort = request.args.get('sort', 'name')
+    direction = request.args.get('direction', 'asc')
+    if sort not in ('name', 'kcal', 'protein', 'carbs', 'fat') or direction not in ('asc', 'desc'):
+        abort(400)
     with connect() as conn:
         settings = settings_row(conn)
         today = user_today(settings['timezone'])
         day = date_or_400(request.args.get('date', today.isoformat()))
-        rows = available_foods(conn, search, scope, preparation)
+        rows = available_foods(conn, search, scope, preparation, sort, direction)
     return render_template('nutrition/foods.html', foods=rows, query=search, day=day, nutrients=NUTRIENTS,
-                           scope=scope, preparation=preparation)
+                           scope=scope, preparation=preparation, sort=sort, direction=direction)
 
 
 @bp.route('/foods/new', methods=['GET', 'POST'])

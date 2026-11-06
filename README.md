@@ -34,6 +34,7 @@ Expected: 19 tables including the migration ledger. Health endpoint: https://loc
 ## Implemented in this version
 
 - Fitness branding and responsive pages.
+- Grouped member sidebar/mobile navigation and an account-scoped training, nutrition and bodyweight dashboard; see [approved theme, checks and screenshots](./docs/black-violet-theme.md).
 - Register/login/logout, hashed passwords, form CSRF tokens and protected dashboard.
 - User-scoped dashboard counts for workout plans, sessions and latest weight.
 - Searchable exercise catalogue with 68 seeded exercises, including correctly labelled timed movements.

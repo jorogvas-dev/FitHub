@@ -1,23 +1,87 @@
 {% extends 'base.html' %}
+{% from '_icons.html' import icon %}
+{% block title %}Dashboard · FitHub{% endblock %}
 {% block content %}
-<p class="eyebrow">MEMBER DASHBOARD</p>
-<h1>Hey, {{ g.user.username }}.</h1>
-<p class="lead">Your training starts here.</p>
-<p><a href="{{ url_for('profile.edit') }}">Edit fitness profile</a> · <a href="{{ url_for('nutrition.diary') }}">Nutrition diary</a></p>
-{% if setup_required %}<article class="setup-card"><div><p class="eyebrow">A GOOD PLACE TO START</p><h2>Complete your training profile</h2><p>Save your height, experience, goal and starting bodyweight. Your existing details stay unchanged.</p></div><a class="button" href="{{ url_for('profile.onboarding') }}">Finish setup →</a></article>{% endif %}
-<div class="grid">
-  <article><span class="tag">YOUR PLANS</span><h2 class="metric">{{ plans }}</h2><p><a href="{{ url_for('plans.index') }}">Manage your plans →</a></p></article>
-  <article><span class="tag">WORKOUTS LOGGED</span><h2 class="metric">{{ workouts }}</h2><p><a href="{{ url_for('workouts.history') }}">View workout history →</a></p></article>
-  <article>
-    <span class="tag">LATEST BODYWEIGHT</span>
-    <h2 class="metric">{{ measurement[0] ~ ' kg' if measurement else '—' }}</h2>
+<header class="dashboard-heading">
+  <div><h1>Dashboard</h1><p>Hey, {{ g.user.username }}. <time datetime="{{ today }}">{{ today.strftime('%a %d %b %Y') }}</time> · {{ settings.timezone }}</p></div>
+  <div class="dashboard-actions">
+    <a class="button" href="{{ url_for('plans.index') }}" aria-describedby="start-workout-hint">{{ icon('play') }}<span>Start workout</span></a>
+    <a class="button secondary" href="{{ url_for('nutrition.entry_edit',day=today.isoformat()) }}">{{ icon('utensils-crossed') }}<span>Log food</span></a>
+    <a class="button secondary" href="{{ url_for('profile.measurement_edit') }}">{{ icon('scale') }}<span>Add weight</span></a>
+  </div>
+</header>
+{% if setup_required %}<article class="setup-card dashboard-setup"><div><p class="eyebrow">A GOOD PLACE TO START</p><h2>Complete your training profile</h2><p>Save your height, experience, goal and starting bodyweight. Your existing details stay unchanged.</p></div><a class="button secondary" href="{{ url_for('profile.onboarding') }}">Finish setup {{ icon('arrow-right') }}</a></article>{% endif %}
+<div class="dashboard-grid">
+<div class="dashboard-column">
+  <article class="dashboard-card training-summary" aria-labelledby="training-heading">
+    <div class="dashboard-card-heading">
+      <div><p class="eyebrow">Training day preview</p><h2 id="training-heading">{{ training_day.plan_name if training_day else 'Your training' }}</h2>
+      {% if training_day %}<p class="day-caption">{{ training_day.day_name }} <span class="badge">Planned</span></p>{% endif %}</div>
+      {% if training_day %}<a href="{{ url_for('plans.detail',plan_id=training_day.plan_id) }}">Open plan</a>{% endif %}
+    </div>
+    <p class="note start-hint" id="start-workout-hint">Choose a plan and training day before starting a workout.</p>
+    {% if training_day and prescriptions %}
+    <div class="exercise-list-heading" aria-hidden="true"><span>Exercise</span><span>Sets × reps</span></div>
+    <ul class="dashboard-exercises" aria-label="Planned exercises">
+      {% for entry in prescriptions[:5] %}<li><span class="exercise-name">{{ entry.name }}{% if not entry.is_active %}<small>Inactive · retained in this plan</small>{% endif %}</span>
+      <span class="exercise-target">{% if entry.tracking_type == 'duration' %}<span class="note">Timed targets unavailable</span>{% else %}<span class="visually-hidden">Sets × reps: </span>{{ entry.target_sets }} × {{ entry.reps_min }}{% if entry.reps_max != entry.reps_min %}–{{ entry.reps_max }}{% endif %}{% endif %}</span></li>{% endfor %}
+    </ul>
+    {% if prescriptions|length > 5 %}<p class="note">+ {{ prescriptions|length - 5 }} more exercises in this training day. <a href="{{ url_for('plans.detail',plan_id=training_day.plan_id) }}">View all</a></p>{% endif %}
+    <p class="training-count note">{{ prescriptions|length }} exercise{{ 's' if prescriptions|length != 1 }} · {{ planned_sets }} planned sets</p>
+    {% elif training_day %}
+    <div class="dashboard-empty"><h3>Add exercises to this day</h3><p>This training day has no planned exercises yet.</p><a class="button secondary" href="{{ url_for('plans.detail',plan_id=training_day.plan_id) }}">Build this training day</a></div>
+    {% else %}
+    <div class="dashboard-empty"><h3>{{ 'Add a training day' if plans else 'Your first plan starts here' }}</h3><p>{{ 'Open a plan and add a training day to choose your exercises and targets.' if plans else 'Create a plan, add training days, then choose your exercises and targets.' }}</p><a class="button secondary" href="{{ url_for('plans.index') if plans else url_for('plans.create') }}">{{ 'Open workout plans' if plans else 'Create your first plan' }}</a></div>
+    {% endif %}
+    <div class="training-footer"><a href="{{ url_for('plans.index') }}">{{ plans }} plan{{ 's' if plans != 1 }}</a><a href="{{ url_for('workouts.history') }}">{{ workouts }} logged workout{{ 's' if workouts != 1 }}</a><span>All-time counts</span></div>
+  </article>
+
+  <article class="dashboard-card weight-summary" aria-labelledby="weight-heading">
+    <div class="dashboard-card-heading"><h2 id="weight-heading">Bodyweight</h2><a href="{{ url_for('profile.history') }}">View history</a></div>
     {% if measurement %}
-      <p>Recorded {{ measurement[1] }}</p>
-      {% if weight_change is not none %}<p>{{ '+' if weight_change > 0 else '' }}{{ weight_change }} kg since {{ previous_measurement[1] }}</p>
-      {% else %}<p>Add another measurement to see your change.</p>{% endif %}
-    {% else %}<p>No measurements recorded.</p>{% endif %}
-    <p><a href="{{ url_for('profile.history') }}">Bodyweight history</a> · <a href="{{ url_for('profile.measurement_edit') }}">Add measurement</a></p>
+    <div class="weight-overview"><div><p class="weight-value" aria-label="{{ measurement[0] }} kg">{{ measurement[0] }} <span>kg</span></p><p class="note">Recorded <time datetime="{{ measurement[1] }}">{{ measurement[1].strftime('%d %b %Y') }}</time></p></div>
+    {% if weight_change is not none %}<p class="weight-change">{{ icon('scale') }}<span>{{ '+' if weight_change > 0 else '' }}{{ weight_change }} kg since {{ previous_measurement[1] }}</span></p>{% endif %}</div>
+    {% if weight_change is none %}<p class="note">Add another measurement to see your change.</p>{% endif %}
+    {% if previous_measurement %}<p class="weight-previous note">Previous measurement · {{ previous_measurement[0] }} kg on <time datetime="{{ previous_measurement[1] }}">{{ previous_measurement[1].strftime('%d %b %Y') }}</time></p>{% endif %}
+    {% else %}<div class="dashboard-empty"><h3>No measurements recorded.</h3><p>Add your first bodyweight measurement to start tracking your progress.</p><a class="button secondary" href="{{ url_for('profile.measurement_edit') }}">{{ icon('plus') }}Add your first measurement</a></div>{% endif %}
+  </article>
+
+</div><div class="dashboard-column">
+  <article class="dashboard-card nutrition-summary" aria-labelledby="nutrition-heading">
+    <div class="dashboard-card-heading"><h2 id="nutrition-heading">Today's nutrition</h2><a href="{{ url_for('nutrition.diary',date=today.isoformat()) }}">Review diary</a></div>
+    {% if incomplete_entries %}
+    <div class="nutrition-status" role="status">{{ icon('alert-triangle') }}<div><strong>Incomplete diary</strong><p>{{ incomplete_entries }} entr{{ 'y contains' if incomplete_entries == 1 else 'ies contain' }} unknown nutrition values. Targets are set manually.</p></div></div>
+    {% elif not food_count %}<p class="note">No food logged today. <a href="{{ url_for('nutrition.entry_edit',day=today.isoformat()) }}">Log your first food</a> to start your diary.</p>{% endif %}
+    <dl class="dashboard-nutrients">
+    {% for key,label,unit in nutrients %}{% set value = nutrition_totals[key] %}
+      <div class="nutrient-row {{ 'calorie-row' if key == 'kcal' }}" data-nutrient="{{ key }}">
+        <div class="nutrient-values"><dt>{{ label }}</dt><dd>
+          {% if value.complete %}<strong>{{ value.total|nutrition_amount }}</strong> {{ unit }}
+          {% elif value.known_count %}<strong class="incomplete-text">{{ value.subtotal|nutrition_amount }}</strong> {{ unit }}
+          {% else %}<strong class="incomplete-text">Unknown</strong>{% endif %}
+        </dd></div>
+        <p class="nutrient-target">{% if value.target is not none %}{{ value.target|nutrition_amount }} {{ unit }} manual target{% else %}Target not set{% endif %}</p>
+        {% if not value.complete and value.known_count %}<p class="nutrient-subtotal">known subtotal</p>{% endif %}
+        {% if not value.complete %}<span class="badge incomplete">Incomplete · {{ value.missing }} unknown entr{{ 'y' if value.missing == 1 else 'ies' }}</span>{% endif %}
+        {% if key != 'kcal' and value.complete and value.target is not none and value.target > 0 %}
+        <div class="macro-track {{ 'over' if value.over is not none }}" aria-hidden="true"><span style="width:{{ [value.total * 100 / value.target,100]|min }}%"></span></div>
+        {% endif %}
+        <div class="nutrient-remaining">{% if value.target is none %}<a href="{{ url_for('nutrition.settings') }}">Set a target</a>
+        {% elif value.over is not none %}<strong class="over-target">{{ 'At least ' if not value.complete }}{{ value.over|nutrition_amount }} {{ unit }} over target</strong>
+        {% elif not value.complete %}<span class="incomplete-text">Remaining unknown</span>
+        {% else %}{{ value.remaining|nutrition_amount }} {{ unit }} remaining{% endif %}</div>
+      </div>
+    {% endfor %}
+    </dl>
+    <details class="target-explanation"><summary>About your manual targets</summary>{% include 'nutrition/_comparison.html' %}</details>
+  </article>
+
+  <article class="dashboard-card meal-summary" aria-labelledby="meal-heading">
+    {{ icon('calendar-range' if meal_plan else 'calendar-x','empty-icon') }}
+    {% if meal_plan %}<h2 id="meal-heading">{{ 'Saved meal plan' if meal_plan.status == 'saved' else 'Meal plan draft' }}</h2><p>A {{ meal_plan.status }} plan for <time datetime="{{ today }}">{{ today.strftime('%d %b %Y') }}</time>. Review your meals and portions before logging.</p><a class="button secondary" href="{{ url_for('meals.plan_detail',plan_id=meal_plan.plan_id) }}">{{ 'Open saved plan' if meal_plan.status == 'saved' else 'Review draft' }}</a>
+    {% else %}<h2 id="meal-heading">No saved meal plan</h2><p>No plan for <time datetime="{{ today }}">{{ today.strftime('%d %b %Y') }}</time>. Create a draft from your recipes and manual targets.</p><div class="actions"><a class="button secondary" href="{{ url_for('meals.plan_new') }}">Create a meal draft</a><a href="{{ url_for('meals.plans') }}">View meal plans</a></div>{% endif %}
+    <p class="note">Planning doesn't add food to your diary. Log meals explicitly after saving.</p>
   </article>
 </div>
-<article><h2>Build your training plan</h2><p>Choose training days, add exercises, and set your rep targets.</p><a class="button" href="{{ url_for('plans.index') }}">My workout plans →</a></article>
+</div>
 {% endblock %}

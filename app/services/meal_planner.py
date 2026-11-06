@@ -1,7 +1,7 @@
 """Decimal recipe snapshots, explicit exclusions and a bounded deterministic search."""
 from decimal import Decimal, ROUND_HALF_UP
 from app.services.foods import ALIASES, ALLERGENS, DIETS, food_provenance, tokens
-from app.services.nutrition import CENT, MEALS, NUTRIENTS, entry_totals
+from app.services.nutrition import CENT, MEALS, NUTRIENTS, amount, entry_totals
 
 D = Decimal
 PORTIONS = tuple(D(i)/4 for i in range(1,9))
@@ -132,7 +132,7 @@ def generate(snapshots, targets):
         low = sum((min(option[2][key] for option in group) for group in choices), D(0))
         high = sum((max(option[2][key] for option in group) for group in choices), D(0))
         if not low <= target[key] <= high:
-            notes.append(f'{label} target is outside the searched portion range ({low:.2f}–{high:.2f} {unit}). Targets cannot all be met within this grid.')
+            notes.append(f'{label} target is outside the searched portion range ({amount(low)}–{amount(high)} {unit}). Targets cannot all be met within this grid.')
     # Keep bounded prefixes close to progressive daily targets. All arithmetic stays Decimal.
     beam = [(D(0), (), {key: D(0) for key, _, _ in NUTRIENTS})]
     fractions = (D('.25'), D('.60'), D('.90'), D(1))

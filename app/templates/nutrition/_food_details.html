@@ -1,0 +1,2 @@
+{% if food.preparation is defined %}<p class="note">{{ food.preparation }} · per 100 g edible portion as described. Weigh this preparation; exclude refuse.</p>{% endif %}
+<p class="note">Allergen metadata: {{ 'reviewed declarations' if food.allergen_complete else 'unknown / incomplete' }}. Nutrition data is not allergen verification.</p>

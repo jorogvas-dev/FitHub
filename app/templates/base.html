@@ -1,18 +1,74 @@
+{% from '_icons.html' import icon %}
+{% set navigation_date = day.isoformat() if request.blueprint in ('nutrition','food_library','meals') and day is defined else plan.planned_on.isoformat() if request.blueprint == 'meals' and plan is defined else none %}
+{% macro navlink(endpoint,label,glyph,active=false,href=none) -%}
+<a href="{{ href or url_for(endpoint) }}" class="sidebar-link" {% if active %}aria-current="page"{% endif %}>{{ icon(glyph) }}<span>{{ label }}</span></a>
+{%- endmacro %}
+{% macro member_navigation(label) -%}
+<nav class="sidebar-navigation" aria-label="{{ label }}">
+  {{ navlink('main.dashboard','Dashboard','layout-dashboard',request.endpoint == 'main.dashboard') }}
+  <section class="nav-group" aria-label="Training">
+    <h2>Training</h2>
+    {{ navlink('plans.index','Workout plans','clipboard-list',request.blueprint == 'plans') }}
+    {{ navlink('workouts.history','Workout history','history',request.blueprint == 'workouts') }}
+    {{ navlink('main.exercises','Exercise library','dumbbell',request.endpoint == 'main.exercises') }}
+  </section>
+  <section class="nav-group" aria-label="Nutrition">
+    <h2>Nutrition</h2>
+    {{ navlink('nutrition.diary','Daily diary','book-open',request.endpoint in ('nutrition.diary','nutrition.entry_edit','nutrition.entry_delete'),href=url_for('nutrition.diary',date=navigation_date)) }}
+    {{ navlink('nutrition.foods','Food library','apple',request.endpoint == 'food_library.log' or (request.endpoint == 'nutrition.foods' and scope != 'mine'),href=url_for('nutrition.foods',scope='library',date=navigation_date)) }}
+    {{ navlink('nutrition.foods','My foods','utensils-crossed',request.endpoint in ('nutrition.food_edit','nutrition.food_log') or (request.endpoint == 'nutrition.foods' and scope == 'mine'),href=url_for('nutrition.foods',scope='mine',date=navigation_date)) }}
+    {{ navlink('meals.recipes','Recipes','chef-hat',request.endpoint in ('meals.recipes','meals.recipe_detail','meals.recipe_edit','meals.recipe_delete','meals.ingredient_edit','meals.ingredient_delete')) }}
+    {{ navlink('meals.plans','Meal plans','calendar-range',request.endpoint in ('meals.plans','meals.plan_new','meals.plan_detail','meals.meal_edit','meals.plan_save','meals.meal_log')) }}
+    {{ navlink('nutrition.settings','Preferences & targets','target',request.endpoint == 'nutrition.settings') }}
+  </section>
+  <section class="nav-group" aria-label="Progress">
+    <h2>Progress</h2>
+    {{ navlink('profile.history','Bodyweight','scale',request.endpoint in ('profile.history','profile.measurement_edit','profile.measurement_delete')) }}
+  </section>
+  <section class="nav-group" aria-label="Profile">
+    <h2>Profile</h2>
+    {{ navlink('profile.edit','Fitness profile','user',request.endpoint in ('profile.edit','profile.onboarding')) }}
+  </section>
+</nav>
+{%- endmacro %}
+{% macro admin_navigation(label) -%}
+  {% if g.user.is_admin %}
+  <section class="nav-group admin-navigation admin-links" aria-label="Admin">
+    <h2>Admin</h2>
+    <nav class="sidebar-navigation" aria-label="{{ label }}">
+    {{ navlink('admin.index','Manage exercises','shield',request.blueprint == 'admin') }}
+    {{ navlink('food_library.admin_list','Manage shared foods','apple',request.endpoint in ('food_library.admin_list','food_library.edit','food_library.status')) }}
+    </nav>
+  </section>
+  {% endif %}
+{%- endmacro %}
+{% macro account_controls() -%}
+<div class="sidebar-account"><span class="account-name">{{ g.user.username }}</span><form method="post" action="{{ url_for('auth.logout') }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="quiet logout-button">{{ icon('log-out') }}<span>Log out</span></button></form></div>
+{%- endmacro %}
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101713"><title>{% block title %}FitHub · Train with intent{% endblock %}</title><link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}"></head>
-<body><a class="skip-link" href="#main-content">Skip to content</a>
-<header class="site-header"><a class="brand" href="{{ url_for('main.index') }}">FitHub<span>TRAIN WITH INTENT</span></a>
-<nav aria-label="Main navigation">
-{% macro navlink(endpoint,label,active) %}<a href="{{ url_for(endpoint) }}" {% if active %}aria-current="page"{% endif %}>{{ label }}</a>{% endmacro %}
-{% if g.user %}{{ navlink('main.dashboard','Dashboard',request.endpoint == 'main.dashboard') }}{{ navlink('plans.index','My plans',request.blueprint == 'plans') }}{{ navlink('workouts.history','Workouts',request.blueprint == 'workouts') }}{% endif %}
-{{ navlink('main.exercises','Exercises',request.endpoint == 'main.exercises') }}
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#000000"><title>{% block title %}FitHub · Train with intent{% endblock %}</title><link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">{% if g.user %}<link rel="stylesheet" href="{{ url_for('static',filename='css/workspace.css') }}">{% endif %}{% if g.user and request.blueprint in ('nutrition','food_library','meals') %}<link rel="stylesheet" href="{{ url_for('static',filename='css/nutrition.css') }}">{% endif %}{% if g.user and request.blueprint in ('plans','workouts') %}<link rel="stylesheet" href="{{ url_for('static',filename='css/training.css') }}">{% endif %}</head>
+<body class="{{ 'member-layout' if g.user else 'public-layout' }}"><a class="skip-link" href="#main-content">Skip to content</a>
+<div class="{{ 'app-shell' if g.user else 'public-shell' }}">
 {% if g.user %}
-{{ navlink('profile.history','Bodyweight',request.endpoint in ('profile.history','profile.measurement_edit','profile.measurement_delete')) }}
-{{ navlink('profile.edit','Profile',request.endpoint in ('profile.edit','profile.onboarding')) }}
-{{ navlink('nutrition.diary','Nutrition',request.blueprint in ('nutrition','food_library','meals')) }}
-{% if g.user.is_admin %}{{ navlink('admin.index','Admin',request.blueprint == 'admin') }}{% endif %}
-<form method="post" action="{{ url_for('auth.logout') }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="quiet">Log out</button></form>
-{% else %}{{ navlink('auth.login','Log in',request.endpoint == 'auth.login') }}<a class="button small" href="{{ url_for('auth.register') }}">Join FitHub</a>{% endif %}
-</nav></header>
-<main id="main-content">{% for message in get_flashed_messages() %}<div class="notice" role="alert">{{ message }}</div>{% endfor %}{% block content %}{% endblock %}</main>
-<footer><strong>FitHub</strong> · Train with intent. Track your progress.</footer></body></html>
+<aside class="sidebar">
+  <a class="brand" href="{{ url_for('main.index') }}">FitHub<span>TRAIN WITH INTENT</span></a>
+  {{ member_navigation('Main navigation') }}
+  {{ admin_navigation('Admin navigation') }}
+  {{ account_controls() }}
+</aside>
+<header class="mobile-header">
+  <a class="brand" href="{{ url_for('main.index') }}">FitHub<span>TRAIN WITH INTENT</span></a>
+  <details class="mobile-menu">
+    <summary aria-controls="mobile-navigation-links">{{ icon('menu') }}<span>Menu</span></summary>
+    <div id="mobile-navigation-links" class="mobile-menu-content">{{ member_navigation('Mobile navigation') }}{{ admin_navigation('Mobile admin navigation') }}{{ account_controls() }}</div>
+  </details>
+</header>
+{% endif %}
+<div class="workspace">
+{% if not g.user %}
+<header class="site-header"><a class="brand" href="{{ url_for('main.index') }}">FitHub<span>TRAIN WITH INTENT</span></a>
+<nav aria-label="Main navigation"><a href="{{ url_for('main.exercises') }}" {% if request.endpoint == 'main.exercises' %}aria-current="page"{% endif %}>Exercises</a><a href="{{ url_for('auth.login') }}" {% if request.endpoint == 'auth.login' %}aria-current="page"{% endif %}>Log in</a><a class="button small" href="{{ url_for('auth.register') }}">Join FitHub</a></nav></header>
+{% endif %}
+<main id="main-content" class="page-main{{ ' nutrition-workspace' if request.blueprint in ('nutrition','food_library','meals') else ' training-workspace' if request.blueprint in ('plans','workouts') else '' }}" tabindex="-1">{% for message in get_flashed_messages() %}<div class="notice" role="alert">{{ message }}</div>{% endfor %}{% block content %}{% endblock %}</main>
+<footer class="site-footer"><strong>FitHub</strong> · Train with intent. Track your progress.</footer>
+</div></div></body></html>

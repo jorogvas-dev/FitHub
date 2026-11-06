@@ -3,4 +3,4 @@
 <p class="note">Changes apply to future logs. Existing diary entries keep their food name and nutrition values.</p>
 {% set values = request.form if request.method == 'POST' else (food or {}) %}
 <form method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><label>Food name<input name="name" required maxlength="100" value="{{ values.get('name','') }}"></label>
-{% if food %}{% include 'nutrition/_provenance.html' %}{% endif %}{% include 'nutrition/_rates.html' %}{% include 'nutrition/_metadata.html' %}<div class="form-actions"><button class="button">Save food</button><a href="{{ url_for('nutrition.foods') }}">Cancel</a></div></form>{% include 'nutrition/_warning.html' %}</section>{% endblock %}
+{% if food %}{% include 'nutrition/_food_details.html' %}{% endif %}{% include 'nutrition/_rates.html' %}{% include 'nutrition/_metadata.html' %}<div class="form-actions"><button class="button">Save food</button><a href="{{ url_for('nutrition.foods') }}">Cancel</a></div></form>{% include 'nutrition/_warning.html' %}</section>{% endblock %}

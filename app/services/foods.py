@@ -27,7 +27,9 @@ def metadata_input():
                 ingredient_labels=tokens(raw))
 
 
-def available_foods(conn, search='', scope='all', preparation=''):
+def available_foods(conn, search='', scope='all', preparation='', sort='name', direction='asc'):
+    if sort not in ('name', 'kcal', 'protein', 'carbs', 'fat') or direction not in ('asc', 'desc'):
+        raise ValueError('Choose a supported food sort and direction.')
     private = [] if scope == 'library' else query(conn,
         "SELECT *, 'private:'||food_id AS token, 'My foods' AS collection FROM nutrition_food "
         'WHERE user_id=%s AND name ILIKE %s ORDER BY name,food_id', (g.user['user_id'], '%'+search+'%'))
@@ -35,7 +37,14 @@ def available_foods(conn, search='', scope='all', preparation=''):
         "SELECT *, 'catalogue:'||catalogue_id AS token, 'Food library' AS collection FROM food_catalogue "
         "WHERE is_active AND name ILIKE %s AND (%s='' OR preparation=%s) ORDER BY name,catalogue_id",
         ('%'+search+'%', preparation, preparation))
-    return sorted(private+shared, key=lambda r: (r['name'].casefold(), r['token']))
+    # Establish a deterministic tie-breaker before the stable numeric sort.
+    rows = sorted(private+shared, key=lambda r: (r['name'].casefold(), r['token']))
+    if sort == 'name':
+        return sorted(rows, key=lambda r: r['name'].casefold(), reverse=direction == 'desc')
+    field = sort+'_100g'
+    known = [row for row in rows if row[field] is not None]
+    unknown = [row for row in rows if row[field] is None]
+    return sorted(known, key=lambda r: r[field], reverse=direction == 'desc') + unknown
 
 
 def selected_food(conn, token, lock=False):

@@ -1,8 +1,10 @@
+{% from '_icons.html' import icon %}
+{% set nutrition_date = day.isoformat() if day is defined else plan.planned_on.isoformat() if plan is defined else none %}
 <nav class="nutrition-nav" aria-label="Nutrition navigation">
-  <a href="{{ url_for('nutrition.diary') }}" {% if request.endpoint == 'nutrition.diary' %}aria-current="page"{% endif %}>Daily diary</a>
-  <a href="{{ url_for('nutrition.foods',scope='library',date=day.isoformat() if day is defined else none) }}" {% if request.blueprint == 'food_library' or (request.endpoint == 'nutrition.foods' and scope != 'mine') %}aria-current="page"{% endif %}>Food library</a>
-  <a href="{{ url_for('nutrition.foods',date=day.isoformat() if day is defined else none) }}" {% if request.endpoint in ('nutrition.food_edit','nutrition.food_log') or (request.endpoint == 'nutrition.foods' and scope == 'mine') %}aria-current="page"{% endif %}>My foods</a>
-  <a href="{{ url_for('meals.recipes') }}" {% if request.endpoint.startswith('meals.recipe') or request.endpoint.startswith('meals.ingredient') %}aria-current="page"{% endif %}>My recipes</a>
-  <a href="{{ url_for('meals.plans') }}" {% if request.endpoint.startswith('meals.plan') or request.endpoint in ('meals.meal_edit','meals.meal_log') %}aria-current="page"{% endif %}>Meal plans</a>
-  <a href="{{ url_for('nutrition.settings') }}" {% if request.endpoint == 'nutrition.settings' %}aria-current="page"{% endif %}>Preferences &amp; targets</a>
+  <a href="{{ url_for('nutrition.diary',date=nutrition_date) }}" {% if request.endpoint in ('nutrition.diary','nutrition.entry_edit','nutrition.entry_delete') %}aria-current="page"{% endif %}>{{ icon('book-open') }}<span>Daily diary</span></a>
+  <a href="{{ url_for('nutrition.foods',scope='library',date=nutrition_date) }}" {% if request.blueprint == 'food_library' or (request.endpoint == 'nutrition.foods' and scope != 'mine') %}aria-current="page"{% endif %}>{{ icon('apple') }}<span>Food library</span></a>
+  <a href="{{ url_for('nutrition.foods',scope='mine',date=nutrition_date) }}" {% if request.endpoint in ('nutrition.food_edit','nutrition.food_log') or (request.endpoint == 'nutrition.foods' and scope == 'mine') %}aria-current="page"{% endif %}>{{ icon('utensils-crossed') }}<span>My foods</span></a>
+  <a href="{{ url_for('meals.recipes') }}" {% if request.endpoint.startswith('meals.recipe') or request.endpoint.startswith('meals.ingredient') %}aria-current="page"{% endif %}>{{ icon('chef-hat') }}<span>Recipes</span></a>
+  <a href="{{ url_for('meals.plans') }}" {% if request.endpoint.startswith('meals.plan') or request.endpoint in ('meals.meal_edit','meals.meal_log') %}aria-current="page"{% endif %}>{{ icon('calendar-range') }}<span>Meal plans</span></a>
+  <a href="{{ url_for('nutrition.settings') }}" {% if request.endpoint == 'nutrition.settings' %}aria-current="page"{% endif %}>{{ icon('target') }}<span>Preferences &amp; targets</span></a>
 </nav>

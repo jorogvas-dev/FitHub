@@ -70,8 +70,8 @@ class NutritionIntegrationTests(PostgresTestCase):
         self.assertEqual(self.save_settings().status_code,302)
         self.assertEqual(self.settings(),('Peanuts','Olives','Vegetarian','Europe/Sofia',D('2000'),D('100'),D('200'),D('50')))
         page=self.a.get('/nutrition/settings').data
-        self.assertIn(b'350.00 kcal higher',page)
-        self.assertIn(b'1650.00 kcal',page)
+        self.assertIn(b'350 kcal higher',page)
+        self.assertIn(b'1650 kcal',page)
         self.assertIn(b'guarantee',page)
         self.assertNotIn(b'Peanuts',self.b.get('/nutrition/settings').data)
         original=self.settings()
@@ -168,7 +168,7 @@ class NutritionIntegrationTests(PostgresTestCase):
         self.assertIsNone(context['totals']['kcal']['total'])
         self.assertEqual(context['totals']['kcal']['subtotal'],D('200'))
         self.assertIsNone(context['totals']['kcal']['remaining'])
-        self.assertIn(b'At least 50.00 kcal over target',response.data)
+        self.assertIn(b'At least 50 kcal over target',response.data)
         self.assertIn(b'Incomplete',response.data)
         self.assertIn(b'Remaining unknown',response.data)
         self.assertEqual(context['totals']['protein']['total'],D('0'))
@@ -181,7 +181,7 @@ class NutritionIntegrationTests(PostgresTestCase):
             self.add_entry(grams='33.33',kcal_100g='0.01')
         response,context=self.diary(DAY)
         self.assertEqual(context['totals']['kcal']['total'],D('0.009999'))
-        self.assertIn(b'0.01 kcal over target',response.data)
+        self.assertIn(b'0 kcal over target',response.data)
         self.assertEqual(context['totals']['kcal']['over'],D('0.009999'))
 
     def test_ownership_all_food_and_entry_paths_and_mismatched_date_ids(self):

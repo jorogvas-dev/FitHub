@@ -89,7 +89,9 @@ class FoundationTests(unittest.TestCase):
             s['user_id']=42
         self.db('app.routes.auth.connect',[(42,'<script>bad</script>',False)])
         conn=self.db('app.routes.main.connect',[(2,),(5,),[],None])
-        response=self.client.get('/dashboard')
+        settings=dict(timezone='Europe/Sofia',target_kcal=None,target_protein=None,target_carbs=None,target_fat=None)
+        with patch('app.routes.main.settings_row',return_value=settings), patch('app.routes.main.query',return_value=[]):
+            response=self.client.get('/dashboard')
         self.assertEqual(response.status_code,200)
         self.assertIn(b'&lt;script&gt;',response.data)
         self.assertNotIn(b'<script>bad',response.data)

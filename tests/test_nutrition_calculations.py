@@ -13,13 +13,23 @@ def entry(grams='100', kcal='200', protein='10', carbs='25', fat='6'):
 
 
 class NutritionCalculationTests(unittest.TestCase):
+    def test_whole_number_half_up_display_preserves_input_precision(self):
+        for raw, expected in [('0', '0'), ('0.49', '0'), ('0.5', '1'),
+                              ('2.5', '3'), ('123.456789', '123'), ('123.5', '124'),
+                              ('-0.49', '0'), ('-2.5', '-3')]:
+            value = D(raw)
+            with self.subTest(raw=raw):
+                self.assertEqual(amount(value), expected)
+                self.assertEqual(str(value), raw)
+                self.assertEqual(amount(raw), expected)  # JSON snapshot targets are strings.
+
     def test_exact_portion_and_only_final_rounding(self):
         row=entry(grams='33.33',kcal='0.01',protein='0.01',carbs='0.01',fat='0.01')
         self.assertEqual(entry_totals(row)['kcal'],D('0.003333'))
         total=daily_totals([row,row,row],{})['kcal']
         self.assertEqual(total['total'],D('0.009999'))
-        self.assertEqual(amount(total['total']),'0.01')
-        self.assertEqual(amount(entry_totals(row)['kcal']),'<0.01')
+        self.assertEqual(amount(total['total']),'0')
+        self.assertEqual(amount(entry_totals(row)['kcal']),'0')
         self.assertEqual(entry_totals(entry(grams='125.55',kcal='123.45'))['kcal'],D('154.991475'))
 
     def test_unknown_values_and_explicit_zero_are_distinct(self):
@@ -35,7 +45,7 @@ class NutritionCalculationTests(unittest.TestCase):
         self.assertEqual(totals['carbs']['known_count'],0)
         self.assertIsNone(totals['carbs']['total'])
         self.assertEqual(amount(None),'Unknown')
-        self.assertEqual(amount(D('0')),'0.00')
+        self.assertEqual(amount(D('0')),'0')
 
     def test_over_target_exact_remaining_and_partial_lower_bound(self):
         settings={'target_kcal':D('150'),'target_protein':D('10')}
@@ -49,7 +59,7 @@ class NutritionCalculationTests(unittest.TestCase):
         self.assertFalse(partial['complete'])
         tiny=daily_totals([entry(grams='0.01',kcal='0.01')],{'target_kcal':D('0')})['kcal']
         self.assertGreater(tiny['over'],0)
-        self.assertEqual(amount(tiny['over']),'<0.01')
+        self.assertEqual(amount(tiny['over']),'0')
 
     def test_empty_day_and_unset_targets(self):
         totals=daily_totals([],{'target_kcal':D('2000')})

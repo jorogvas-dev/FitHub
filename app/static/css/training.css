@@ -1,0 +1,99 @@
+/* Training extends the existing member workspace; no new runtime or dependencies. */
+.training-workspace h1{font-size:32px;letter-spacing:-1px;margin:0 0 10px}
+.training-workspace .lead{font-size:15px;line-height:1.7;margin:8px 0}
+.training-workspace .note{font-size:13px;line-height:1.7}
+.training-workspace .button{gap:8px}
+.training-nav{gap:6px;margin:0 0 32px;padding:0 0 20px;border-bottom:1px solid var(--line)}
+.training-nav>a{display:flex;align-items:center;gap:8px;min-height:44px;border:1px solid transparent}
+.training-nav>a[aria-current=page]{border-color:var(--line)}
+.training-nav .icon{width:17px;height:17px}
+.training-back{display:inline-block;font-size:13px;margin:0 0 20px;min-height:28px}
+.training-workspace .training-heading{align-items:flex-start;margin:0 0 28px;gap:20px}
+.training-heading .eyebrow{margin-bottom:10px}
+.training-heading .note{margin-bottom:0}
+.training-heading>div:first-child{min-width:0}
+.training-heading .actions{gap:16px}
+.plan-grid,.history-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin:24px 0}
+.plan-card,.session-card{display:flex;flex-direction:column;padding:24px;overflow-wrap:anywhere}
+.plan-card .card-meta{color:var(--muted)}
+.plan-card h2,.session-card h2{font-size:23px;line-height:1.4;margin:20px 0 8px}
+.plan-card>.note{margin:0 0 12px}
+.plan-card>p:not(.note){font-size:14px;margin:0 0 24px}
+.plan-card>.button{margin-top:auto;align-self:flex-start}
+.training-empty{grid-column:1/-1;text-align:center;padding:36px 24px;background:var(--panel);border:1px dashed var(--line);border-radius:var(--radius)}
+.training-empty>.icon{width:28px;height:28px;color:var(--muted);margin:0 0 16px}
+.training-empty h2{font-size:23px;margin:0 0 12px}
+.training-empty p{font-size:14px;max-width:520px;margin:10px auto 20px;color:var(--muted)}
+.training-days,.workout-exercises{display:grid;gap:24px}
+.training-day-card,.workout-exercise{padding:24px}
+.day-heading,.exercise-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.day-heading h2,.exercise-heading h2{font-size:24px;line-height:1.35;margin:0 0 8px}
+.day-heading .eyebrow,.exercise-heading .eyebrow{font-size:10px;margin:0 0 8px}
+.day-heading .note{margin:0}
+.prescription-list{list-style:none;margin:22px 0 0;padding:0;border-top:1px solid var(--line)}
+.prescription-list>li{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding:20px 0}
+.prescription-main{flex:1;min-width:170px}
+.prescription-main h3{font-size:16px;line-height:1.5;margin:0;color:var(--text)}
+.prescription-main>.note{margin:3px 0 12px}
+.prescription-target{display:flex;gap:12px 24px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin:0;line-height:1.7}
+.prescription-target strong{color:var(--text);font-weight:600}
+.day-start{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;padding-top:22px}
+.day-start>div:first-child{flex:1;min-width:180px}
+.start-context{font-size:14px;margin:0;color:var(--text)}
+.day-start .note{margin:4px 0 0;font-size:12px}
+.day-empty{margin:20px 0 0;padding:20px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.day-empty h3{font-size:18px;margin:0 0 8px}
+.day-empty p{font-size:14px;margin:0}
+.training-workspace .training-footnote{font-size:12px;margin:24px 0}
+.session-status{display:inline-flex;align-items:center;gap:8px;max-width:100%;border:1px solid var(--control-line);border-radius:8px;background:var(--selected);color:var(--accent);font-size:12px;font-weight:650;padding:8px 10px;line-height:1.5}
+.session-status>.icon{width:15px;height:15px}
+.session-status.is-finished{background:var(--surface);border-color:var(--control-line);color:var(--muted)}
+.session-plan{margin:0 0 18px;color:var(--muted);font-size:14px}
+.session-dates{margin:0 0 20px;padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.session-dates>div{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:0 0 8px;font-size:12px}
+.session-dates>div:last-child{margin-bottom:0}
+.session-dates dt{color:var(--muted)}
+.session-dates dd{margin:0;font-variant-numeric:tabular-nums}
+.session-card-footer{margin-top:auto}
+.session-card-footer>.note{margin:0 0 14px;font-size:12px}
+.workout-readonly{display:flex;align-items:flex-start;gap:12px;padding:18px 20px;border:1px solid var(--control-line);background:var(--surface);border-radius:var(--radius);margin:0 0 24px}
+.workout-readonly>.icon{color:var(--accent);margin-top:2px}
+.workout-readonly strong{font-size:14px}
+.workout-readonly p{font-size:13px;color:var(--muted);margin:6px 0 0}
+.workout-overview{display:flex;align-items:center;gap:16px 28px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding:0 0 24px;margin:24px 0}
+.workout-overview>div{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted)}
+.workout-overview .icon{color:var(--accent);width:18px;height:18px}
+.workout-overview strong{color:var(--text)}
+.workout-overview p{font-size:12px;margin:0 0 0 auto;color:var(--muted)}
+.training-workspace .section-heading{gap:12px;margin:28px 0 20px}
+.training-workspace .section-heading h2{font-size:21px;margin:0}
+.workout-targets{margin:20px 0 0;padding:16px 18px;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+.workout-targets h3{font-size:12px;color:var(--muted);margin:0 0 10px;font-weight:500}
+.workout-targets .prescription-target+.prescription-target{border-top:1px solid var(--line);padding-top:12px;margin-top:12px}
+.workout-targets .note{font-size:12px;margin-bottom:0}
+.timed-notice{border-left:3px solid var(--warning-line);padding:10px 14px;font-size:13px;background:var(--warning-bg);color:var(--warning);line-height:1.7}
+.logged-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:24px 0 14px}
+.logged-heading h3{font-size:14px;margin:0}
+.logged-heading .note{font-size:12px;margin:0}
+.set-list{list-style:none;margin:0;padding:0}
+.logged-set{display:grid;grid-template-columns:65px minmax(0,1fr) auto;align-items:center;gap:20px;padding:16px 0;border-top:1px solid var(--line)}
+.logged-set:last-child{padding-bottom:0}
+.set-number{font-size:13px;font-weight:650;color:var(--text)}
+.set-values{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:0}
+.set-values dt{font-size:11px;color:var(--muted);line-height:1.6}
+.set-values dd{font-size:15px;margin:5px 0 0;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.set-actions{gap:16px;font-size:13px}
+.set-actions .quiet{font-size:13px;min-height:44px}
+.sets-empty{font-size:14px;color:var(--muted);padding-top:16px;border-top:1px solid var(--line);margin:0}
+.other-exercise-action{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:28px 0}
+.other-exercise-action .note{font-size:12px;max-width:340px;margin:0}
+.finish-panel{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;border:1px solid var(--warning-line);border-radius:var(--radius);background:var(--warning-bg);padding:24px;margin:32px 0 0}
+.finish-panel>div{flex:1;min-width:200px}
+.finish-panel .eyebrow{color:var(--warning);font-size:10px;margin:0 0 8px}
+.finish-panel h2{font-size:22px;margin:0 0 10px}
+.finish-panel p:not(.eyebrow){font-size:13px;color:var(--muted);max-width:600px;margin:0}
+.training-workspace .finish-button{background:var(--button-fill);background-image:var(--primary-gradient);color:var(--button-text);min-height:48px}
+.training-workspace .form-card>.eyebrow{margin-top:24px}
+.training-workspace .compact-empty p{margin:0 auto}
+@media(max-width:760px){.plan-grid,.history-grid{grid-template-columns:1fr}.training-workspace .training-heading h1{font-size:28px}.workout-overview p{width:100%;margin:0}.day-start{align-items:flex-start}.day-start>.actions{width:100%}.day-start .actions>form{flex:1}.day-start .actions>form>button{width:100%}}
+@media(max-width:520px){.training-workspace .training-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-bottom:26px}.training-nav>a{font-size:12px!important;padding:9px 8px!important;line-height:1.5}.training-nav>a:last-child{grid-column:1/-1}.training-nav .icon{width:16px;height:16px}.training-heading .actions{width:100%}.training-heading .actions>.button{width:100%}.plan-card,.session-card,.training-day-card,.workout-exercise{padding:20px 18px}.plan-grid,.history-grid,.training-days,.workout-exercises{gap:20px}.plan-card h2,.session-card h2{font-size:22px}.day-heading,.exercise-heading{gap:16px}.day-heading h2,.exercise-heading h2{font-size:22px}.day-heading>.actions{gap:20px}.prescription-list>li{gap:8px}.prescription-main{min-width:0;width:100%;flex-basis:100%}.prescription-target{gap:6px 18px}.day-start .actions{align-items:stretch;flex-direction:column}.day-start .actions>.button{width:100%}.day-start .actions form{width:100%}.exercise-heading>div{flex:1;min-width:130px}.exercise-heading>.button{padding:11px 12px;font-size:13px}.workout-targets{padding:14px}.workout-targets .prescription-target{flex-direction:column}.logged-set{grid-template-columns:minmax(0,1fr) auto;gap:12px}.set-number{grid-column:1;grid-row:1}.set-values{grid-column:1/-1;grid-row:2;gap:12px}.set-actions{grid-column:2;grid-row:1;gap:14px}.set-values dd{font-size:14px}.sets-empty{font-size:13px}.finish-panel{padding:20px 18px;gap:20px}.finish-panel>div{min-width:0;flex-basis:100%}.finish-panel form,.finish-panel button{width:100%}.workout-readonly{padding:16px}.training-workspace .form-card{max-width:100%}.training-workspace .form-card h1{font-size:28px}.training-workspace .section-heading .note{font-size:12px}.session-dates>div{display:block}.session-dates dd{margin-top:4px}.session-card .card-meta{gap:8px;flex-wrap:wrap}.session-card .card-meta>.note{font-size:12px;margin:0}}

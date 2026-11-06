@@ -44,12 +44,11 @@ def diary_date(value):
 
 
 def amount(value):
+    """Display only: nearest whole number, with halves rounded away from zero."""
     if value is None:
         return 'Unknown'
-    rounded = value.quantize(CENT, rounding=ROUND_HALF_UP)
-    if value != 0 and rounded == 0:
-        return '<0.01' if value > 0 else '-<0.01'
-    return format(rounded, '.2f')
+    rounded = Decimal(value).quantize(Decimal('1'), rounding=ROUND_HALF_UP)
+    return '0' if rounded == 0 else format(rounded, '.0f')
 
 
 def entry_totals(entry):

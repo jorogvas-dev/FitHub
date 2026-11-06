@@ -142,9 +142,9 @@ class AdminExerciseTests(PostgresTestCase):
         for path in paths[:-1]:
             self.assertEqual(self.a.get(path).status_code,403,path)
             self.assertTrue(self.app.test_client().get(path).location.endswith('/login'),path)
-        self.assertNotIn(b'>Admin</a>',self.a.get('/dashboard').data)
+        self.assertNotIn(b'href="/admin/exercises"',self.a.get('/dashboard').data)
         self.promote()
-        self.assertIn(b'>Admin</a>',self.a.get('/dashboard').data)
+        self.assertIn(b'href="/admin/exercises"',self.a.get('/dashboard').data)
         with self.connect_db() as conn:
             conn.execute('UPDATE app_user SET is_admin=false WHERE user_id=%s',(self.owner,))
         self.assertEqual(self.a.get('/admin/exercises').status_code,403)

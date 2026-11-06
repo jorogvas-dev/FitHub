@@ -190,7 +190,7 @@ class MealPlannerTests(PostgresTestCase):
         self.make_recipe();self.settings(target_kcal=0,target_protein=0,target_carbs=0,target_fat=0)
         plan=self.draft();page=self.a.get(f'/nutrition/meal-plans/{plan}').data
         self.assertIn(b'Targets are not met',page);self.assertIn(b'outside the searched portion range',page)
-        self.assertIn(b'400.00 kcal over',page)
+        self.assertIn(b'400 kcal over',page)
         with self.connect_db() as conn:
             self.assertEqual(conn.execute('SELECT target_kcal FROM nutrition_settings WHERE user_id=%s',(self.owner,)).fetchone()[0],D(0))
 

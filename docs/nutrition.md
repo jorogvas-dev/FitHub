@@ -5,6 +5,11 @@ Food library, My foods, My recipes, Meal plans, and Preferences & targets. Recip
 plans, settings and diary entries are private. Food library is shared; only database
 administrators can edit or deactivate shared records.
 
+The diary, food selection and meal plans now share the dashboard workspace design.
+See [nutrition UI verification and screenshots](./black-violet-theme.md) for the current
+presentation-only rebuild command and desktop/mobile checks; no new migration is
+required for that UI update.
+
 ## Update the existing installation
 
 Run PowerShell with the existing database and Chroma containers available:
@@ -45,7 +50,7 @@ docker compose run --rm --no-deps -T web flask --app app promote-admin "existing
 
 ## Shared Food library and private My foods
 
-Search both collections or filter to either one. Library preparation filters include
+Search both collections or filter to either one. Sort calories, protein, carbs or fat per 100 g, lowest or highest first. Sorting uses full-precision numeric values, puts unknowns last in both directions, and breaks ties by case-insensitive name then collection/ID. The GET form preserves search, collection, preparation and selected diary date. Library preparation filters include
 raw, uncooked/dry, cooked and as described. Original USDA descriptions retain fat
 percentages, preparation and edible-part qualifiers (for example drained solids,
 peeled cucumber or separable lean meat). Enter grams of the stated preparation's
@@ -61,9 +66,9 @@ Source zero remains zero; absent or blank amounts remain NULL.
 
 The checked-in [seed](../db/data/usda-sr-2018.json) stores source descriptions, FDC
 IDs, source URLs, dataset version, download URL, publication dates and the
-archive SHA256. USDA source links open the verified downloads page (the former
+archive SHA256. Administrator source links open the verified downloads page (the former
 per-food route returns 404); individual FDC IDs are displayed alongside the link,
-and the exact archive URL is retained in provenance. Publication dates in this FDC export can be 2019-04-01 even though
+and the exact archive URL is retained in provenance. Member food selection, logging and private food editing omit source citations and external links; administrator editing retains them. Publication dates in this FDC export can be 2019-04-01 even though
 the source release is the final April 2018 SR Legacy dataset. The curated selection
 is [pinned by ID and exact description](../db/data/usda-selection.json).
 Archive SHA256: `b80817294b8850530aaedf2e515c02593b1824f763a0ff356e5c2081643e6fd0`.
@@ -169,8 +174,7 @@ Grams and targets use two decimals. For recipes, batch grams × portion / batch 
 is rounded once to 0.01 g with ROUND_HALF_UP; portions producing an ingredient below
 0.01 g or above 10000 g are rejected. Planned and logged grams are identical.
 Nutrient contributions use rate × grams / 100 without intermediate rounding. Daily
-sums are exact; only display rounds to two places. Tiny positive displayed amounts
-use <0.01, so small overages are not concealed.
+sums are exact; only display rounds to whole numbers using ROUND_HALF_UP (halves away from zero). The same formatter covers calories, nutrient grams, portion grams, targets and remaining/over-target amounts in Nutrition and the dashboard. Edit forms retain stored precision. Unknown values, incomplete known subtotals and unset targets keep their explicit labels. Exact positive overages retain their over-target status even when the displayed amount rounds to 0.
 
 | Field | Input bound |
 | --- | --- |

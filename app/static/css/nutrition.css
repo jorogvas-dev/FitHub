@@ -1,0 +1,112 @@
+/* Nutrition uses the member workspace's palette, typography and inline SVG icons. */
+.nutrition-workspace h1{font-size:32px;letter-spacing:-1px;margin:0 0 10px}
+.nutrition-workspace .lead{font-size:15px;line-height:1.7;margin:8px 0}
+.nutrition-workspace .note{font-size:13px;line-height:1.7}
+.nutrition-workspace .button{gap:8px}
+.nutrition-workspace .nutrition-nav{gap:6px;margin:0 0 32px;padding:0 0 20px;align-items:stretch}
+.nutrition-nav>a{display:flex;align-items:center;gap:8px;min-height:44px;border:1px solid transparent}
+.nutrition-nav>a[aria-current=page]{border-color:var(--line)}
+.nutrition-nav .icon{width:17px;height:17px;flex-shrink:0}
+.nutrition-workspace .nutrition-heading{align-items:flex-start;margin:0 0 24px;gap:20px}
+.nutrition-heading .eyebrow{margin-bottom:10px}
+.nutrition-heading .note{margin-bottom:0}
+.nutrition-workspace .section-heading{margin:28px 0 18px}
+.nutrition-workspace .section-heading h2{font-size:21px;margin:0}
+.nutrition-workspace .diary-date-nav{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);padding:16px 20px;margin:24px 0;gap:16px}
+.nutrition-workspace .date-picker{gap:10px;font-size:13px}
+.nutrition-workspace .date-picker label{font-size:13px}
+.nutrition-workspace .date-picker input{padding:9px 10px;min-height:44px;font-size:14px}
+.nutrition-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin:18px 0 24px}
+.nutrition-metric{display:flex;flex-direction:column;padding:20px;min-width:0;overflow-wrap:anywhere}
+.nutrition-metric h3{font-size:15px;margin:0 0 20px;letter-spacing:0}
+.metric-label{font-size:12px;color:var(--muted);margin:0 0 4px}
+.consumed-value{font-size:28px;font-weight:750;letter-spacing:-.8px;line-height:1.3;margin:0 0 16px;font-variant-numeric:tabular-nums;color:var(--text)}
+.consumed-value span{font-size:13px;font-weight:400;color:var(--muted);letter-spacing:0}
+.metric-status{display:flex;align-items:flex-start;gap:6px;font-size:12px;line-height:1.6;margin:0 0 16px}
+.metric-status .icon{width:15px;height:15px;flex-shrink:0;margin-top:2px}
+.metric-target{margin:auto 0 0;border-top:1px solid var(--line);padding-top:14px}
+.metric-target>div{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:12px}
+.metric-target dt{color:var(--muted)}
+.metric-target dd{margin:0;font-variant-numeric:tabular-nums}
+.metric-balance{margin:12px 0 0;padding:10px 0 0;font-size:12px;color:var(--accent);border-top:1px solid var(--line)}
+.metric-balance strong{font-weight:650}
+.nutrition-workspace .incomplete-text{color:var(--warning)}
+.nutrition-workspace .over-target{color:var(--danger)}
+.nutrition-workspace .nutrition-status{margin:20px 0}
+.nutrition-workspace .nutrition-status strong{display:inline;font-size:inherit;letter-spacing:0;text-transform:none;color:inherit}
+.nutrition-workspace .planning-note{background:var(--panel);border-color:var(--line)}
+.nutrition-workspace .planning-note>.icon{color:var(--accent)}
+.nutrition-workspace .precision-note{margin:20px 0 28px;font-size:12px}
+.diary-meals{display:grid;gap:20px}
+.diary-meal{padding:22px 24px}
+.meal-heading,.entry-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.meal-heading{align-items:center;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.meal-heading h2{display:flex;align-items:center;gap:10px;font-size:20px;margin:0}
+.meal-heading h2 .icon{color:var(--accent);width:19px;height:19px}
+.diary-entry-list{list-style:none;margin:0;padding:0}
+.diary-entry{padding:20px 0;border-bottom:1px solid var(--line)}
+.diary-entry:last-child{border-bottom:0;padding-bottom:0}
+.entry-heading h3{font-size:15px;line-height:1.5;margin:0;color:var(--text)}
+.entry-heading>div:first-child{flex:1;min-width:140px}
+.entry-heading .note{margin:3px 0 12px}
+.entry-nutrients{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:6px 0 0}
+.entry-nutrients dt{font-size:12px;color:var(--muted)}
+.entry-nutrients dd{margin:4px 0 0;font-size:15px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.entry-nutrients dd span{font-size:12px;color:var(--muted)}
+.entry-source{margin:16px 0 0;font-size:12px;color:var(--muted)}
+.entry-source p{margin-bottom:0}
+.meal-empty{padding:24px 0 4px}
+.meal-empty p{margin:0 0 6px;font-size:14px}
+.meal-empty .note{margin:0}
+.food-search-panel{padding:20px 24px;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel)}
+.nutrition-workspace .food-search{display:flex;align-items:flex-end;gap:12px;max-width:none;margin:0}
+.food-search label{flex:1;min-width:150px;font-size:12px;margin:0}
+.food-search .search-query{flex:2;min-width:200px}
+.food-search input,.food-search select{min-width:0;font-size:14px;min-height:46px}
+.food-search-panel>.note{margin:16px 0 0}
+.food-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.food-result{display:flex;flex-direction:column;padding:24px}
+.food-result-heading h2{font-size:19px;line-height:1.5;margin:12px 0 18px;letter-spacing:-.2px}
+.food-details{margin:14px 0 20px;overflow-wrap:anywhere}
+.food-details .note{font-size:12px}
+.food-result-actions{margin-top:auto;padding-top:18px;border-top:1px solid var(--line)}
+.food-log-card>.eyebrow{margin-top:24px}
+.nutrition-workspace .empty-state>.icon{width:28px;height:28px;color:var(--muted);margin:0 0 12px}
+.nutrition-workspace .empty-state .actions{justify-content:center}
+.nutrition-workspace .nutrition-warning{border:1px solid var(--warning-line);border-left:3px solid var(--warning-line);border-radius:10px;padding:18px 20px;margin-top:28px;font-size:14px}
+.nutrition-workspace .nutrition-warning p:last-child{margin-bottom:0}
+.nutrition-workspace .food-facts{margin:20px 0}
+.nutrition-workspace .meal-card .section-heading{margin:0 0 18px}
+.nutrition-workspace .meal-card h2{font-size:21px;line-height:1.5}
+.nutrition-workspace .meal-card details{font-size:13px;margin:20px 0}
+.plan-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin:24px 0}
+.plan-list-card{display:flex;flex-direction:column;padding:24px}
+.plan-list-card h2{font-size:22px;margin:20px 0 12px}
+.plan-list-card .note{margin:0 0 20px}
+.plan-list-card>.button{margin-top:auto;align-self:flex-start}
+.plan-list-card .card-meta{font-size:12px;color:var(--muted)}
+.plan-differences .metric-balance{color:var(--muted)}
+.plan-differences .metric-balance.over-target{color:var(--danger)}
+@media(max-width:1050px){.nutrition-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.nutrition-heading .actions{align-self:flex-start}.food-search .search-query{flex-basis:100%}}
+@media(max-width:650px){.food-results,.plan-list{grid-template-columns:1fr}.nutrition-workspace .nutrition-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-bottom:26px}.nutrition-workspace .nutrition-nav>a{font-size:12px;padding:9px 8px;line-height:1.5}.nutrition-nav .icon{width:16px;height:16px}.food-result,.diary-meal{padding:20px 18px}.food-search-panel{padding:18px}.nutrition-workspace .food-search{align-items:stretch}.food-search label,.food-search .search-query{min-width:0;flex-basis:auto}.food-search button{width:100%}.nutrition-workspace .nutrition-heading h1{font-size:28px}.nutrition-heading .actions{width:100%}.nutrition-heading .actions .button{flex:1}.nutrition-workspace .diary-date-nav{padding:16px;gap:20px}.diary-date-nav>.actions{gap:8px;width:100%;justify-content:space-between}.diary-date-nav .small{padding:9px 12px}.nutrition-workspace .date-picker{display:grid;grid-template-columns:minmax(0,1fr) auto;width:100%}.date-picker label{grid-column:1/-1}.nutrition-workspace .date-picker input{width:100%}.nutrition-metrics{gap:12px}.nutrition-metric{padding:16px}.nutrition-metric h3{margin-bottom:16px}.consumed-value{font-size:25px}.metric-target>div{display:block}.metric-target dd{margin-top:4px}.entry-nutrients{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.meal-heading h2{font-size:20px}.meal-heading .small{font-size:12px}.entry-heading .actions{gap:16px}.nutrition-workspace .section-heading{gap:8px}.nutrition-workspace .form-card{max-width:100%}.plan-list-card{padding:20px}.nutrition-workspace .nutrition-warning{padding:16px}.nutrition-workspace .nutrition-warning p{font-size:13px}}
+@media(prefers-reduced-motion:reduce){.nutrition-workspace *{scroll-behavior:auto}}
+
+/* Approved diary: aligned numeric columns on desktop, readable entry cards on mobile. */
+.diary-entry .entry-actions{gap:12px;font-size:13px;justify-content:flex-end}
+.diary-entry .entry-actions .button{font-size:13px;padding:8px 12px}
+.diary-entry .entry-nutrients{margin:0}
+.diary-entry .entry-source{grid-column:1/-1}
+.diary-target-explanation{border:0;padding-top:0;margin:0 0 24px}
+.nutrition-workspace .nutrition-status{font-size:13px;padding:12px 14px;margin:0 0 24px}
+.nutrition-workspace .nutrition-status p{font-size:13px;line-height:1.6}
+.nutrition-workspace .precision-note{margin:24px 0 0}
+@media(min-width:1101px){
+ .diary-entry{display:grid;grid-template-columns:minmax(150px,1.5fr) minmax(280px,2fr) 120px;gap:8px 24px;align-items:center;padding:16px 0}
+ .diary-entry .entry-heading{display:contents}
+ .diary-entry .entry-food{grid-column:1;grid-row:1;min-width:0}
+ .diary-entry .entry-actions{grid-column:3;grid-row:1}
+ .diary-entry .entry-nutrients{grid-column:2;grid-row:1}
+ .diary-entry .entry-nutrients dt,.diary-entry .entry-nutrients dd{text-align:right}
+ .diary-entry .entry-heading .note{margin-bottom:0}
+}
+@media(max-width:650px){.nutrition-workspace .date-picker label{grid-column:1/-1}.diary-entry .entry-food{min-width:0}.entry-nutrients{margin-top:8px}}
