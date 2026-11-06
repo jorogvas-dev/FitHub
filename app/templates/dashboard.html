@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% from '_icons.html' import icon %}
+{% from 'nutrition/_overage.html' import overage_label %}
 {% block title %}Dashboard · FitHub{% endblock %}
 {% block content %}
 <header class="dashboard-heading">
@@ -67,7 +68,7 @@
         <div class="macro-track {{ 'over' if value.over is not none }}" aria-hidden="true"><span style="width:{{ [value.total * 100 / value.target,100]|min }}%"></span></div>
         {% endif %}
         <div class="nutrient-remaining">{% if value.target is none %}<a href="{{ url_for('nutrition.settings') }}">Set a target</a>
-        {% elif value.over is not none %}<strong class="over-target">{{ 'At least ' if not value.complete }}{{ value.over|nutrition_amount }} {{ unit }} over target</strong>
+        {% elif value.over is not none %}<strong class="over-target">{{ overage_label(value.over, unit, not value.complete) }}</strong>
         {% elif not value.complete %}<span class="incomplete-text">Remaining unknown</span>
         {% else %}{{ value.remaining|nutrition_amount }} {{ unit }} remaining{% endif %}</div>
       </div>

@@ -1,0 +1,7 @@
+{% macro overage_label(value, unit, incomplete=false) -%}
+{%- if value > 0 and value|nutrition_amount == '0' -%}
+{{ 'Known subtotal: ' if incomplete }}Less than 1 {{ unit }} over target{{ '; actual overage may be higher.' if incomplete }}
+{%- else -%}
+{{ 'At least ' if incomplete }}{{ value|nutrition_amount }} {{ unit }} over target
+{%- endif -%}
+{%- endmacro %}

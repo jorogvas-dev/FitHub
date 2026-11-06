@@ -181,7 +181,7 @@ class NutritionIntegrationTests(PostgresTestCase):
             self.add_entry(grams='33.33',kcal_100g='0.01')
         response,context=self.diary(DAY)
         self.assertEqual(context['totals']['kcal']['total'],D('0.009999'))
-        self.assertIn(b'0 kcal over target',response.data)
+        self.assertIn(b'Less than 1 kcal over target',response.data)
         self.assertEqual(context['totals']['kcal']['over'],D('0.009999'))
 
     def test_ownership_all_food_and_entry_paths_and_mismatched_date_ids(self):

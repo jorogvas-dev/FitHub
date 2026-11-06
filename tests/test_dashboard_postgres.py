@@ -151,7 +151,7 @@ class DashboardTests(PostgresTestCase):
             self.food(grams='33.33', kcal_100g='0.01', protein_100g=0, carbs_100g=0, fat_100g=0)
         response, context = self.dashboard()
         self.assertEqual(context['nutrition_totals']['kcal']['total'], D('0.009999'))
-        self.assertIn(b'0 kcal over target', response.data)
+        self.assertIn(b'Less than 1 kcal over target', response.data)
         self.assertNotIn(b'macro-track', response.data)
         self.assertEqual(context['nutrition_totals']['protein']['remaining'], D(0))
 

@@ -174,7 +174,7 @@ Grams and targets use two decimals. For recipes, batch grams × portion / batch 
 is rounded once to 0.01 g with ROUND_HALF_UP; portions producing an ingredient below
 0.01 g or above 10000 g are rejected. Planned and logged grams are identical.
 Nutrient contributions use rate × grams / 100 without intermediate rounding. Daily
-sums are exact; only display rounds to whole numbers using ROUND_HALF_UP (halves away from zero). The same formatter covers calories, nutrient grams, portion grams, targets and remaining/over-target amounts in Nutrition and the dashboard. Edit forms retain stored precision. Unknown values, incomplete known subtotals and unset targets keep their explicit labels. Exact positive overages retain their over-target status even when the displayed amount rounds to 0.
+sums are exact; only display rounds to whole numbers using ROUND_HALF_UP (halves away from zero). The same formatter covers calories, nutrient grams, portion grams, targets and remaining/over-target amounts in Nutrition and the dashboard. Edit forms retain stored precision. Unknown values, incomplete known subtotals and unset targets keep their explicit labels. Positive overages that round to zero display "Less than 1 g over target" or "Less than 1 kcal over target". For incomplete totals, this labels the known subtotal and states that the actual overage may be higher; other incomplete overages retain "At least". Exact zero is never an overage.
 
 | Field | Input bound |
 | --- | --- |

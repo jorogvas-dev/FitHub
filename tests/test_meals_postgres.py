@@ -194,6 +194,24 @@ class MealPlannerTests(PostgresTestCase):
         with self.connect_db() as conn:
             self.assertEqual(conn.execute('SELECT target_kcal FROM nutrition_settings WHERE user_id=%s',(self.owner,)).fetchone()[0],D(0))
 
+    def test_small_plan_overages_use_the_shared_label_and_zero_stays_exact(self):
+        self.make_recipe()
+        self.settings(target_kcal='1599.99', target_protein='79.99')
+        plan = self.draft()
+        captured = []
+        def capture(sender, template, context, **extra):
+            captured.append(context)
+        with template_rendered.connected_to(capture, self.app):
+            page = self.a.get(f'/nutrition/meal-plans/{plan}')
+        self.assertEqual(page.status_code, 200)
+        for nutrient, unit in [('kcal', 'kcal'), ('protein', 'g')]:
+            self.assertEqual(captured[-1]['differences'][nutrient], D('0.01'))
+            self.assertIn(f'Less than 1 {unit} over target'.encode(), page.data)
+        self.assertEqual(captured[-1]['differences']['carbs'], D(0))
+        self.assertIn(b'>Exact</p>', page.data)
+        self.assertNotIn(b'0 kcal over', page.data)
+        self.assertNotIn(b'0 g over', page.data)
+
     def test_ownership_child_ids_and_foreign_recipe_swap(self):
         recipe=self.make_recipe();other=self.make_recipe('Second');plan=self.draft();secondplan=self.draft()
         row=self.meal_rows(plan)[0]
