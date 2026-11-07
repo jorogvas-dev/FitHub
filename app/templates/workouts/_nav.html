@@ -1,0 +1,7 @@
+<nav class="training-nav" aria-label="Training navigation">
+  <a href="{{ url_for('workout_calendar.index') }}" {% if request.blueprint == 'workout_calendar' %}aria-current="page"{% endif %}>{{ icon('calendar-range') }}<span>Calendar</span></a>
+  <a href="{{ url_for('plans.index') }}" {% if request.blueprint == 'plans' %}aria-current="page"{% endif %}>{{ icon('clipboard-list') }}<span>Workout plans</span></a>
+  <a href="{{ url_for('workouts.history') }}" {% if request.blueprint == 'workouts' and request.endpoint != 'workouts.exercise_progress' %}aria-current="page"{% endif %}>{{ icon('history') }}<span>Workout history</span></a>
+  <a href="{{ url_for('workouts.exercise_progress') }}" {% if request.endpoint == 'workouts.exercise_progress' %}aria-current="page"{% endif %}>{{ icon('chart-line') }}<span>Progress</span></a>
+  <a href="{{ url_for('main.exercises') }}">{{ icon('dumbbell') }}<span>Exercise library</span></a>
+</nav>

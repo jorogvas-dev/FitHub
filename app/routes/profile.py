@@ -32,7 +32,9 @@ def onboarding():
         todays_weight = query(conn, 'SELECT * FROM body_measurement WHERE user_id=%s AND measured_on=%s',
                               (g.user['user_id'], today), one=True)
         if all(profile.get(field) is not None for field in ('height_cm', 'goal', 'experience')) and latest:
-            return redirect(url_for('main.dashboard'))
+            preferences = query(conn, 'SELECT status FROM training_preferences WHERE user_id=%s',
+                                (g.user['user_id'],), one=True)
+            return redirect(url_for('main.dashboard' if preferences else 'workout_ai.preferences'))
         if request.method == 'POST':
             try:
                 # Existing values always win, including values saved since this form was opened.
@@ -69,8 +71,8 @@ def onboarding():
             except ValueError as exc:
                 flash(str(exc))
             else:
-                flash('You are ready to train. Create a plan or explore the exercise library.')
-                return redirect(url_for('main.dashboard'))
+                flash('Your existing profile and measurements are saved. Training preferences are optional.')
+                return redirect(url_for('workout_ai.preferences'))
     return render_template('profile/onboarding.html', profile=profile, latest=latest, todays_weight=todays_weight,
                            today=today, goals=GOALS, experience_levels=EXPERIENCE)
 

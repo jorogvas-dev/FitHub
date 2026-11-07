@@ -110,3 +110,5 @@
  .diary-entry .entry-heading .note{margin-bottom:0}
 }
 @media(max-width:650px){.nutrition-workspace .date-picker label{grid-column:1/-1}.diary-entry .entry-food{min-width:0}.entry-nutrients{margin-top:8px}}
+.swap-comparison{display:flex;align-items:flex-end;flex-wrap:wrap;gap:16px}.swap-comparison label{flex:1;min-width:180px;margin:0}.swap-comparison button{margin-bottom:0}.swap-current{font-variant-numeric:tabular-nums}.swap-options{display:grid;grid-template-columns:1fr;gap:24px;margin:24px 0}.swap-option{min-width:0;overflow-wrap:anywhere}.swap-option h2{font-size:22px}.swap-option form{border-top:1px solid var(--line);padding-top:18px;margin-top:20px}.swap-nutrients p{margin:4px 0 0;font-size:12px}.swap-option details{margin:18px 0}.swap-coach{color:var(--accent)}.swap-explain{margin:22px 0}
+@media(max-width:520px){.swap-comparison label,.swap-comparison button{width:100%;min-width:0;flex:auto}.swap-option .section-heading{align-items:flex-start}.swap-option h2{font-size:20px}.swap-option button{width:100%}}

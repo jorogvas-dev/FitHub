@@ -1,18 +1,19 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %}{% from 'workouts/_exercise_card.html' import exercise_card with context %}
 {% block title %}{{ plan.day_name }} · Workout · FitHub{% endblock %}
-{% block content %}
-<a href="{{ url_for('workouts.history') }}">← Workout history</a>
-<div class="page-heading"><div><p class="eyebrow">{{ 'FINISHED WORKOUT' if workout.finished_at else 'WORKOUT IN PROGRESS' }}</p><h1>{{ plan.day_name }}</h1><p>{{ plan.plan_name }}</p></div>
-{% if not workout.finished_at %}<div class="actions"><a class="button" href="{{ url_for('workouts.set_edit',session_id=workout.session_id) }}">+ Log set</a><form method="post" action="{{ url_for('workouts.finish',session_id=workout.session_id) }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="button">Finish workout</button></form></div>{% endif %}</div>
-<p class="note">Started {{ workout.started_at }}{% if workout.finished_at %} · Finished {{ workout.finished_at }}. This workout is read-only.{% endif %}</p>
-<article class="training-day"><h2>Planned exercises</h2>
-{% if plan.exercises %}<div class="table-wrap"><table><thead><tr><th>Exercise</th><th>Target sets</th><th>Rep range</th></tr></thead><tbody>
-{% for exercise in plan.exercises %}<tr><td>{{ exercise.name }}</td><td>{{ exercise.target_sets }}</td><td>{% if exercise.get('tracking_type') == 'duration' %}Timed exercise: duration target unavailable; legacy values retained.{% else %}{{ exercise.reps_min }}–{{ exercise.reps_max }} reps{% endif %}</td></tr>{% endfor %}
-</tbody></table></div>{% else %}<p>No planned exercises available. Logged sets are shown below.</p>{% endif %}</article>
-<article class="training-day"><h2>Logged sets</h2>
-<p class="note">Historical rep values and original targets remain as recorded. This logger does not store timed durations.</p>
-{% if logs %}<div class="table-wrap"><table><thead><tr><th>Exercise</th><th>Set</th><th>Reps</th><th>Weight</th><th>RIR</th>{% if not workout.finished_at %}<th>Actions</th>{% endif %}</tr></thead><tbody>
-{% for entry in logs %}<tr><td>{{ entry.name }}</td><td>{{ entry.set_number }}</td><td>{{ entry.reps }}</td><td>{{ (entry.weight_kg ~ ' kg') if entry.weight_kg is not none else 'Bodyweight' }}</td><td>{{ entry.rir if entry.rir is not none else '—' }}</td>
-{% if not workout.finished_at %}<td><div class="actions"><a href="{{ url_for('workouts.set_edit',session_id=workout.session_id,set_id=entry.set_id) }}">Edit</a><form method="post" action="{{ url_for('workouts.set_delete',session_id=workout.session_id,set_id=entry.set_id) }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="quiet danger-link">Delete set</button></form></div></td>{% endif %}</tr>{% endfor %}
-</tbody></table></div>{% else %}<p>No sets logged yet.</p>{% endif %}</article>
+{% block content %}{% include 'workouts/_nav.html' %}
+<a class="training-back" href="{{ url_for('workouts.history') }}">← Workout history</a>
+<div class="page-heading training-heading"><div><p class="eyebrow">TRAINING / {{ 'FINISHED WORKOUT' if workout.finished_at else 'ACTIVE WORKOUT' }}</p><h1>{{ plan.day_name }}</h1><p class="lead">{{ plan.plan_name }}</p><p class="note">Started <time datetime="{{ workout.started_at.isoformat() }}">{{ workout.started_at.strftime('%d %b %Y · %H:%M %Z') }}</time></p></div><span class="session-status {{ 'is-finished' if workout.finished_at else 'is-active' }}">{{ icon('shield' if workout.finished_at else 'play') }}{{ 'Finished · Read-only' if workout.finished_at else 'In progress' }}</span></div>
+{% if workout.finished_at %}<aside class="workout-readonly">{{ icon('shield') }}<div><strong>This workout is read-only.</strong><p>Finished <time datetime="{{ workout.finished_at.isoformat() }}">{{ workout.finished_at.strftime('%d %b %Y · %H:%M %Z') }}</time>. Your recorded sets and original targets are shown below.</p></div></aside>{% endif %}
+{% if workout.finished_at %}<p class="note">New PR badges mark strict improvements over earlier completed workouts. First results establish baselines. Only the best set for each record in this session earns a badge.</p>{% endif %}
+{% include 'workouts/_timer.html' %}
+<div class="workout-overview"><div>{{ icon('clipboard-list') }}<span><strong>{{ plan.exercises|length }}</strong> planned prescription{{ 's' if plan.exercises|length != 1 else '' }}</span></div><div>{{ icon('dumbbell') }}<span><strong>{{ logs|length }}</strong> sets logged</span></div><p>Weight in kg · RIR = reps in reserve</p></div>
+{% if workout.finished_at %}{% include 'workouts/_review.html' %}{% endif %}
+<div class="section-heading"><h2>Planned exercises</h2><span class="note">Targets and logged sets together</span></div>
+<section class="workout-exercises" aria-label="Exercises and logged sets">
+{% if not plan.exercises %}<div class="training-empty compact-empty"><p>No planned exercises available. Logged sets are shown below.</p></div>{% endif %}
+{% for card in cards %}{{ exercise_card(card.exercise,card.targets,card.entries,workout,references.get(card.exercise.exercise_id),pr_badges) }}{% endfor %}
+</section>
+<p class="note training-footnote">Historical rep values and original targets remain as recorded. This logger does not store timed durations.</p>
+{% if not workout.finished_at %}<div class="other-exercise-action"><a class="button secondary" href="{{ url_for('workouts.set_edit',session_id=workout.session_id) }}">{{ icon('plus') }}Log set for another exercise</a><p class="note">Choose an available rep-based exercise. Planned targets above stay unchanged.</p></div>
+<section class="finish-panel" aria-labelledby="finish-heading"><div><p class="eyebrow">END THIS SESSION</p><h2 id="finish-heading">Ready to finish?</h2><p>Finish when you are done. This session will become read-only; your logged sets stay available in workout history.</p></div><form method="post" action="{{ url_for('workouts.finish',session_id=workout.session_id) }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="button finish-button">{{ icon('shield') }}Finish workout</button></form></section>{% endif %}
 {% endblock %}

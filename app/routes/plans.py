@@ -79,7 +79,9 @@ def entry_input():
 def index():
     with connect() as conn:
         plans = query(conn, 'SELECT p.*, (SELECT count(*) FROM workout_day d WHERE d.plan_id=p.plan_id) AS days FROM workout_plan p WHERE p.owner_id=%s ORDER BY p.created_at DESC,p.plan_id DESC', (g.user['user_id'],))
-    return render_template('plans/index.html', plans=plans)
+        drafts = query(conn, 'SELECT draft_id,document,created_at FROM workout_draft WHERE user_id=%s '
+                       'AND saved_at IS NULL ORDER BY created_at DESC LIMIT 20', (g.user['user_id'],))
+    return render_template('plans/index.html', plans=plans, drafts=drafts)
 
 
 @bp.route('/new', methods=['GET', 'POST'])
@@ -203,16 +205,17 @@ def entry_edit(plan_id, day_id, entry_id=None):
         if request.method == 'POST':
             try:
                 exercise_id, sets, low, high = entry_input()
+                rest=integer_input('rest_seconds','Rest duration',1,3600) if request.form.get('rest_seconds','').strip() else None
                 usable_exercise(conn, exercise_id, (entry['exercise_id'],) if entry else ())
             except ValueError as exc:
                 flash(str(exc))
             else:
                 if entry_id is None:
-                    conn.execute('INSERT INTO plan_exercise(day_id,exercise_id,target_sets,reps_min,reps_max,position) SELECT %s,%s,%s,%s,%s,coalesce(max(position),0)+1 FROM plan_exercise WHERE day_id=%s',
-                                 (day_id, exercise_id, sets, low, high, day_id))
+                    conn.execute('INSERT INTO plan_exercise(day_id,exercise_id,target_sets,reps_min,reps_max,rest_seconds,position) SELECT %s,%s,%s,%s,%s,%s,coalesce(max(position),0)+1 FROM plan_exercise WHERE day_id=%s',
+                                 (day_id, exercise_id, sets, low, high, rest, day_id))
                 else:
-                    conn.execute('UPDATE plan_exercise SET exercise_id=%s,target_sets=%s,reps_min=%s,reps_max=%s WHERE plan_exercise_id=%s',
-                                 (exercise_id, sets, low, high, entry_id))
+                    conn.execute('UPDATE plan_exercise SET exercise_id=%s,target_sets=%s,reps_min=%s,reps_max=%s,rest_seconds=%s WHERE plan_exercise_id=%s',
+                                 (exercise_id, sets, low, high, rest, entry_id))
                 return redirect(url_for('plans.detail', plan_id=plan_id))
     return render_template('plans/exercise_form.html', plan_id=plan_id, day=day, exercises=exercises, entry=entry)
 

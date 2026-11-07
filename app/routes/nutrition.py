@@ -60,12 +60,13 @@ def food_input(name_field='name', places=2, name_limit=100):
     return name, rates
 
 
-def portion_input():
+def portion_input(entry=None):
     day = diary_date(request.form.get('logged_on', ''))
     meal = request.form.get('meal', '')
     if meal not in dict(MEALS):
         raise ValueError('Choose breakfast, lunch, dinner or snack.')
-    grams = decimal_input('grams', 'Grams consumed', CENT, 10000, 2)
+    grams = (entry['grams'] if entry and request.form.get('grams','')==str(entry['grams'])
+             else decimal_input('grams', 'Grams consumed', CENT, 10000, 2))
     return day, meal, grams
 
 
@@ -125,6 +126,7 @@ def settings():
             except ValueError as exc:
                 flash(str(exc))
             else:
+                conn.execute('SELECT user_id FROM app_user WHERE user_id=%s FOR UPDATE',(g.user['user_id'],))
                 conn.execute('INSERT INTO nutrition_settings(user_id,allergies,unwanted_ingredients,dietary_preferences,'
                              'timezone,target_kcal,target_protein,target_carbs,target_fat) '
                              'VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (user_id) DO UPDATE SET '
@@ -134,6 +136,8 @@ def settings():
                              'target_carbs=EXCLUDED.target_carbs,target_fat=EXCLUDED.target_fat',
                              (g.user['user_id'], *notes, zone, *targets))
                 flash('Nutrition settings saved. Targets stay exactly as entered.')
+                if request.args.get('next')=='meal-plan':
+                    return redirect(url_for('meals.plan_new',starters='yes'))
                 return redirect(url_for('nutrition.settings'))
     return render_template('nutrition/settings.html', settings=stored, zones=supported_timezones(),
                            nutrients=NUTRIENTS, comparison=target_comparison(stored))
@@ -221,7 +225,7 @@ def entry_edit(day, entry_id=None):
         entry = owned_entry(conn, parent_day, entry_id, lock=request.method == 'POST') if entry_id is not None else None
         if request.method == 'POST':
             try:
-                selected, meal, grams = portion_input()
+                selected, meal, grams = portion_input(entry)
                 name, rates = food_input('food_name', places=6 if entry and entry['provenance'] else 2,
                                          name_limit=300 if entry and entry['provenance'] else 100)
             except ValueError as exc:

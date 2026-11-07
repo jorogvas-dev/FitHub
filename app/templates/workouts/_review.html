@@ -1,0 +1,14 @@
+<section class="workout-review" id="workout-review" aria-labelledby="review-heading">
+  <div class="review-heading"><div><p class="eyebrow">Reflect on this session</p><h2 id="review-heading">Workout review</h2></div>
+  <form method="post" action="{{ url_for('workouts.review',session_id=workout.session_id) }}#workout-review" data-workout-review aria-describedby="review-status"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="button secondary">{{ 'Review again with AI' if review else 'Review with AI' }}</button></form></div>
+  <p id="review-status" class="note" role="status" aria-live="polite" hidden>Reviewing your completed workout. This may take a few minutes.</p>
+  <p class="note">Advisory only. Your logged sets, saved prescription, earlier comparable sessions and earned records inform this review. Reading it does not change your plan or logs.</p>
+  {% if review %}
+    <div class="review-result" data-review-mode="{{ review.mode }}">
+    {% if review.mode == 'fallback' %}<p class="review-fallback" role="status">AI review is unavailable. Here is a recap from your logged workout.</p>{% else %}<p class="review-source">AI-prioritized review</p>{% endif %}
+    <ul class="review-highlights">{% for fact in review.highlights %}<li>{{ fact.text }}</li>{% endfor %}</ul>
+    {% if review.suggestions %}<h3>Optional next-session suggestions</h3><ol class="review-suggestions">{% for suggestion in review.suggestions %}<li><p>{{ suggestion.text }}</p><p class="note">{{ suggestion.explanation }}</p></li>{% endfor %}</ol>{% else %}<p class="note">No next-session targets suggested. Keep the logged session as your reference.</p>{% endif %}
+    </div>
+  {% endif %}
+</section>
+<script src="{{ url_for('static',filename='js/workout-review.js') }}" defer></script>

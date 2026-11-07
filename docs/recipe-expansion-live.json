@@ -1,0 +1,43 @@
+{
+  "provider": "live fithub-coach",
+  "coverage": {
+    "previous": {
+      "recipes": 40,
+      "breakfasts": 8,
+      "low_fat_protein": 1,
+      "vegetarian": 12,
+      "quick": 14,
+      "snacks": 6,
+      "meal_prep": 36,
+      "fully_reviewed_allergens": 4
+    },
+    "expanded": {
+      "recipes": 100,
+      "breakfasts": 7,
+      "low_fat_protein": 1,
+      "vegetarian": 70,
+      "quick": 10,
+      "snacks": 62,
+      "meal_prep": 97,
+      "fully_reviewed_allergens": 1
+    }
+  },
+  "cases": [
+    {
+      "collection": "previous",
+      "case": "balanced",
+      "eligible": 40,
+      "shortlist": 10,
+      "error": "Live provider unavailable or response invalid; no draft or diary created.",
+      "seconds": 0.0726
+    },
+    {
+      "collection": "expanded",
+      "case": "balanced",
+      "eligible": 100,
+      "shortlist": 10,
+      "error": "Live provider unavailable or response invalid; no draft or diary created.",
+      "seconds": 0.0351
+    }
+  ]
+}

@@ -8,4 +8,4 @@ COPY db db
 RUN useradd --create-home app
 USER app
 EXPOSE 8000
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "2", "--threads", "4", "--forwarded-allow-ips", "*", "--access-logfile", "-", "app:create_app()"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "2", "--threads", "4", "--timeout", "210", "--forwarded-allow-ips", "*", "--access-logfile", "-", "app:create_app()"]

@@ -6,3 +6,7 @@
 *.yml text eol=lf
 Dockerfile text eol=lf
 *.conf.template text eol=lf
+
+# These pinned upstream bytes are checksum-verified, including line endings.
+db/data/unitools/unitools-recipes-v1.json -text
+db/data/unitools/LICENSE -text whitespace=-blank-at-eof

@@ -1,13 +1,5 @@
-{% extends 'base.html' %}
-{% block title %}Workout history · FitHub{% endblock %}
-{% block content %}
-<div class="page-heading"><div><p class="eyebrow">YOUR TRAINING</p><h1>Workout history</h1></div><a class="button" href="{{ url_for('plans.index') }}">Start from a training day</a></div>
-{% for session in sessions %}
-<article class="training-day">
-  <span class="tag">{{ 'FINISHED' if session.finished_at else 'IN PROGRESS' }}</span>
-  <h2><a href="{{ url_for('workouts.detail',session_id=session.session_id) }}">{{ session.plan.day_name }}</a></h2>
-  <p>{{ session.plan.plan_name }} · Started {{ session.started_at }} · {{ session.set_count }} sets logged</p>
-  {% if session.finished_at %}<p>Finished {{ session.finished_at }}</p>{% endif %}
-</article>
-{% else %}<article><h2>No workouts yet</h2><p>Open a plan and start a training day to log your first workout.</p></article>{% endfor %}
-{% endblock %}
+{% extends 'base.html' %}{% block title %}Workout history · FitHub{% endblock %}
+{% block content %}{% include 'workouts/_nav.html' %}
+<div class="page-heading training-heading"><div><p class="eyebrow">TRAINING / WORKOUT HISTORY</p><h1>Workout history</h1><p class="lead">Continue an active workout or revisit your recorded sessions.</p></div><a class="button" href="{{ url_for('plans.index') }}">{{ icon('play') }}Choose a training day</a></div>
+<div class="history-grid">{% for session in sessions %}<article class="session-card"><div class="card-meta"><span class="session-status {{ 'is-finished' if session.finished_at else 'is-active' }}">{{ icon('shield' if session.finished_at else 'play') }}{{ 'Finished' if session.finished_at else 'In progress' }}</span><span class="note">{{ session.set_count }} sets logged</span></div><h2><a href="{{ url_for('workouts.detail',session_id=session.session_id) }}">{{ session.plan.day_name }}</a></h2><p class="session-plan">{{ session.plan.plan_name }}</p><dl class="session-dates"><div><dt>Started</dt><dd><time datetime="{{ session.started_at.isoformat() }}">{{ session.started_at.strftime('%d %b %Y · %H:%M %Z') }}</time></dd></div>{% if session.finished_at %}<div><dt>Finished</dt><dd><time datetime="{{ session.finished_at.isoformat() }}">{{ session.finished_at.strftime('%d %b %Y · %H:%M %Z') }}</time></dd></div>{% endif %}</dl><div class="session-card-footer"><p class="note">{{ 'Read-only · recorded targets and sets' if session.finished_at else 'Active · logging is still available' }}</p><a class="button{{ ' secondary' if session.finished_at }}" href="{{ url_for('workouts.detail',session_id=session.session_id) }}">{{ 'View session' if session.finished_at else 'Continue workout' }}{{ icon('arrow-right') }}</a></div></article>
+{% else %}<article class="training-empty">{{ icon('history') }}<h2>No workouts yet</h2><p>Open a plan and start a training day to log your first workout.</p><a class="button" href="{{ url_for('plans.index') }}">Choose a training day{{ icon('arrow-right') }}</a></article>{% endfor %}</div>{% endblock %}

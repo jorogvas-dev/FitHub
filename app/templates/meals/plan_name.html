@@ -1,0 +1,7 @@
+{% extends 'base.html' %}{% block title %}Name meal plan · FitHub{% endblock %}
+{% block content %}{% include 'nutrition/_nav.html' %}
+<section class="form-card"><a href="{{ url_for('meals.plan_detail',plan_id=plan.plan_id) }}">← Back to meal plan</a><h1>Name your meal plan</h1>
+<p class="note">A name is optional. Leave it blank to use the default numbered label. You can rename drafts and saved plans.</p>
+<form method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+<label>Plan name (optional)<input name="name" maxlength="100" value="{{ request.form.get('name',plan.name or '') }}" placeholder="e.g. High-protein weekdays" autofocus></label>
+<div class="form-actions"><button class="button">Save name</button><a href="{{ url_for('meals.plan_detail',plan_id=plan.plan_id) }}">Cancel</a></div></form></section>{% endblock %}

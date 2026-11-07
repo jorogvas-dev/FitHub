@@ -14,6 +14,8 @@
 {% if setup_required %}<article class="setup-card dashboard-setup"><div><p class="eyebrow">A GOOD PLACE TO START</p><h2>Complete your training profile</h2><p>Save your height, experience, goal and starting bodyweight. Your existing details stay unchanged.</p></div><a class="button secondary" href="{{ url_for('profile.onboarding') }}">Finish setup {{ icon('arrow-right') }}</a></article>{% endif %}
 <div class="dashboard-grid">
 <div class="dashboard-column">
+  {% include '_weekly_recap.html' %}
+  {% include '_upcoming_workouts.html' %}
   <article class="dashboard-card training-summary" aria-labelledby="training-heading">
     <div class="dashboard-card-heading">
       <div><p class="eyebrow">Training day preview</p><h2 id="training-heading">{{ training_day.plan_name if training_day else 'Your training' }}</h2>
@@ -79,7 +81,7 @@
 
   <article class="dashboard-card meal-summary" aria-labelledby="meal-heading">
     {{ icon('calendar-range' if meal_plan else 'calendar-x','empty-icon') }}
-    {% if meal_plan %}<h2 id="meal-heading">{{ 'Saved meal plan' if meal_plan.status == 'saved' else 'Meal plan draft' }}</h2><p>A {{ meal_plan.status }} plan for <time datetime="{{ today }}">{{ today.strftime('%d %b %Y') }}</time>. Review your meals and portions before logging.</p><a class="button secondary" href="{{ url_for('meals.plan_detail',plan_id=meal_plan.plan_id) }}">{{ 'Open saved plan' if meal_plan.status == 'saved' else 'Review draft' }}</a>
+    {% if meal_plan %}<h2 id="meal-heading">{{ meal_plan.name or ('Saved meal plan' if meal_plan.status == 'saved' else 'Meal plan draft') }}</h2><p>A {{ meal_plan.status }} plan for <time datetime="{{ today }}">{{ today.strftime('%d %b %Y') }}</time>. Review your meals and portions before logging.</p><a class="button secondary" href="{{ url_for('meals.plan_detail',plan_id=meal_plan.plan_id) }}">{{ 'Open saved plan' if meal_plan.status == 'saved' else 'Review draft' }}</a>
     {% else %}<h2 id="meal-heading">No saved meal plan</h2><p>No plan for <time datetime="{{ today }}">{{ today.strftime('%d %b %Y') }}</time>. Create a draft from your recipes and manual targets.</p><div class="actions"><a class="button secondary" href="{{ url_for('meals.plan_new') }}">Create a meal draft</a><a href="{{ url_for('meals.plans') }}">View meal plans</a></div>{% endif %}
     <p class="note">Planning doesn't add food to your diary. Log meals explicitly after saving.</p>
   </article>

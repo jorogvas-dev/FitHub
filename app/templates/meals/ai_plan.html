@@ -1,0 +1,18 @@
+{% extends 'base.html' %}{% block title %}Recipe retrieval · FitHub{% endblock %}
+{% block content %}{% include 'nutrition/_nav.html' %}
+<section class="form-card"><p class="eyebrow">NUTRITION / FIT​HUB COACH</p><h1>Generate with retrieved recipes</h1>
+<p>Use the curated recipe library with your saved preferences. Review meals and portions before explicitly saving. Your diary stays unchanged.</p>
+<p class="note">The server fits meals within every configured calorie and macro upper limit. Portions are 0.25–2 servings; a snack is added only if it improves the fit. If a full day cannot fit, the preview explains the remaining shortfall.</p>
+<p><a href="{{ url_for('nutrition.settings') }}">Review allergies, excluded ingredients and targets</a></p>
+{% for error in errors %}<p class="notice" role="alert">{{ error }}</p>{% endfor %}
+<form method="post" data-nutrition-generation aria-describedby="review-status"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+<label>Plan name (optional)<input name="name" maxlength="100" value="{{ request.form.get('name','') }}" placeholder="e.g. High-protein weekdays"></label>
+<label>Plan date<input type="date" name="planned_on" required value="{{ request.form.get('planned_on',day.isoformat()) }}"></label>
+<label>Meal style<input name="meal_style" maxlength="200" value="{{ meal_style }}"></label>
+<p class="note">{{ eligible|length }} recipes satisfy your current exclusions. Unknown ingredient checks block recipes when an allergy is active. Unset targets remain unset.</p>
+<button class="button">Generate with FitHub Coach</button></form>
+<p id="review-status" class="note" role="status" aria-live="polite" hidden>Retrieving eligible recipes and generating your draft. This may take a few minutes.</p>
+<p><a class="button secondary" href="{{ url_for('meals.plan_new') }}">Use manual planner</a></p>
+<p class="note">Recipe data: <a href="https://theunitools.com/en/data" rel="noopener">UniTools — theunitools.com</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license">CC BY-SA 4.0</a>. FitHub curates and adds ingredient matching labels. Source macros are estimates per serving; ingredient quantities retain their original units.</p></section>
+{% if excluded %}<details><summary>Why recipes were excluded</summary>{% for item in excluded %}<p><strong>{{ item.name }}</strong>: {{ item.reasons|join(' ') }}</p>{% endfor %}</details>{% endif %}
+<script src="{{ url_for('static',filename='js/nutrition-generation.js') }}" defer></script>{% endblock %}

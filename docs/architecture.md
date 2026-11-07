@@ -13,7 +13,10 @@ Tables: app_user, fitness_profile, exercise, workout_plan, workout_day, plan_exe
 Relationships: user -> profile, plans, sessions, measurements, coach messages; plan -> days -> exercise prescriptions; session -> logged sets -> exercise.
 A user's access to a linked workout_day is validated against plan ownership when a session is started. Set mutations lock the session row, and finished sessions are read-only. Profile and measurement routes also enforce ownership.
 
-Future AI: existing AI project remains a separate service, inspected before integration. Use a fitness-only Chroma collection. Retrieve training history from PostgreSQL after authorization. No model is loaded in web workers.
+Current AI: Open WebUI reuses its existing LM Studio connection. FitHub validates
+private workout drafts/reviews and public-recipe nutrition selections server-side.
+Chroma stores only public recipe search documents. No model is loaded in web workers.
+See the current [school architecture and database diagrams](school-project.md).
 
 This version follows the agreed personal fitness app scope: workout planning, logs, progress, AI coach. Gym memberships and class reservations from the initial optional proposal are not part of this version.
 

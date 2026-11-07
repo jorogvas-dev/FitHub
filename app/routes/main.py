@@ -1,6 +1,8 @@
 from flask import Blueprint, g, render_template, request
 from app.db import connect
 from app.services.nutrition import NUTRIENTS, daily_totals, target_comparison, user_today
+from app.services.weekly_recap import weekly_recap
+from app.services.workout_calendar import upcoming
 from .auth import login_required
 from .nutrition import settings_row
 from .plans import query
@@ -23,6 +25,9 @@ def dashboard():
         profile = conn.execute('SELECT height_cm,goal,experience FROM fitness_profile WHERE user_id=%s', (g.user['user_id'],)).fetchone()
         settings = settings_row(conn)
         today = user_today(settings['timezone'])
+        scheduled=upcoming(conn,g.user['user_id'],today)
+        recap = weekly_recap(conn, g.user['user_id'], today, settings['timezone'],
+                             'last' if request.args.get('week') == 'last' else 'this')
         entries = query(conn, 'SELECT grams,kcal_100g,protein_100g,carbs_100g,fat_100g '
                         'FROM nutrition_diary_entry WHERE user_id=%s AND logged_on=%s',
                         (g.user['user_id'], today))
@@ -36,7 +41,7 @@ def dashboard():
                               'JOIN workout_day d USING(day_id) JOIN workout_plan p USING(plan_id) '
                               'WHERE pe.day_id=%s AND p.owner_id=%s ORDER BY pe.position,pe.plan_exercise_id',
                               (training_day['day_id'], g.user['user_id'])) if training_day else []
-        meal_plan = query(conn, 'SELECT plan_id,status FROM meal_plan WHERE user_id=%s AND planned_on=%s '
+        meal_plan = query(conn, 'SELECT plan_id,status,name FROM meal_plan WHERE user_id=%s AND planned_on=%s '
                           "ORDER BY (status='saved') DESC,created_at DESC,plan_id DESC LIMIT 1",
                           (g.user['user_id'], today), one=True)
     latest = measurements[0] if measurements else None
@@ -50,7 +55,7 @@ def dashboard():
                            comparison=target_comparison(settings), food_count=len(entries),
                            incomplete_entries=sum(any(entry[key+'_100g'] is None for key, _, _ in NUTRIENTS)
                                                   for entry in entries),
-                           training_day=training_day, prescriptions=prescriptions,
+                           training_day=training_day, prescriptions=prescriptions, recap=recap,upcoming=scheduled,
                            planned_sets=sum(row['target_sets'] for row in prescriptions), meal_plan=meal_plan)
 
 

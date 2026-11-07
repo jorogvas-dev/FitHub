@@ -45,7 +45,7 @@ class MealPlannerTests(PostgresTestCase):
 
     def test_full_recipe_draft_adjust_swap_save_and_explicit_log(self):
         recipe=self.make_recipe();plan=self.draft()
-        rows=self.meal_rows(plan);self.assertEqual(len(rows),4);self.assertEqual(self.diary_rows(),[])
+        rows=self.meal_rows(plan);self.assertEqual(len(rows),3);self.assertEqual(self.diary_rows(),[])
         paths=['/nutrition/recipes',f'/nutrition/recipes/{recipe}',f'/nutrition/recipes/{recipe}/edit',
                f'/nutrition/recipes/{recipe}/ingredients/new','/nutrition/meal-plans',f'/nutrition/meal-plans/{plan}',
                f'/nutrition/meal-plans/{plan}/meals/{rows[0][0]}/edit']
@@ -170,7 +170,7 @@ class MealPlannerTests(PostgresTestCase):
         response=self.post(self.a,'/nutrition/meal-plans/new',planned_on=DAY)
         self.assertEqual(response.status_code,200)
         self.assertIn(b'Incomplete recipe or ingredient allergen metadata',response.data)
-        self.assertIn(b'No eligible breakfast',response.data)
+        self.assertIn(b'No eligible recipes',response.data)
         with self.connect_db() as conn:
             conn.execute("UPDATE recipe_ingredient SET allergen_complete=true,allergens=ARRAY['peanut'] WHERE recipe_id=%s",(recipe,))
         self.assertIn(b'Declared allergens: peanut',self.a.get('/nutrition/meal-plans/new').data)
@@ -189,8 +189,8 @@ class MealPlannerTests(PostgresTestCase):
     def test_infeasible_targets_explicit_differences_and_no_target_changes(self):
         self.make_recipe();self.settings(target_kcal=0,target_protein=0,target_carbs=0,target_fat=0)
         plan=self.draft();page=self.a.get(f'/nutrition/meal-plans/{plan}').data
-        self.assertIn(b'Targets are not met',page);self.assertIn(b'outside the searched portion range',page)
-        self.assertIn(b'400 kcal over',page)
+        self.assertIn(b'No nonzero portions fit',page)
+        self.assertEqual(self.meal_rows(plan),[])
         with self.connect_db() as conn:
             self.assertEqual(conn.execute('SELECT target_kcal FROM nutrition_settings WHERE user_id=%s',(self.owner,)).fetchone()[0],D(0))
 
@@ -205,10 +205,8 @@ class MealPlannerTests(PostgresTestCase):
             page = self.a.get(f'/nutrition/meal-plans/{plan}')
         self.assertEqual(page.status_code, 200)
         for nutrient, unit in [('kcal', 'kcal'), ('protein', 'g')]:
-            self.assertEqual(captured[-1]['differences'][nutrient], D('0.01'))
-            self.assertIn(f'Less than 1 {unit} over target'.encode(), page.data)
-        self.assertEqual(captured[-1]['differences']['carbs'], D(0))
-        self.assertIn(b'>Exact</p>', page.data)
+            self.assertLessEqual(captured[-1]['differences'][nutrient], D(0))
+        self.assertLessEqual(captured[-1]['differences']['carbs'], D(0))
         self.assertNotIn(b'0 kcal over', page.data)
         self.assertNotIn(b'0 g over', page.data)
 

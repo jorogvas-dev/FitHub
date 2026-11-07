@@ -1,169 +1,170 @@
-# FitHub School
+# FitHub
 
-Fitness application with PostgreSQL and ChromaDB, replacing the earlier document-focused starter.
+A school project for workout planning, training history and nutrition planning.
+Local AI produces drafts for human review. Saving a plan never logs a workout or meal.
 
-## Windows launch
+[School guide and diagrams](docs/school-project.md) ·
+[Six-minute demo and startup checklist](docs/presentation.md) ·
+[Verification](docs/submission-verification.md) ·
+[Backup/restore](docs/backup-and-restore.md)
 
-For an existing installation, keep its `.env` and database volumes and run:
+## Prerequisites and first installation
+
+Use Windows PowerShell, Git and Docker Desktop with its Linux engine running.
+The isolated-install verifier requires Compose `!override`/`!reset` support
+(tested with Compose 5.6.1). Docker supplies Python: no host Python is required for
+setup, regression tests or the HTTP smoke. Chrome/Playwright are developer browser
+test tools, not application dependencies. Allow storage/RAM for Docker images and,
+separately, an optional local model.
+
+Default free localhost ports: HTTP **8010**, HTTPS **8443**, logs **8088**,
+PostgreSQL **5433**. Web replicas and Chroma have no published host ports.
+
+```powershell
+git clone https://github.com/jorogvas-dev/FitHub.git
+Set-Location FitHub
+git switch ui/purple-theme
+New-Item -ItemType Directory -Force .secrets | Out-Null
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\setup.ps1
+docker compose exec -T web flask --app app import-recipes --dry-run
+docker compose exec -T web flask --app app import-recipes --index
+```
+
+Setup generates `.env` only when missing and preserves existing secrets. Initialization
+SQL runs only with an empty database volume; versioned migrations run before web
+deployment. Recipe imports check pinned data/license hashes and update stable
+source IDs and the FitHub-only Chroma index. Repeating imports is safe.
+
+A fresh installation has **13 migrations, 23 tables, 68 exercises, 100 shared foods
+and 100 active recipes**. An upgraded database may retain 32 inactive pilot recipes
+for historical references.
+
+Open **https://localhost:8443/** and accept the local self-signed certificate warning.
+HTTP **http://localhost:8010/** redirects to HTTPS; logs: **http://localhost:8088/**;
+readiness: **https://localhost:8443/health**. Use configured ports if changed.
+Register your own account. **No default passwords or administrator accounts exist.**
+
+## Update and migrations
 
 ```powershell
 Set-Location E:\FitHub-School
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\update-deployment.ps1
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\check-deployment.ps1
+docker compose exec -T web flask --app app import-recipes --index
 ```
 
-The update checks port availability and preserves the `fithub-school` project name,
-all existing environment values, secrets, credentials and data volumes. It adds only
-missing HTTPS/log port settings. No unrelated services are stopped. See the
-[deployment guide](./docs/deployment.md) for architecture, certificate handling,
-health checks, failover verification and custom ports.
-
-Open https://localhost:8443 and accept the local self-signed certificate warning.
-HTTP http://localhost:8010 redirects to HTTPS. Container logs: http://localhost:8088.
-For a new installation only, use `scripts/setup.ps1`; it generates secrets only when
-`.env` does not exist. No default login credentials exist. Registration creates regular
-member accounts. Administrator access requires explicit promotion of an existing account;
-there is no default administrator password. See [phase 1](./docs/phase1-ui-onboarding.md).
+Keep `.env`, `.secrets` and all existing volumes. Never remove the main database
+volumes as an update step. For an application-only rebuild:
 
 ```powershell
-docker compose exec db psql -U fithub -d fithub -c "\dt"
-```
-
-Expected: 19 tables including the migration ledger. Health endpoint: https://localhost:8443/health.
-
-## Implemented in this version
-
-- Fitness branding and responsive pages.
-- Grouped member sidebar/mobile navigation and an account-scoped training, nutrition and bodyweight dashboard; see [approved theme, checks and screenshots](./docs/black-violet-theme.md).
-- Register/login/logout, hashed passwords, form CSRF tokens and protected dashboard.
-- User-scoped dashboard counts for workout plans, sessions and latest weight.
-- Searchable exercise catalogue with 68 seeded exercises, including correctly labelled timed movements.
-- Registration onboarding that fills missing profile details and preserves existing measurements.
-- Protected exercise administration with create/edit/deactivate/reactivate controls.
-- Private workout plans, days and exercise prescriptions with create/edit/delete forms.
-- Start workouts from training days; log, edit and delete sets with reps, optional weight and RIR.
-- Private workout history, preserved plan targets, and read-only finished sessions.
-- Private fitness profiles and dated bodyweight history with add/edit/delete forms.
-- Private nutrition preferences, user-entered targets and a manual food diary with saved-food snapshots.
-- Shared offline USDA food catalogue, private recipes and rule-based four-meal drafts with explicit logging.
-- Explicit unknown nutrition values, incomplete/over-target totals and user-local diary dates.
-- Latest bodyweight and signed change from the previous measurement on the dashboard.
-- nginx local HTTPS/HTTP redirect, two identical web replicas and Docker DNS recovery.
-- Project-filtered Dozzle logs and health-based startup dependencies.
-- Fitness schema and persistent PostgreSQL/ChromaDB volumes.
-
-## Next
-
-Timed exercise targets. Workout logging is available from each training day, and the dashboard links to workout history, fitness profiles and bodyweight history. ChromaDB is running but has no fitness knowledge indexed yet; there is no AI endpoint or model loaded in this version. No PDFs or document analysis features.
-The full UML diagram remains future school-documentation work. Login has no rate limiting/password reset/email verification yet; this local school deployment is not ready for public hosting.
-
-## Structure
-
-app/routes/auth.py: authentication
-app/routes/main.py: home, protected dashboard, exercises
-app/routes/profile.py: private fitness profiles and bodyweight tracking
-app/routes/nutrition.py: private preferences, saved foods and manual food diary
-app/services/health.py: database health
-deploy/: nginx TLS/proxy configuration and Chroma heartbeat check
-app/templates/: web pages
-app/static/: stylesheet
-db/init/01-schema.sql: schema and exercise seed data
-scripts/: first-start scripts
-tests/: auth and access regression checks
-docs/: design and validation notes
-
-## Stop / restart
-
-`docker compose stop` stops the project without removing containers or volumes.
-`docker compose up -d --build --wait` restarts the complete deployment with two web replicas.
-Initialization SQL only runs with an empty database volume. This starter uses fresh FitHub volumes and does not migrate data from the old document schema.
-
-Dependencies are pinned in requirements.lock.txt (Linux/Python 3.12); use Docker on Windows.
-
-## Updating from v0.1
-
-See README-WORKOUT-UPDATE.md for the historical workout editor update.
-
-That describes the older workout editor update. The current phase 1 update requires
-the additive migrations in [the phase 1 guide](./docs/phase1-ui-onboarding.md).
-The deployment updater applies them automatically before replacing web containers.
-
-## Workout logging update
-
-For a current installation, migrate and rebuild the web service from PowerShell:
-
-```powershell
-Set-Location E:\FitHub-School
 docker compose build web
 docker compose run --rm --no-deps -T web flask --app app db-upgrade
-docker compose up -d --no-deps --wait web
-docker compose ps
+docker compose up -d --no-deps --wait --wait-timeout 180 web
 ```
 
-Keep the existing environment and database volumes. Do not rerun setup or remove volumes.
-No additional Python dependencies are required. Phase 1 uses versioned, additive
-schema migrations; existing records and IDs are retained.
+The migration ledger/advisory lock makes migrations 001–013 repeatable. A second
+`db-upgrade` reports that the database is up to date. Editing initialization SQL
+does not upgrade a populated database. `docker compose stop` preserves data;
+`docker compose up -d --wait --wait-timeout 300` starts the deployment again.
 
-Open a plan and select **Start workout** on a training day. Log sets using an exercise
-from the catalogue, a positive set number, 0–1000 reps, optional weight of 0–10000 kg
-(up to two decimal places), and optional RIR of 0–10. Blank weight means bodyweight;
-zero weight remains an explicit zero. Set numbers must be unique per exercise within
-each session. Finish the workout when done; finished sessions cannot be changed.
+## Implemented features
 
-The session records its original plan/day names and prescribed exercises/targets as a
-versioned JSON snapshot in the existing `workout_session.notes` text field. Existing
-session notes are never rewritten. Older sessions use their current day when available.
-Set details join the exercise catalogue independently, so historical exercise names
-remain viewable after day or plan deletion. The navigation and dashboard link to history.
-All mutations require POST and CSRF. Session row locks serialize set mutations and
-completion; completion sets its timestamp once.
+- Private onboarding, profile, bodyweight and editable/skippable training preferences.
+- Manual workout plans and validated AI drafts with explicit **Save as new plan**.
+- Weighted/bodyweight sets, reps/RIR, captured prescriptions and completed history.
+- Last-session references, progress chart/table, PRs and weekly recap.
+- Persistent timestamp-based rest timer, optional sound, calendar and upcoming workouts.
+- Manual diary, private foods/recipes, USDA Food Library and optional meal plan names.
+- Recipe retrieval, exact daily upper limits, portion/snack fitting, confirmed meal
+  swaps and separate diary logging.
+- Protected exercise/food administration, responsive dark theme and keyboard focus.
 
-Run all checks using the existing Docker dependencies and PostgreSQL:
+## Configuration and AI
+
+`.env.example` contains placeholders/defaults. Never commit `.env`, credentials,
+backups, private documents, account data, database volumes or local model weights.
+
+| Variable | Purpose |
+|---|---|
+| `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB` | Database identity; preserve existing values |
+| `SECRET_KEY` | Shared session, CSRF and signing secret across both replicas |
+| `WEB_PORT`, `HTTPS_PORT`, `DOZZLE_PORT`, `POSTGRES_HOST_PORT` | Localhost ports |
+| `WORKOUT_AI_ENDPOINT` | Default `http://host.docker.internal:3000/api/chat/completions` |
+| `WORKOUT_AI_MODEL` | Default `qwen2.5-7b-nerd-uncensored-v1.0` |
+| `NUTRITION_AI_MODEL` | Exact preset ID; default `fithub-coach` |
+| `WORKOUT_AI_TOOL_IDS` | Optional comma-separated tool IDs; empty for fitness flows |
+| `WORKOUT_AI_TIMEOUT_SECONDS` | Default 120, bounded to 1–180 seconds |
+
+Compose supplies `PGHOST`, `PGPORT`, `PGUSER`, `PGPASSWORD`, `PGDATABASE` and
+`CHROMA_URL`. It fixes `WORKOUT_AI_API_KEY_FILE` to
+`/run/secrets/fithub/openwebui-api-key.txt`. Put the API key in ignored
+`.secrets/openwebui-api-key.txt`; both replicas mount it read-only. Keep credentials
+server-side, outside URLs/forms/browser storage.
+
+FitHub reuses separately running **Open WebUI** and its existing **LM Studio**
+connection/model. FitHub does not start/download/switch that model. Enable API-key
+access and authorize the selected model IDs. Verify IDs using FitHub credentials:
 
 ```powershell
-Set-Location E:\FitHub-School
-docker compose run --rm --no-deps -T --volume "${PWD}:/srv:ro" --env FITHUB_TEST_DATABASE_URL=connect_timeout=3 web python -m unittest discover -s tests -v
+docker compose exec -T web flask --app app nutrition-models
+docker compose exec -T web flask --app app nutrition-smoke --kcal 2000 --protein 140 --carbs 230 --fat 65
 ```
 
-Integration tests create a unique temporary PostgreSQL schema and remove only that
-schema afterwards. Accounts, plans and logs in the application schema are untouched.
-The tests cover authentication/CSRF, full plan and workout flows, ownership and parent
-IDs, invalid inputs, duplicate insert/edit rollback, historical sessions, idempotent
-completion, and concurrent add/edit/delete requests waiting on a completion lock.
-Profile/bodyweight checks cover CRUD, optional fields, enum/decimal/date validation,
-duplicate-date rollback, ownership/guessed IDs, deletion confirmation, data preservation,
-and dashboard changes for zero, one or multiple measurements (including unchanged weight).
-Without `FITHUB_TEST_DATABASE_URL`, PostgreSQL tests are skipped. No separate linter
-or type-check configuration is present in this project.
+The smoke uses synthetic targets/public recipes with no plan/diary writes.
+`fithub-coach` is the exact preset ID, not its display name. Document tools and PDFs
+are not needed. Missing services/credentials, invalid output or timeouts show clear
+errors; manual flows remain usable. Workout Review has a server recap fallback.
+See [Open WebUI integration](docs/openwebui-integration.md).
 
-## Fitness profile and bodyweight
+## Administrator access
 
-Use **Profile** in the navigation to save height, goal and experience. All fields are
-optional and can be cleared. Height accepts 50–300 cm with up to one decimal place;
-goals and experience levels come from the existing database choices.
+Register normally, then explicitly promote an existing account:
 
-Use **Bodyweight** to view your measurements, newest date first, and add or edit a
-dated entry. Weight accepts finite plain decimals between 20 and 500 kg with up to
-two decimal places. Dates must be valid `YYYY-MM-DD` dates no later than the server's
-current date. Duplicate dates show a message and preserve both existing entries.
-Deletion opens a confirmation form and requires its checkbox and CSRF token.
+```powershell
+docker compose exec -T web flask --app app promote-admin your_registered_username
+```
 
-The dashboard shows the latest measurement by date, with its signed change from the
-previous recorded measurement. With one entry it asks for another measurement; with
-no entries it shows an empty state. A change of zero is displayed as `0.00 kg`.
-Profiles and measurements are private; request fields cannot choose another owner.
+This creates no account/password. Exercise admin: `/admin/exercises`; food admin:
+`/admin/foods`. Server role/ownership checks protect direct requests and mutations.
 
-Use the web-only PowerShell rebuild and Docker test commands above for this update.
-The existing schema, dependencies, accounts, plans and workout logs are preserved.
+## Verification and backup
 
-## Manual nutrition tracking
+```powershell
+# Real PostgreSQL in temporary schemas; inference mocked in regression tests.
+docker compose run --rm --no-deps -T --volume "${PWD}:/srv:ro" --env FITHUB_TEST_DATABASE_URL=connect_timeout=3 web python -m unittest discover -s tests -v
 
-Use **Nutrition** in the navigation for the daily diary, saved foods, separate allergy
-notes/preferences, manual targets and IANA timezone settings. Unknown values remain
-unknown; saved-food edits never change earlier diary snapshots. The shared library
-bundles 100 attributed USDA foods for offline use. Private recipes support bounded,
-rule-based four-meal drafts, review, swaps and explicit duplicate-protected logging.
-No automatic calorie prescription, AI, external food API or barcode integration is included.
-See [the nutrition guide](./docs/nutrition.md) for migration/rebuild commands, input
-bounds, calculation rules, tests and a manual checklist. The versioned updater applies
-`003_nutrition`, `004_food_catalogue`, `005_meal_planner` and `006_usda_source_links` before replacing web containers; no reset or new dependency is needed.
+# Real HTTPS flows, temporary fictional account, no inference calls.
+docker compose run --rm --no-deps -T --volume "${PWD}/scripts:/srv/scripts:ro" web python scripts/smoke_submission.py
+
+# Separate project, ports and volumes; no AI key; automatic cleanup.
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify-fresh-install.ps1
+
+# External backup, isolated restoration, matching public-table row counts.
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\backup-postgres.ps1 -VerifyRestore
+```
+
+Fresh verification uses ports 18010/18443/18088 and refuses existing verification
+resources. It never resets the main deployment. `check-deployment.ps1` also tests
+replica failover and DNS recovery, temporarily replacing/stopping web replicas;
+run it before, not during, a presentation. Live AI checks are reported separately.
+
+## Troubleshooting and limits
+
+- Docker unavailable: start Docker Desktop and wait for the Linux engine.
+- Port occupied: change `.env`; do not stop unrelated services.
+- Missing table/column: build, run `db-upgrade`, then recreate web.
+- Recipe search unavailable: check Chroma health; repeat `import-recipes --index`.
+- AI failure: run `nutrition-models`; check the key file, exact ID and Open WebUI's
+  LM Studio connection. Never print credentials. Confirm the model is loaded;
+  the inference deadline is intentional. Manual flows remain available.
+- No allergy-safe meals: incomplete allergen metadata fails closed. More recipes
+  do not automatically provide more verified allergy-safe options.
+- Shortfalls: other hard limits, recipe ratios, portion bounds and bounded search
+  may prevent filling targets. Targets are never silently changed.
+- Silent timer: enable sound with a user gesture, again after reload if needed.
+- Brief 502 after rebuilding web: wait for readiness/Docker DNS; inspect
+  `docker compose ps` and `docker compose logs --tail 100 web nginx` if it persists.
+
+This is a localhost school deployment, without password reset, email verification,
+login rate limiting or public-hosting certification. Timed workout logging and
+trainer PDF retrieval are not implemented. See the school guide for data licenses,
+privacy boundaries and other limitations.

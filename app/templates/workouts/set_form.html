@@ -1,16 +1,17 @@
 {% extends 'base.html' %}
 {% block title %}{{ 'Edit' if entry else 'Log' }} set · FitHub{% endblock %}
-{% block content %}
-<section class="form-card"><a href="{{ url_for('workouts.detail',session_id=workout.session_id) }}">← Workout</a><h1>{{ 'Edit' if entry else 'Log' }} set</h1>
+{% block content %}{% include 'workouts/_nav.html' %}
+<section class="form-card"><a href="{{ url_for('workouts.detail',session_id=workout.session_id) }}">← Workout</a><p class="eyebrow">TRAINING / WORKOUT #{{ workout.session_id }}</p><h1>{{ 'Edit' if entry else 'Add' }} set</h1><p class="note">Record a completed set, then return to its planned targets and logged sets.</p>
 <form method="post">
 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-{% set values = request.form if request.method == 'POST' else (entry or {}) %}
+{% set values = request.form if request.method == 'POST' else (entry or {'exercise_id':request.args.get('exercise_id',''),'set_number':request.args.get('set_number',1)}) %}
 <label>Exercise<select name="exercise_id" required><option value="">Choose an exercise</option>{% for exercise in exercises %}<option value="{{ exercise.exercise_id }}" {% if values.get('exercise_id')|string == exercise.exercise_id|string %}selected{% endif %}>{{ exercise.name }}{{ ' · Inactive (existing session)' if not exercise.is_active }}</option>{% endfor %}</select></label>
 <div class="input-pair"><label>Set number<input type="number" name="set_number" min="1" max="2147483647" step="1" required value="{{ values.get('set_number',1) }}"></label><label>Reps<input type="number" name="reps" min="0" max="1000" step="1" required value="{{ values.get('reps','') }}"></label></div>
 <label>Weight (kg, optional)<input type="number" name="weight_kg" min="0" max="10000" step="0.01" value="{{ values.get('weight_kg','') if values.get('weight_kg') is not none else '' }}"></label>
 <p class="note">Leave weight blank for bodyweight sets. Choose a rep-based exercise. Timed durations cannot be recorded as reps.</p>
 {% if not exercises %}<div class="notice">No rep-based exercises are available. Ask an administrator to add or activate one.</div>{% endif %}
 <label>Reps in reserve (RIR, optional)<input type="number" name="rir" min="0" max="10" step="1" value="{{ values.get('rir','') if values.get('rir') is not none else '' }}"></label>
-<div class="form-actions"><button class="button" {% if not exercises %}disabled{% endif %}>Save set</button><a href="{{ url_for('workouts.detail',session_id=workout.session_id) }}">Cancel</a></div>
+<div class="form-actions"><button class="button" {% if not exercises %}disabled{% endif %}>{{ icon('plus') }}Save set</button><a href="{{ url_for('workouts.detail',session_id=workout.session_id) }}">Cancel</a></div>
 </form></section>
+{% include 'workouts/_timer.html' %}
 {% endblock %}

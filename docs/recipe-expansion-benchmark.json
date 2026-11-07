@@ -1,0 +1,439 @@
+{
+  "provider": "mocked structured preferences; real PostgreSQL, Chroma and Decimal fitting",
+  "coverage": {
+    "previous": {
+      "recipes": 40,
+      "breakfasts": 8,
+      "low_fat_protein": 1,
+      "vegetarian": 12,
+      "quick": 14,
+      "snacks": 6,
+      "meal_prep": 36,
+      "fully_reviewed_allergens": 4
+    },
+    "expanded": {
+      "recipes": 100,
+      "breakfasts": 7,
+      "low_fat_protein": 1,
+      "vegetarian": 70,
+      "quick": 10,
+      "snacks": 62,
+      "meal_prep": 97,
+      "fully_reviewed_allergens": 1
+    }
+  },
+  "cases": [
+    {
+      "collection": "previous",
+      "case": "balanced",
+      "eligible": 40,
+      "shortlist": 10,
+      "targets": {
+        "kcal": "2000",
+        "protein": "140",
+        "carbs": "230",
+        "fat": "65"
+      },
+      "totals": {
+        "kcal": "1994.10000000",
+        "protein": "134.48350000",
+        "carbs": "227.31600000",
+        "fat": "63.02200000"
+      },
+      "remaining": {
+        "kcal": "5.90000000",
+        "protein": "5.51650000",
+        "carbs": "2.68400000",
+        "fat": "1.97800000"
+      },
+      "normalized_shortfall": "0.002623554409665810933494100988",
+      "selections": [
+        {
+          "recipe_id": "unitools:mas-huni",
+          "portion": "0.25"
+        },
+        {
+          "recipe_id": "unitools:casado",
+          "portion": "1.5"
+        },
+        {
+          "recipe_id": "unitools:jasha-maroo",
+          "portion": "1.25"
+        },
+        {
+          "recipe_id": "starter:banana-berries",
+          "portion": "0.75"
+        }
+      ],
+      "seconds": 0.2887,
+      "notes": [
+        "Server search: up to 20 eligible recipes per slot; 0.25\u20132 servings in 0.25 steps; 128 retained states. Global optimality is not guaranteed.",
+        "An optional eligible snack was added because it strictly improves target fit without exceeding any limit.",
+        "Calories shortfall: 5.90000000 kcal. Available recipe ratios, portion bounds or other limits prevent filling this gap in the search.",
+        "Protein shortfall: 5.51650000 g. Available recipe ratios, portion bounds or other limits prevent filling this gap in the search.",
+        "Carbohydrate shortfall: 2.68400000 g. Available recipe ratios, portion bounds or other limits prevent filling this gap in the search.",
+        "Fat shortfall: 1.97800000 g. Available recipe ratios, portion bounds or other limits prevent filling this gap in the search."
+      ]
+    },
+    {
+      "collection": "previous",
+      "case": "lean",
+      "eligible": 40,
+      "shortlist": 10,
+      "targets": {
+        "kcal": "1800",
+        "protein": "150",
+        "carbs": "180",
+        "fat": "50"
+      },
+      "totals": {
+        "kcal": "1619.10000000",
+        "protein": "120.48350000",
+        "carbs": "177.81600000",
+        "fat": "49.02200000"
+      },
+      "remaining": {
+        "kcal": "180.90000000",
+        "protein": "29.51650000",
+        "carbs": "2.18400000",
+        "fat": "0.97800000"
+      },
+      "normalized_shortfall": "0.04935111792222222222222222224",
+      "selections": [
+        {
+          "recipe_id": "unitools:skyr-with-berries",
+          "portion": "1.75"
+        },
+        {
+          "recipe_id": "unitools:casado",
+          "portion": "1"
+        },
+        {
+          "recipe_id": "unitools:barramundi-on-the-barbie",
+          "portion": "0.75"
+        },
+        {
+          "recipe_id": "starter:banana-berries",
+          "portion": "0.75"
+        }
+      ],
+      "seconds": 0.1839,
+      "notes": [
+        "Server search: up to 20 eligible recipes per slot; 0.25\u20132 servings in 0.25 steps; 128 retained states. Global optimality is not guaranteed.",
+        "An optional eligible snack was added because it strictly improves target fit without exceeding any limit.",
+        "Calories shortfall: 180.90000000 kcal. Available recipe ratios, portion bounds or other limits prevent filling this gap in the search.",
+        "Protein shortfall: 29.51650000 g. Available recipe ratios, portion bounds or other limits prevent filling this gap in the search.",
+        "Carbohydrate shortfall: 2.18400000 g. Available recipe ratios, portion bounds or other limits prevent filling this gap in the search.",
+        "Fat shortfall: 0.97800000 g. Available recipe ratios, portion bounds or other limits prevent filling this gap in the search."
+      ]
+    },
+    {
+      "collection": "previous",
+      "case": "vegetarian",
+      "eligible": 12,
+      "shortlist": 8,
+      "targets": {
+        "kcal": "2000",
+        "protein": "120",
+        "carbs": "250",
+        "fat": "60"
+      },
+      "totals": {
+        "kcal": "1879.70000000",
+        "protein": "97.99450000",
+        "carbs": "247.27200000",
+        "fat": "59.17400000"
+      },
+      "remaining": {
+        "kcal": "120.30000000",
+        "protein": "22.00550000",
+        "carbs": "2.72800000",
+        "fat": "0.82600000"
+      },
+      "normalized_shortfall": "0.03755453412247222222222222223",
+      "selections": [
+        {
+          "recipe_id": "unitools:skyr-with-berries",
+          "portion": "2"
+        },
+        {
+          "recipe_id": "unitools:misir-wat",
+          "portion": "1.5"
+        },
+        {
+          "recipe_id": "unitools:dal-bhat",
+          "portion": "1.25"
+        },
+        {
+          "recipe_id": "starter:banana-berries",
+          "portion": "0.25"
+        }
+      ],
+      "seconds": 0.0574,
+      "notes": [
+        "Server search: up to 20 eligible recipes per slot; 0.25\u20132 servings in 0.25 steps; 128 retained states. Global optimality is not guaranteed.",
+        "An optional eligible snack was added because it strictly improves target fit without exceeding any limit.",
+        "Calories shortfall: 120.30000000 kcal. Available recipe ratios, portion bounds or other limits prevent filling this gap in the search.",
+        "Protein shortfall: 22.00550000 g. Available recipe ratios, portion bounds or other limits prevent filling this gap in the search.",
+        "Carbohydrate shortfall: 2.72800000 g. Available recipe ratios, portion bounds or other limits prevent filling this gap in the search.",
+        "Fat shortfall: 0.82600000 g. Available recipe ratios, portion bounds or other limits prevent filling this gap in the search."
+      ]
+    },
+    {
+      "collection": "previous",
+      "case": "milk_allergy",
+      "eligible": 0,
+      "blocked": "No eligible recipes; exclusions retained.",
+      "seconds": 0.0
+    },
+    {
+      "collection": "previous",
+      "case": "unset",
+      "eligible": 40,
+      "shortlist": 10,
+      "targets": {
+        "kcal": null,
+        "protein": null,
+        "carbs": null,
+        "fat": null
+      },
+      "totals": {
+        "kcal": "1680",
+        "protein": "106",
+        "carbs": "142",
+        "fat": "76"
+      },
+      "remaining": {
+        "kcal": null,
+        "protein": null,
+        "carbs": null,
+        "fat": null
+      },
+      "normalized_shortfall": 0,
+      "selections": [
+        {
+          "recipe_id": "unitools:baleadas",
+          "portion": "1"
+        },
+        {
+          "recipe_id": "unitools:adobo",
+          "portion": "1"
+        },
+        {
+          "recipe_id": "unitools:adobo",
+          "portion": "1"
+        }
+      ],
+      "seconds": 0.0185,
+      "notes": [
+        "Server search: up to 20 eligible recipes per slot; 0.25\u20132 servings in 0.25 steps; 128 retained states. Global optimality is not guaranteed.",
+        "No daily targets are set. Started with one serving per available main meal. No optional snack was added because no configured target fit can improve."
+      ]
+    },
+    {
+      "collection": "expanded",
+      "case": "balanced",
+      "eligible": 100,
+      "shortlist": 10,
+      "targets": {
+        "kcal": "2000",
+        "protein": "140",
+        "carbs": "230",
+        "fat": "65"
+      },
+      "totals": {
+        "kcal": "2000.00",
+        "protein": "122.50",
+        "carbs": "227.50",
+        "fat": "64.75"
+      },
+      "remaining": {
+        "kcal": "0.00",
+        "protein": "17.50",
+        "carbs": "2.50",
+        "fat": "0.25"
+      },
+      "normalized_shortfall": "0.01575794034742340689701457478",
+      "selections": [
+        {
+          "recipe_id": "unitools:skyr-with-berries",
+          "portion": "2"
+        },
+        {
+          "recipe_id": "unitools:nikujaga",
+          "portion": "1.75"
+        },
+        {
+          "recipe_id": "unitools:hangi-style-chicken",
+          "portion": "0.75"
+        },
+        {
+          "recipe_id": "unitools:montreal-bagels",
+          "portion": "0.75"
+        }
+      ],
+      "seconds": 0.2845,
+      "notes": [
+        "Server search: up to 20 eligible recipes per slot; 0.25\u20132 servings in 0.25 steps; 128 retained states. Global optimality is not guaranteed.",
+        "An optional eligible snack was added because it strictly improves target fit without exceeding any limit.",
+        "Protein shortfall: 17.50 g. Available recipe ratios, portion bounds or other limits prevent filling this gap in the search.",
+        "Carbohydrate shortfall: 2.50 g. Available recipe ratios, portion bounds or other limits prevent filling this gap in the search.",
+        "Fat shortfall: 0.25 g. Available recipe ratios, portion bounds or other limits prevent filling this gap in the search."
+      ]
+    },
+    {
+      "collection": "expanded",
+      "case": "lean",
+      "eligible": 100,
+      "shortlist": 10,
+      "targets": {
+        "kcal": "1800",
+        "protein": "150",
+        "carbs": "180",
+        "fat": "50"
+      },
+      "totals": {
+        "kcal": "1545.00",
+        "protein": "101.50",
+        "carbs": "171.50",
+        "fat": "49.50"
+      },
+      "remaining": {
+        "kcal": "255.00",
+        "protein": "48.50",
+        "carbs": "8.50",
+        "fat": "0.50"
+      },
+      "normalized_shortfall": "0.1269438271604938271604938271",
+      "selections": [
+        {
+          "recipe_id": "unitools:skyr-with-berries",
+          "portion": "2"
+        },
+        {
+          "recipe_id": "unitools:hangi-style-chicken",
+          "portion": "0.75"
+        },
+        {
+          "recipe_id": "unitools:nikujaga",
+          "portion": "1"
+        },
+        {
+          "recipe_id": "unitools:gurasa",
+          "portion": "0.5"
+        }
+      ],
+      "seconds": 0.1768,
+      "notes": [
+        "Server search: up to 20 eligible recipes per slot; 0.25\u20132 servings in 0.25 steps; 128 retained states. Global optimality is not guaranteed.",
+        "An optional eligible snack was added because it strictly improves target fit without exceeding any limit.",
+        "Calories shortfall: 255.00 kcal. Available recipe ratios, portion bounds or other limits prevent filling this gap in the search.",
+        "Protein shortfall: 48.50 g. Available recipe ratios, portion bounds or other limits prevent filling this gap in the search.",
+        "Carbohydrate shortfall: 8.50 g. Available recipe ratios, portion bounds or other limits prevent filling this gap in the search.",
+        "Fat shortfall: 0.50 g. Available recipe ratios, portion bounds or other limits prevent filling this gap in the search."
+      ]
+    },
+    {
+      "collection": "expanded",
+      "case": "vegetarian",
+      "eligible": 70,
+      "shortlist": 10,
+      "targets": {
+        "kcal": "2000",
+        "protein": "120",
+        "carbs": "250",
+        "fat": "60"
+      },
+      "totals": {
+        "kcal": "1860.0",
+        "protein": "95.0",
+        "carbs": "238.0",
+        "fat": "60.0"
+      },
+      "remaining": {
+        "kcal": "140.0",
+        "protein": "25.0",
+        "carbs": "12.0",
+        "fat": "0.0"
+      },
+      "normalized_shortfall": "0.05060677777777777777777777776",
+      "selections": [
+        {
+          "recipe_id": "unitools:skyr-with-berries",
+          "portion": "2"
+        },
+        {
+          "recipe_id": "unitools:pizza-margherita",
+          "portion": "1"
+        },
+        {
+          "recipe_id": "unitools:pizza-margherita",
+          "portion": "0.5"
+        },
+        {
+          "recipe_id": "unitools:montreal-bagels",
+          "portion": "1"
+        }
+      ],
+      "seconds": 0.1163,
+      "notes": [
+        "Server search: up to 20 eligible recipes per slot; 0.25\u20132 servings in 0.25 steps; 128 retained states. Global optimality is not guaranteed.",
+        "An optional eligible snack was added because it strictly improves target fit without exceeding any limit.",
+        "Calories shortfall: 140.0 kcal. Available recipe ratios, portion bounds or other limits prevent filling this gap in the search.",
+        "Protein shortfall: 25.0 g. Available recipe ratios, portion bounds or other limits prevent filling this gap in the search.",
+        "Carbohydrate shortfall: 12.0 g. Available recipe ratios, portion bounds or other limits prevent filling this gap in the search."
+      ]
+    },
+    {
+      "collection": "expanded",
+      "case": "milk_allergy",
+      "eligible": 0,
+      "blocked": "No eligible recipes; exclusions retained.",
+      "seconds": 0.0
+    },
+    {
+      "collection": "expanded",
+      "case": "unset",
+      "eligible": 100,
+      "shortlist": 10,
+      "targets": {
+        "kcal": null,
+        "protein": null,
+        "carbs": null,
+        "fat": null
+      },
+      "totals": {
+        "kcal": "1680",
+        "protein": "108",
+        "carbs": "122",
+        "fat": "84"
+      },
+      "remaining": {
+        "kcal": null,
+        "protein": null,
+        "carbs": null,
+        "fat": null
+      },
+      "normalized_shortfall": 0,
+      "selections": [
+        {
+          "recipe_id": "unitools:banitsa",
+          "portion": "1"
+        },
+        {
+          "recipe_id": "unitools:adobo",
+          "portion": "1"
+        },
+        {
+          "recipe_id": "unitools:adobo",
+          "portion": "1"
+        }
+      ],
+      "seconds": 0.0241,
+      "notes": [
+        "Server search: up to 20 eligible recipes per slot; 0.25\u20132 servings in 0.25 steps; 128 retained states. Global optimality is not guaranteed.",
+        "No daily targets are set. Started with one serving per available main meal. No optional snack was added because no configured target fit can improve."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+<article class="dashboard-card weekly-recap" aria-labelledby="recap-heading" id="weekly-recap">
+  <div class="dashboard-card-heading">
+    <div><p class="eyebrow">Your week in review</p><h2 id="recap-heading">Weekly recap</h2></div>
+    <div class="recap-switch" role="group" aria-label="Recap week">
+      <a href="{{ url_for('main.dashboard',week='this') }}#weekly-recap" {% if recap.selection == 'this' %}aria-current="true"{% endif %}>This week</a>
+      <a href="{{ url_for('main.dashboard',week='last') }}#weekly-recap" {% if recap.selection == 'last' %}aria-current="true"{% endif %}>Last week</a>
+    </div>
+  </div>
+  <p class="recap-range"><time datetime="{{ recap.start }}">{{ recap.start.strftime('%d %b %Y') }}</time> – <time datetime="{{ recap.last_day }}">{{ recap.last_day.strftime('%d %b %Y') }}</time><span class="note">Monday–Sunday · {{ recap.timezone }}</span></p>
+  <dl class="recap-metrics">
+    <div><dt>Completed workouts</dt><dd data-recap="workouts">{{ recap.completed }}</dd></div>
+    <div><dt>New records</dt><dd data-recap="records">{{ recap.new_records }}</dd></div>
+  </dl>
+  <p class="note recap-record-note">Records earned against earlier completed workouts. First results set a baseline.</p>
+  <section class="recap-weight" aria-labelledby="recap-weight-heading">
+    <h3 id="recap-weight-heading">Bodyweight change</h3>
+    {% if recap.weight_change is not none %}
+    <p class="recap-weight-value" data-recap="weight-change">{{ '+' if recap.weight_change > 0 else '' }}{{ recap.weight_change }} <span>kg</span></p>
+    <p class="note">{{ recap.first_weight.weight_kg }} kg on <time datetime="{{ recap.first_weight.measured_on }}">{{ recap.first_weight.measured_on.strftime('%d %b %Y') }}</time><br>{{ recap.last_weight.weight_kg }} kg on <time datetime="{{ recap.last_weight.measured_on }}">{{ recap.last_weight.measured_on.strftime('%d %b %Y') }}</time></p>
+    {% elif recap.first_weight %}
+    <p class="recap-weight-value" data-recap="single-weight">{{ recap.first_weight.weight_kg }} <span>kg</span></p>
+    <p class="note">Recorded <time datetime="{{ recap.first_weight.measured_on }}">{{ recap.first_weight.measured_on.strftime('%d %b %Y') }}</time>. Two weigh-ins within this week are needed to calculate change.</p>
+    {% else %}
+    <p class="note">No weigh-ins this week.</p><a href="{{ url_for('profile.measurement_edit') }}">Add weight</a>
+    {% endif %}
+  </section>
+  <div class="recap-footer"><a href="{{ url_for('workouts.exercise_progress') }}">Exercise progress</a><a href="{{ url_for('profile.history') }}">Weight history</a></div>
+</article>

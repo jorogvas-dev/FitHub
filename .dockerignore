@@ -1,5 +1,9 @@
 .venv
 .env
+.env.*
+.secrets
+tmp
+.superdesign
 .git
 __pycache__
 *.pyc

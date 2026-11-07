@@ -41,6 +41,17 @@ services:
       PGDATABASE: ${POSTGRES_DB:-fithub}
       SECRET_KEY: ${SECRET_KEY:?Run scripts/setup.ps1 first}
       CHROMA_URL: http://chroma:8000
+      WORKOUT_AI_ENDPOINT: ${WORKOUT_AI_ENDPOINT:-http://host.docker.internal:3000/api/chat/completions}
+      WORKOUT_AI_MODEL: ${WORKOUT_AI_MODEL:-qwen2.5-7b-nerd-uncensored-v1.0}
+      NUTRITION_AI_MODEL: ${NUTRITION_AI_MODEL:-fithub-coach}
+      WORKOUT_AI_TOOL_IDS: ${WORKOUT_AI_TOOL_IDS:-}
+      WORKOUT_AI_API_KEY_FILE: /run/secrets/fithub/openwebui-api-key.txt
+      WORKOUT_AI_TIMEOUT_SECONDS: ${WORKOUT_AI_TIMEOUT_SECONDS:-120}
+    volumes:
+      - type: bind
+        source: ./.secrets
+        target: /run/secrets/fithub
+        read_only: true
     expose:
       - "8000"
     depends_on:

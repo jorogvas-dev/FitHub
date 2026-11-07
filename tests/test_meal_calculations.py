@@ -16,9 +16,9 @@ def snapshot(**overrides):
 class MealCalculationTests(unittest.TestCase):
     def test_round_grams_once_then_keep_nutrition_unrounded(self):
         entries=portion_entries(snapshot(),D('1'))
-        self.assertEqual(entries[0]['grams'],D('33.33'))
-        self.assertEqual(totals(entries)['kcal'],D('41.1481477737'))
-        self.assertEqual(totals(entries*3)['kcal'],D('123.4444433211'))
+        self.assertEqual(entries[0]['grams'],D(100)/3)
+        self.assertEqual(totals(entries)['kcal'],D('123.456789')*(D(100)/3)/100)
+        self.assertEqual(totals(entries*3)['kcal'],totals(entries)['kcal']*3)
 
     def test_unknown_is_not_zero_and_extreme_gram_bounds(self):
         recipe=snapshot();recipe['ingredients'][0]['food']['protein_100g']=None
@@ -58,19 +58,30 @@ class MealCalculationTests(unittest.TestCase):
         targets={key:'0' for key in ['kcal','protein','carbs','fat']}
         choices,notes=generate([snapshot()],targets)
         self.assertEqual(len(choices),4)
-        self.assertTrue(all(portion==D('.25') for _,portion in choices))
-        self.assertTrue(any('outside' in note for note in notes))
-        self.assertTrue(any('Targets were not met' in note for note in notes))
+        self.assertFalse(any(choices))
+        self.assertTrue(any('No nonzero' in note for note in notes))
         self.assertTrue(any('Global optimality is not guaranteed' in note for note in notes))
         self.assertFalse(exact_match(totals(portion_entries(snapshot(),D('.25'))),targets))
 
-    def test_no_eligible_meal_or_missing_target_returns_explanation(self):
+    def test_no_eligible_meal_is_explained_even_with_partial_targets(self):
         targets={key:'100' for key in ['kcal','protein','carbs','fat']}
         recipe=snapshot();recipe['meals']=['breakfast']
         choices,notes=generate([recipe],targets)
-        self.assertIsNone(choices);self.assertIn('lunch',notes[-1])
+        self.assertIsNone(choices[1]);self.assertTrue(any('Lunch' in note for note in notes))
         choices,notes=generate([recipe],{**targets,'protein':None})
-        self.assertIsNone(choices);self.assertIn('all four',notes[0])
+        self.assertIsNone(choices[1]);self.assertTrue(any('Lunch' in note for note in notes))
+
+    def test_unset_targets_use_default_portions_and_partial_targets_stay_optional(self):
+        targets={key:None for key in ['kcal','protein','carbs','fat']}
+        choices,notes=generate([snapshot()],targets)
+        self.assertEqual(len(choices),4)
+        self.assertTrue(all(choice[1]==D(1) for choice in choices if choice))
+        self.assertIsNone(choices[3])
+        self.assertIn('No daily targets',notes[-1])
+        self.assertFalse(exact_match(totals(portion_entries(snapshot(),D(1))),targets))
+        choices,notes=generate([snapshot()],{**targets,'protein':'20'})
+        self.assertEqual(len(choices),4)
+        self.assertIsNone(targets['kcal'])
 
 
 if __name__=='__main__':unittest.main()

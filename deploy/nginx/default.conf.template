@@ -23,6 +23,7 @@ server {
     ssl_session_cache shared:TLS:10m;
     ssl_session_timeout 10m;
     server_tokens off;
+    set $fithub_forwarded_port ${HTTPS_PORT};
 
     # Readiness tests TLS without consuming the web round-robin sequence.
     location = /proxy-health {
@@ -30,24 +31,29 @@ server {
         return 200 'nginx ready\n';
     }
 
+    # The app caps inference at 180 seconds. Leave room to render its own timeout error.
+    location = /plans/generate {
+        include /etc/nginx/fithub-proxy.conf;
+        proxy_read_timeout 195s;
+    }
+
+    location ~ ^/workouts/[0-9]+/review$ {
+        include /etc/nginx/fithub-proxy.conf;
+        proxy_read_timeout 195s;
+    }
+
+    location = /nutrition/meal-plans/ai {
+        include /etc/nginx/fithub-proxy.conf;
+        proxy_read_timeout 195s;
+    }
+
+    location ~ ^/nutrition/meal-plans/[0-9]+/meals/[0-9]+/swap$ {
+        include /etc/nginx/fithub-proxy.conf;
+        proxy_read_timeout 195s;
+    }
+
     location / {
-        proxy_pass http://fithub_web;
-        proxy_http_version 1.1;
-        proxy_set_header Connection "";
-        proxy_set_header Host $http_host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $remote_addr;
-        proxy_set_header X-Forwarded-Host $http_host;
-        proxy_set_header X-Forwarded-Proto $scheme;
-        proxy_set_header X-Forwarded-Port ${HTTPS_PORT};
-        proxy_cookie_flags session secure httponly samesite=lax;
-        proxy_connect_timeout 2s;
+        include /etc/nginx/fithub-proxy.conf;
         proxy_read_timeout 30s;
-        proxy_send_timeout 30s;
-        # Retry failed connections/GETs. Do not enable non_idempotent POST replay.
-        proxy_next_upstream error timeout http_502 http_503 http_504;
-        proxy_next_upstream_tries 2;
-        proxy_next_upstream_timeout 5s;
-        add_header X-FitHub-Upstream $upstream_addr always;
     }
 }

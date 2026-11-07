@@ -1,0 +1,20 @@
+{% extends 'base.html' %}{% block title %}Review workout draft · FitHub{% endblock %}
+{% block content %}<div class="page-heading training-heading"><div><p class="eyebrow">PRIVATE AI DRAFT / NOT SAVED AS A PLAN</p><h1>Review workout draft</h1><p class="lead">Edit names, replace exercises and adjust sets and rep ranges.</p></div><a class="button secondary" href="{{ url_for('plans.index') }}">Back to Workout plans</a></div>
+<p class="note">No workout plan or log is created until you explicitly save. Estimates use 5 minutes of warm-up plus 2.5 minutes per set; actual duration will vary. The AI draft is a starting point for your review.</p>
+{% if error %}<p class="notice" role="alert">{{ error }}</p>{% endif %}
+<p><a href="{{ url_for('workout_ai.preferences') }}">Edit training preferences</a> · <a href="{{ url_for('workout_ai.generate') }}">Generate another draft</a></p>
+{% set posted = request.form if request.method == 'POST' else {} %}
+<form method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="revision" value="{{ draft.revision }}">
+<label>Plan name<input name="name" required maxlength="100" value="{{ posted.get('name',document.name) }}"></label>
+{% for day in document.days %}{% set i = loop.index0 %}<article class="training-day-card draft-day"><label>Training day {{ loop.index }} name<input name="d{{ i }}_name" required maxlength="100" value="{{ posted.get('d'~i~'_name',day.name) }}"></label>
+<p class="note">Estimated {{ day.estimated_minutes }} minutes · recalculated after edits · 1–6 sets, 1–30 reps</p>
+{% for j in range([day.exercises|length+1,8]|min) %}{% set row = day.exercises[j] if j < day.exercises|length else none %}{% set prefix = 'd'~i~'_e'~j~'_' %}
+<fieldset><legend>{{ 'Exercise '~(j+1) if row else 'Add an exercise (optional)' }}</legend>
+<label>Exercise<select name="{{ prefix }}exercise_id"><option value="">{{ 'Choose an exercise' if row else 'Do not add an exercise' }}</option>{% for exercise in exercises %}<option value="{{ exercise.exercise_id }}" {% if posted.get(prefix~'exercise_id',row.exercise_id|string if row else '') == exercise.exercise_id|string %}selected{% endif %}>{{ exercise.name }} · {{ exercise.equipment }}</option>{% endfor %}</select></label>
+<div class="draft-prescription"><label>Sets<input type="number" name="{{ prefix }}sets" min="1" max="6" step="1" value="{{ posted.get(prefix~'sets',row.sets if row else 3) }}"></label><label>Minimum reps<input type="number" name="{{ prefix }}reps_min" min="1" max="30" step="1" value="{{ posted.get(prefix~'reps_min',row.reps_min if row else 8) }}"></label><label>Maximum reps<input type="number" name="{{ prefix }}reps_max" min="1" max="30" step="1" value="{{ posted.get(prefix~'reps_max',row.reps_max if row else 12) }}"></label></div>
+{% if row %}<label class="checkbox"><input type="checkbox" name="{{ prefix }}remove" value="yes" {% if posted.get(prefix~'remove') == 'yes' %}checked{% endif %}>Remove this exercise from the draft</label>{% endif %}
+</fieldset>{% endfor %}</article>{% endfor %}
+<div class="form-actions"><button class="button secondary" name="action" value="update">Update preview</button></div>
+<section class="form-card"><h2>Keep this workout plan?</h2><p>Saving creates a new plan in your account. You can continue editing it with the existing plan editor. It does not start a workout.</p>
+<label class="checkbox"><input type="checkbox" name="confirm" value="save">I reviewed this draft and want to save it as a new plan.</label>
+<button class="button" name="action" value="save">Save as new plan</button></section></form>{% endblock %}

@@ -123,3 +123,12 @@ dist/
 Thumbs.db
 Desktop.ini
 .superdesign
+
+# Local inference weights and model caches are not application source.
+models/
+model-cache/
+*.gguf
+*.safetensors
+*.onnx
+*.pt
+*.pth

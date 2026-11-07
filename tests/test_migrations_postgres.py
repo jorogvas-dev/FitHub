@@ -21,8 +21,8 @@ class MigrationTests(PostgresTestCase):
             conn.execute('ALTER TABLE nutrition_diary_entry DROP COLUMN catalogue_id,DROP COLUMN provenance')
             conn.execute('ALTER TABLE nutrition_food DROP COLUMN provenance,DROP COLUMN allergens,DROP COLUMN allergen_complete,DROP COLUMN ingredient_labels')
             conn.execute('DROP TABLE food_catalogue')
-            conn.execute("DELETE FROM schema_migration WHERE version IN ('004_food_catalogue','005_meal_planner','006_usda_source_links')")
-            self.assertEqual(upgrade(conn),['004_food_catalogue','005_meal_planner','006_usda_source_links'])
+            conn.execute("DELETE FROM schema_migration WHERE version IN ('004_food_catalogue','005_meal_planner','006_usda_source_links','008_nutrition_starters')")
+            self.assertEqual(upgrade(conn),['004_food_catalogue','005_meal_planner','006_usda_source_links','008_nutrition_starters'])
             self.assertEqual(upgrade(conn),[])
             self.assertEqual(conn.execute('SELECT food_id,user_id,name,kcal_100g,protein_100g,carbs_100g,fat_100g FROM nutrition_food').fetchall(),before_food)
             self.assertEqual(conn.execute('SELECT entry_id,user_id,logged_on,meal,food_id,food_name,grams,kcal_100g,protein_100g FROM nutrition_diary_entry').fetchall(),before_diary)
@@ -38,7 +38,7 @@ class MigrationTests(PostgresTestCase):
             self.assertTrue(any(row[2]=='Bodyweight' for row in rows))
             self.assertEqual(conn.execute("SELECT tracking_type FROM exercise WHERE name='Plank'").fetchone(),('duration',))
             self.assertEqual(upgrade(conn),[])
-            self.assertEqual(conn.execute('SELECT count(*) FROM schema_migration').fetchone()[0],6)
+            self.assertEqual(conn.execute('SELECT count(*) FROM schema_migration').fetchone()[0],13)
 
     def test_seed_preserves_custom_entries_ids_edits_and_inactive_status(self):
         with self.connect_db() as conn:
@@ -65,7 +65,7 @@ class MigrationTests(PostgresTestCase):
             before={table:conn.execute('SELECT * FROM '+table+' ORDER BY 1').fetchall()
                     for table in ['app_user','fitness_profile','workout_plan','workout_day','plan_exercise','workout_session','set_log','body_measurement']}
             exercises=conn.execute('SELECT exercise_id,name,muscle_group,equipment,description FROM exercise ORDER BY exercise_id').fetchall()
-            self.assertEqual(upgrade(conn),['001_exercise_lifecycle','002_exercise_library','003_nutrition','004_food_catalogue','005_meal_planner','006_usda_source_links'])
+            self.assertEqual(upgrade(conn),['001_exercise_lifecycle','002_exercise_library','003_nutrition','004_food_catalogue','005_meal_planner','006_usda_source_links','007_workout_drafts','008_nutrition_starters','009_recipe_retrieval','010_meal_swaps','011_exact_nutrition_limits','012_workout_calendar','013_meal_plan_names'])
             self.assertEqual(upgrade(conn),[])
             for table,rows in before.items():
                 self.assertEqual(conn.execute('SELECT * FROM '+table+' ORDER BY 1').fetchall(),rows,table)

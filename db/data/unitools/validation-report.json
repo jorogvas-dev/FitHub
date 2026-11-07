@@ -1,0 +1,3203 @@
+{
+  "source": "https://github.com/farcrak/unitools-recipes",
+  "commit": "2f554073f7e730b18d707fe1164d18308f6ec16c",
+  "sha256": "41fdc0572b7272ca557d2df22a0fac1cc1f18146e97ebd2c8258c395daf87d8a",
+  "license": "CC BY-SA 4.0",
+  "attribution": "Recipe data: UniTools — theunitools.com, CC BY-SA 4.0",
+  "source_count": 501,
+  "selected": 100,
+  "rejected": [
+    {
+      "source_id": "spaghetti-carbonara",
+      "name": "Spaghetti carbonara",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "risotto-alla-milanese",
+      "name": "Risotto alla milanese",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "ratatouille",
+      "name": "Ratatouille",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "french-onion-soup",
+      "name": "French onion soup",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "borscht",
+      "name": "Borscht",
+      "reasons": [
+        "sourcream: missing or invalid positive quantity.",
+        "sourcream: unsupported measurement unit.",
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "guacamole",
+      "name": "Guacamole",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "tom-yum-goong",
+      "name": "Tom yum goong",
+      "reasons": [
+        "cilantro: missing or invalid positive quantity.",
+        "cilantro: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "dal-tadka",
+      "name": "Dal tadka",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "paella-valenciana",
+      "name": "Paella valenciana",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "tortilla-espanola",
+      "name": "Spanish tortilla",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "moussaka",
+      "name": "Moussaka",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "horiatiki-salata",
+      "name": "Horiatiki salad",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "pho-bo",
+      "name": "Phở bò",
+      "reasons": [
+        "herbs: missing or invalid positive quantity.",
+        "herbs: unsupported measurement unit.",
+        "lime: missing or invalid positive quantity.",
+        "lime: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "banh-mi",
+      "name": "Bánh mì",
+      "reasons": [
+        "coriander: missing or invalid positive quantity.",
+        "coriander: unsupported measurement unit.",
+        "chilli: missing or invalid positive quantity.",
+        "chilli: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "tacos-al-pastor",
+      "name": "Tacos al pastor",
+      "reasons": [
+        "onion: missing or invalid positive quantity.",
+        "onion: unsupported measurement unit.",
+        "lime: missing or invalid positive quantity.",
+        "lime: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "menemen",
+      "name": "Menemen",
+      "reasons": [
+        "feta: missing or invalid positive quantity.",
+        "feta: unsupported measurement unit.",
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "mercimek-corbasi",
+      "name": "Mercimek çorbası",
+      "reasons": [
+        "lemon: missing or invalid positive quantity.",
+        "lemon: unsupported measurement unit.",
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "khinkali",
+      "name": "Khinkali",
+      "reasons": [
+        "blackpepper: missing or invalid positive quantity.",
+        "blackpepper: unsupported measurement unit.",
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "murgh-makhani",
+      "name": "Butter chicken",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "syrniki",
+      "name": "Syrniki",
+      "reasons": [
+        "sourcream: missing or invalid positive quantity.",
+        "sourcream: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "pad-thai",
+      "name": "Pad thai",
+      "reasons": [
+        "lime: missing or invalid positive quantity.",
+        "lime: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "tiramisu",
+      "name": "Tiramisu",
+      "reasons": [
+        "cocoa: missing or invalid positive quantity.",
+        "cocoa: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "gazpacho",
+      "name": "Gazpacho",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "croquetas-de-jamon",
+      "name": "Ham croquetas",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "ceviche",
+      "name": "Ceviche",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "lomo-saltado",
+      "name": "Lomo saltado",
+      "reasons": [
+        "coriander: missing or invalid positive quantity.",
+        "coriander: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "coq-au-vin",
+      "name": "Coq au vin",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "kaesespaetzle",
+      "name": "Käsespätzle",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "rinderrouladen",
+      "name": "Rinderrouladen",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "bibimbap",
+      "name": "Bibimbap",
+      "reasons": [
+        "sesameseeds: missing or invalid positive quantity.",
+        "sesameseeds: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "souvlaki",
+      "name": "Souvlaki",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "chicken-biryani",
+      "name": "Chicken biryani",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "pierogi-ruskie",
+      "name": "Pierogi ruskie",
+      "reasons": [
+        "sourcream: missing or invalid positive quantity.",
+        "sourcream: unsupported measurement unit.",
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "zurek",
+      "name": "Żurek",
+      "reasons": [
+        "horseradish: missing or invalid positive quantity.",
+        "horseradish: unsupported measurement unit.",
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "sauerbraten",
+      "name": "Sauerbraten",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "schwaebischer-kartoffelsalat",
+      "name": "Swabian potato salad",
+      "reasons": [
+        "chives: missing or invalid positive quantity.",
+        "chives: unsupported measurement unit.",
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "bucatini-all-amatriciana",
+      "name": "Bucatini all'amatriciana",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "shakshuka",
+      "name": "Shakshuka",
+      "reasons": [
+        "feta: missing or invalid positive quantity.",
+        "feta: unsupported measurement unit.",
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "hummus",
+      "name": "Hummus",
+      "reasons": [
+        "oil: missing or invalid positive quantity.",
+        "oil: unsupported measurement unit.",
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "gyudon",
+      "name": "Gyudon",
+      "reasons": [
+        "beniShoga: missing or invalid positive quantity.",
+        "beniShoga: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "solyanka",
+      "name": "Meat solyanka",
+      "reasons": [
+        "lemon: missing or invalid positive quantity.",
+        "lemon: unsupported measurement unit.",
+        "sourcream: missing or invalid positive quantity.",
+        "sourcream: unsupported measurement unit.",
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "tagine-de-poulet",
+      "name": "Chicken tagine with preserved lemon",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "harira",
+      "name": "Harira",
+      "reasons": [
+        "lemon: missing or invalid positive quantity.",
+        "lemon: unsupported measurement unit.",
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "goulash",
+      "name": "Goulash",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "fish-and-chips",
+      "name": "Fish and chips",
+      "reasons": [
+        "vinegar: missing or invalid positive quantity.",
+        "vinegar: unsupported measurement unit.",
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "shepherds-pie",
+      "name": "Shepherd's pie",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "wiener-schnitzel",
+      "name": "Wiener Schnitzel",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "bacalhau-a-bras",
+      "name": "Bacalhau à brás",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "empanadas-argentinas",
+      "name": "Argentinian empanadas",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "nasi-goreng",
+      "name": "Nasi goreng",
+      "reasons": [
+        "cucumber: missing or invalid positive quantity.",
+        "cucumber: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "rendang",
+      "name": "Rendang",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "borshch-ukrainskyi",
+      "name": "Ukrainian borscht with pampushky",
+      "reasons": [
+        "sourcream: missing or invalid positive quantity.",
+        "sourcream: unsupported measurement unit.",
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "varenyky-z-vyshnyamy",
+      "name": "Cherry varenyky",
+      "reasons": [
+        "sourcream: missing or invalid positive quantity.",
+        "sourcream: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "svickova",
+      "name": "Svíčková na smetaně",
+      "reasons": [
+        "lingonberry: missing or invalid positive quantity.",
+        "lingonberry: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "koettbullar",
+      "name": "Köttbullar",
+      "reasons": [
+        "lingonberry: missing or invalid positive quantity.",
+        "lingonberry: unsupported measurement unit.",
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "kanelbullar",
+      "name": "Kanelbullar",
+      "reasons": [
+        "pearlsugar: missing or invalid positive quantity.",
+        "pearlsugar: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "koshari",
+      "name": "Koshari",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "ful-medames",
+      "name": "Ful medames",
+      "reasons": [
+        "chilli: missing or invalid positive quantity.",
+        "chilli: unsupported measurement unit.",
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "tabbouleh",
+      "name": "Tabbouleh",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "kibbeh-nayyeh",
+      "name": "Kibbeh nayyeh",
+      "reasons": [
+        "freshmint: missing or invalid positive quantity.",
+        "freshmint: unsupported measurement unit.",
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "ghormeh-sabzi",
+      "name": "Ghormeh sabzi",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "tahdig",
+      "name": "Tahdig",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "plov-uzbekskiy",
+      "name": "Uzbek plov",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "samsa",
+      "name": "Samsa",
+      "reasons": [
+        "sesame: missing or invalid positive quantity.",
+        "sesame: unsupported measurement unit.",
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "clam-chowder",
+      "name": "New England clam chowder",
+      "reasons": [
+        "crackers: missing or invalid positive quantity.",
+        "crackers: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "buffalo-wings",
+      "name": "Buffalo wings",
+      "reasons": [
+        "celery: missing or invalid positive quantity.",
+        "celery: unsupported measurement unit.",
+        "bluecheese: missing or invalid positive quantity.",
+        "bluecheese: unsupported measurement unit.",
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "palak-paneer",
+      "name": "Palak paneer",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "samosa",
+      "name": "Samosa",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "jiaozi",
+      "name": "Jiaozi dumplings",
+      "reasons": [
+        "vinegar: missing or invalid positive quantity.",
+        "vinegar: unsupported measurement unit.",
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "yangzhou-fried-rice",
+      "name": "Yangzhou fried rice",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "chiles-en-nogada",
+      "name": "Chiles rellenos",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "pozole-rojo",
+      "name": "Pozole rojo",
+      "reasons": [
+        "radish: missing or invalid positive quantity.",
+        "radish: unsupported measurement unit.",
+        "tostadas: missing or invalid positive quantity.",
+        "tostadas: unsupported measurement unit.",
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "nihari",
+      "name": "Nihari",
+      "reasons": [
+        "lemon: missing or invalid positive quantity.",
+        "lemon: unsupported measurement unit.",
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "chapli-kebab",
+      "name": "Chapli kebab",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "laksa-lemak",
+      "name": "Laksa lemak",
+      "reasons": [
+        "beansprouts: missing or invalid positive quantity.",
+        "beansprouts: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "stamppot",
+      "name": "Stamppot",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "poffertjes",
+      "name": "Poffertjes",
+      "reasons": [
+        "icingsugar: missing or invalid positive quantity.",
+        "icingsugar: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "doro-wat",
+      "name": "Doro wat",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "misir-wat",
+      "name": "Misir wat",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "moros-y-cristianos",
+      "name": "Moros y cristianos",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "ackee-and-saltfish",
+      "name": "Ackee and saltfish",
+      "reasons": [
+        "pepper2: missing or invalid positive quantity.",
+        "pepper2: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "jollof-rice",
+      "name": "Jollof rice",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "suya",
+      "name": "Suya",
+      "reasons": [
+        "onion: missing or invalid positive quantity.",
+        "onion: unsupported measurement unit.",
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "ajiaco-bogotano",
+      "name": "Ajiaco bogotano",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "quiche-lorraine",
+      "name": "Quiche lorraine",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "tempura",
+      "name": "Tempura",
+      "reasons": [
+        "daikon: missing or invalid positive quantity.",
+        "daikon: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "okonomiyaki",
+      "name": "Okonomiyaki",
+      "reasons": [
+        "okonomisauce: missing or invalid positive quantity.",
+        "okonomisauce: unsupported measurement unit.",
+        "mayo: missing or invalid positive quantity.",
+        "mayo: unsupported measurement unit.",
+        "katsuobushi: missing or invalid positive quantity.",
+        "katsuobushi: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "lahmacun",
+      "name": "Lahmacun",
+      "reasons": [
+        "lemon: missing or invalid positive quantity.",
+        "lemon: unsupported measurement unit.",
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "spanakopita",
+      "name": "Spanakopita",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "patatas-bravas",
+      "name": "Patatas bravas",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "momo",
+      "name": "Momo",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "dal-bhat",
+      "name": "Dal bhat",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "kottu-roti",
+      "name": "Kottu roti",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "pol-sambol",
+      "name": "Pol sambol",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "cevapi",
+      "name": "Ćevapi",
+      "reasons": [
+        "kajmak: missing or invalid positive quantity.",
+        "kajmak: unsupported measurement unit.",
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "ajvar",
+      "name": "Ajvar",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "frikadeller",
+      "name": "Frikadeller",
+      "reasons": [
+        "redcabbage: missing or invalid positive quantity.",
+        "redcabbage: unsupported measurement unit.",
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "smorrebrod",
+      "name": "Smørrebrød",
+      "reasons": [
+        "capers: missing or invalid positive quantity.",
+        "capers: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "sarmale",
+      "name": "Sarmale",
+      "reasons": [
+        "sourcream: missing or invalid positive quantity.",
+        "sourcream: unsupported measurement unit.",
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "mamaliga",
+      "name": "Mămăligă",
+      "reasons": [
+        "sourcream: missing or invalid positive quantity.",
+        "sourcream: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "shopska-salata",
+      "name": "Shopska salad",
+      "reasons": [
+        "olives: missing or invalid positive quantity.",
+        "olives: unsupported measurement unit.",
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "lohikeitto",
+      "name": "Lohikeitto",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "karjalanpiirakka",
+      "name": "Karelian pies",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "irish-stew",
+      "name": "Irish stew",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "crni-rizot",
+      "name": "Black risotto",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "zagorski-strukli",
+      "name": "Zagorje štrukli",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "farikal",
+      "name": "Fårikål",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "moules-marinieres",
+      "name": "Moules marinières",
+      "reasons": [
+        "pepper: missing or invalid positive quantity.",
+        "pepper: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "carbonade-flamande",
+      "name": "Carbonade flamande",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "roesti",
+      "name": "Rösti",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "ghapama",
+      "name": "Ghapama",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "spas",
+      "name": "Spas",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "shah-plov",
+      "name": "Shah plov",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "kufta-bozbash",
+      "name": "Kufta bozbash",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "beshbarmak",
+      "name": "Beshbarmak",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "bryndzove-halusky",
+      "name": "Bryndzové halušky",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "kapustnica",
+      "name": "Kapustnica",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "pastel-de-choclo",
+      "name": "Pastel de choclo",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "empanadas-de-pino",
+      "name": "Empanadas de pino",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "pabellon-criollo",
+      "name": "Pabellón criollo",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "saltenas",
+      "name": "Salteñas",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "silpancho",
+      "name": "Silpancho",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "encebollado",
+      "name": "Encebollado",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "llapingachos",
+      "name": "Llapingachos",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "masgouf",
+      "name": "Masgouf",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "dolma-iraqi",
+      "name": "Iraqi dolma",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "mansaf",
+      "name": "Mansaf",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "maqluba",
+      "name": "Maqluba",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "brik",
+      "name": "Brik",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "shakshuka-tunisienne",
+      "name": "Tunisian lablabi",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "couscous-algerien",
+      "name": "Algerian couscous",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "chorba-frik",
+      "name": "Chorba frik",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "cepelinai",
+      "name": "Cepelinai",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "saltibarsciai",
+      "name": "Šaltibarščiai",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "pelekie-zirni-ar-speki",
+      "name": "Grey peas with speck",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "mulgipuder",
+      "name": "Mulgipuder",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "kama",
+      "name": "Kama",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "draniki",
+      "name": "Draniki",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "machanka",
+      "name": "Machanka",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "mohinga",
+      "name": "Mohinga",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "lahpet-thoke",
+      "name": "Lahpet thoke",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "fish-amok",
+      "name": "Fish amok",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "lok-lak",
+      "name": "Lok lak",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "hainanese-chicken-rice",
+      "name": "Hainanese chicken rice",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "chilli-crab",
+      "name": "Chilli crab",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "lu-rou-fan",
+      "name": "Lu rou fan",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "beef-noodle-soup-taiwan",
+      "name": "Taiwanese beef noodle soup",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "nyama-choma",
+      "name": "Nyama choma",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "sukuma-wiki",
+      "name": "Sukuma wiki",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "waakye",
+      "name": "Waakye",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "banku-with-tilapia",
+      "name": "Banku with tilapia",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "thieboudienne",
+      "name": "Thieboudienne",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "yassa-poulet",
+      "name": "Chicken yassa",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "bobotie",
+      "name": "Bobotie",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "chakalaka",
+      "name": "Chakalaka",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "plokkfiskur",
+      "name": "Plokkfiskur",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "kjotsupa",
+      "name": "Kjötsúpa",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "jota",
+      "name": "Jota",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "bosanski-lonac",
+      "name": "Bosanski lonac",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "burek-bosanski",
+      "name": "Bosnian burek",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "tavce-gravce",
+      "name": "Tavče gravče",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "selsko-meso",
+      "name": "Selsko meso",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "meat-pie-australian",
+      "name": "Australian meat pie",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "poutine",
+      "name": "Poutine",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "tourtiere",
+      "name": "Tourtière",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "gallo-pinto",
+      "name": "Gallo pinto",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "casado",
+      "name": "Casado",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "buuz",
+      "name": "Buuz",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "tsuivan",
+      "name": "Tsuivan",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "beshbarmak-kyrgyz",
+      "name": "Kyrgyz beshbarmak",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "lagman",
+      "name": "Lagman",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "kurutob",
+      "name": "Qurutob",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "oshi-plov-tajik",
+      "name": "Tajik oshi palav",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "kabuli-pulao",
+      "name": "Kabuli pulao",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "mantu-afghan",
+      "name": "Afghan mantu",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "fattoush",
+      "name": "Fattoush",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "kibbeh-bil-sanieh",
+      "name": "Kibbeh bil sanieh",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "shuwa",
+      "name": "Shuwa",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "omani-mishkak",
+      "name": "Mishkak",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "ful-sudani",
+      "name": "Sudanese ful",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "asida-sudanese",
+      "name": "Asida with mulah",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "zanzibar-pilau",
+      "name": "Zanzibar pilau",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "ndizi-nyama",
+      "name": "Ndizi na nyama",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "shorshe-ilish",
+      "name": "Shorshe ilish",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "bhuna-khichuri",
+      "name": "Bhuna khichuri",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "larb-lao",
+      "name": "Larb",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "tam-mak-hoong",
+      "name": "Tam mak hoong",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "souvla",
+      "name": "Souvla",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "halloumi-grilled",
+      "name": "Grilled halloumi with watermelon",
+      "reasons": [
+        "pepper: missing or invalid positive quantity.",
+        "pepper: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "maltese-rabbit-stew",
+      "name": "Maltese rabbit stew",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "pastizzi",
+      "name": "Pastizzi",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "chivito",
+      "name": "Chivito",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "milanesa-a-la-napolitana",
+      "name": "Milanesa a la napolitana",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "pepian",
+      "name": "Pepián",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "tamales-guatemaltecos",
+      "name": "Guatemalan tamales",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "sancocho-dominicano",
+      "name": "Dominican sancocho",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "mangu",
+      "name": "Mangú",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "doubles",
+      "name": "Doubles",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "callaloo",
+      "name": "Callaloo",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "tave-kosi",
+      "name": "Tavë kosi",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "byrek-me-spinaq",
+      "name": "Byrek me spinaq",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "zeama",
+      "name": "Zeamă",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "judd-mat-gaardebounen",
+      "name": "Judd mat Gaardebounen",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "gromperekichelcher",
+      "name": "Gromperekichelcher",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "dograma",
+      "name": "Dograma",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "ichlekli",
+      "name": "Ichlekli",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "kabsa",
+      "name": "Kabsa",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "jareesh",
+      "name": "Jareesh",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "saltah",
+      "name": "Saltah",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "machboos",
+      "name": "Machboos",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "murabyan",
+      "name": "Murabyan",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "harees",
+      "name": "Harees",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "ndole",
+      "name": "Ndolé",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "poulet-dg",
+      "name": "Poulet DG",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "attieke-poisson",
+      "name": "Attiéké with fish",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "kedjenou",
+      "name": "Kedjenou",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "matapa",
+      "name": "Matapa",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "frango-piri-piri",
+      "name": "Piri-piri chicken",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "romazava",
+      "name": "Romazava",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "ravitoto",
+      "name": "Ravitoto",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "baleadas",
+      "name": "Baleadas",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "sopa-de-caracol",
+      "name": "Conch soup",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "gallo-pinto-nicaraguense",
+      "name": "Nicaraguan gallo pinto",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "nacatamal",
+      "name": "Nacatamal",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "sancocho-panameno",
+      "name": "Panamanian sancocho",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "ropa-vieja-panamena",
+      "name": "Panamanian ropa vieja",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "sopa-paraguaya",
+      "name": "Sopa paraguaya",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "tave-elbasani",
+      "name": "Tavë Elbasani",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "njeguski-steak",
+      "name": "Njeguški steak",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "kacamak",
+      "name": "Kačamak",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "ema-datshi",
+      "name": "Ema datshi",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "jasha-maroo",
+      "name": "Jasha maroo",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "mas-huni",
+      "name": "Mas huni",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "garudhiya",
+      "name": "Garudhiya",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "matoke",
+      "name": "Matoke",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "rolex-uganda",
+      "name": "Rolex",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "sadza-ne-nyama",
+      "name": "Sadza ne nyama",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "muriwo-unedovi",
+      "name": "Muriwo unedovi",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "poulet-moambe",
+      "name": "Poulet moambé",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "liboke-de-poisson",
+      "name": "Liboke de poisson",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "tigadegena",
+      "name": "Tigadegena",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "capitaine-braise",
+      "name": "Grilled capitaine",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "osso-buco-alla-milanese",
+      "name": "Osso buco alla milanese",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "melanzane-alla-parmigiana",
+      "name": "Melanzane alla parmigiana",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "qingzheng-yu",
+      "name": "Cantonese steamed fish",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "rogan-josh",
+      "name": "Rogan josh",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "masala-dosa",
+      "name": "Masala dosa",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "bouillabaisse",
+      "name": "Bouillabaisse",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "mole-poblano",
+      "name": "Mole poblano",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "cochinita-pibil",
+      "name": "Cochinita pibil",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "iskender-kebab",
+      "name": "İskender kebab",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "manti-turkish",
+      "name": "Turkish mantı",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "fabada-asturiana",
+      "name": "Fabada asturiana",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "gemista",
+      "name": "Gemista",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "avgolemono",
+      "name": "Avgolemono",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "pelmeni",
+      "name": "Pelmeni",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "beef-stroganoff",
+      "name": "Beef Stroganoff",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "schweinshaxe",
+      "name": "Schweinshaxe",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "pulled-pork",
+      "name": "Pulled pork",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "goi-cuon",
+      "name": "Gỏi cuốn",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "samgyetang",
+      "name": "Samgyetang",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "roast-beef-yorkshire",
+      "name": "Roast beef with Yorkshire pudding",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "bigos",
+      "name": "Bigos",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "moqueca-baiana",
+      "name": "Moqueca baiana",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "coxinha",
+      "name": "Coxinha",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "aji-de-gallina",
+      "name": "Ají de gallina",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "causa-limena",
+      "name": "Causa limeña",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "fesenjan",
+      "name": "Fesenjan",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "joojeh-kabab",
+      "name": "Joojeh kabab",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "caldo-verde",
+      "name": "Caldo verde",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "sate-ayam",
+      "name": "Sate ayam",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "soto-ayam",
+      "name": "Soto ayam",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "chakhokhbili",
+      "name": "Chakhokhbili",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "satsivi",
+      "name": "Satsivi",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "sabich",
+      "name": "Sabich",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "fattet-hummus",
+      "name": "Fattet hummus",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "sfiha",
+      "name": "Sfiha",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "pastilla",
+      "name": "Pastilla",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "molokhia",
+      "name": "Molokhia",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "tafelspitz",
+      "name": "Tafelspitz",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "halaszle",
+      "name": "Halászlé",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "vepro-knedlo-zelo",
+      "name": "Pork with dumplings and cabbage",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "kulajda",
+      "name": "Kulajda",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "toast-skagen",
+      "name": "Toast Skagen",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "stegt-flaesk",
+      "name": "Stegt flæsk",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "erwtensoep",
+      "name": "Erwtensoep",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "bitterballen",
+      "name": "Bitterballen",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "colcannon",
+      "name": "Colcannon",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "guinness-beef-stew",
+      "name": "Beef and stout stew",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "shurpa",
+      "name": "Shurpa",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "chuchvara",
+      "name": "Chuchvara",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "armenian-tolma",
+      "name": "Pasuts tolma",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "nasi-lemak",
+      "name": "Nasi lemak",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "kitfo",
+      "name": "Kitfo",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "egusi-soup",
+      "name": "Egusi soup",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "arroz-con-pollo-cubano",
+      "name": "Arroz con pollo",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "tostones",
+      "name": "Tostones",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "jamaican-patty",
+      "name": "Jamaican patties",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "rice-and-peas",
+      "name": "Rice and peas",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "poronkaristys",
+      "name": "Poronkäristys",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "kjottkaker",
+      "name": "Kjøttkaker",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "waterzooi",
+      "name": "Waterzooi",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "zuercher-geschnetzeltes",
+      "name": "Zürcher Geschnetzeltes",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "peka",
+      "name": "Peka",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "sarma-serbian",
+      "name": "Sarma",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "gibanica",
+      "name": "Gibanica",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "ciorba-de-burta",
+      "name": "Ciorbă de burtă",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "tarator",
+      "name": "Tarator",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "kavarma",
+      "name": "Kavarma",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "hoppers",
+      "name": "Hoppers",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "sri-lankan-fish-curry",
+      "name": "Sri Lankan fish curry",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "gundruk-soup",
+      "name": "Gundruk soup",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "haleem",
+      "name": "Haleem",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "seekh-kebab",
+      "name": "Seekh kebab",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "bunny-chow",
+      "name": "Bunny chow",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "bandeja-paisa",
+      "name": "Bandeja paisa",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "sancocho-colombiano",
+      "name": "Colombian sancocho",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "curanto-en-olla",
+      "name": "Curanto en olla",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "completo-italiano",
+      "name": "Completo",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "kuyrdak",
+      "name": "Kuyrdak",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "dolma-azerbaijani",
+      "name": "Azerbaijani dolma",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "iraqi-biryani",
+      "name": "Iraqi biryani",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "shakshuka-tunisian",
+      "name": "Tunisian chakchouka",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "ojja-merguez",
+      "name": "Ojja with merguez",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "muhammara",
+      "name": "Muhammara",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "shish-barak",
+      "name": "Shish barak",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "barramundi-on-the-barbie",
+      "name": "Grilled barramundi",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "whitebait-fritters",
+      "name": "Whitebait fritters",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "laksa-singapore",
+      "name": "Katong laksa",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "gua-bao",
+      "name": "Gua bao",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "shan-noodles",
+      "name": "Shan noodles",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "ohn-no-khao-swe",
+      "name": "Ohn no khao swe",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "num-banh-chok",
+      "name": "Num banh chok",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "samlor-korko",
+      "name": "Samlor korko",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "buseca",
+      "name": "Buseca",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "kak-ik",
+      "name": "Kak'ik",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "pollo-guisado-dominicano",
+      "name": "Pollo guisado",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "pelau",
+      "name": "Pelau",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "hallaca",
+      "name": "Hallaca",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "asado-negro",
+      "name": "Asado negro",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "pique-macho",
+      "name": "Pique macho",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "ceviche-ecuatoriano",
+      "name": "Ecuadorian ceviche",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "fanesca",
+      "name": "Fanesca",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "carimanola",
+      "name": "Carimañola",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "kugelis",
+      "name": "Kugelis",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "skabu-putra",
+      "name": "Skābputra",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "verivorst",
+      "name": "Verivorst",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "kolduny",
+      "name": "Kalduny",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "kholodnik",
+      "name": "Kholodnik",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "zemiakove-placky",
+      "name": "Zemiakové placky",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "begova-corba",
+      "name": "Begova čorba",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "ohridska-pastrmka",
+      "name": "Ohrid trout",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "pastrmajlija",
+      "name": "Pastrmajlija",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "olla-de-carne",
+      "name": "Olla de carne",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "montucas",
+      "name": "Montucas",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "pastelitos-hondurenos",
+      "name": "Pastelitos",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "vigoron",
+      "name": "Vigorón",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "indio-viejo",
+      "name": "Indio viejo",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "vori-vori",
+      "name": "Vori vori",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "musakhan",
+      "name": "Musakhan",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "galayet-bandora",
+      "name": "Galayet bandora",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "zurbian",
+      "name": "Zurbian",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "fahsa",
+      "name": "Fahsa",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "kuwaiti-jireesh",
+      "name": "Kuwaiti gereesh",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "rechta",
+      "name": "Rechta",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "salata-aswad",
+      "name": "Salata aswad",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "mchuzi-wa-samaki",
+      "name": "Mchuzi wa samaki",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "eru",
+      "name": "Eru",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "kleftiko",
+      "name": "Kleftiko",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "koupepia",
+      "name": "Koupepia",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "lampuki-pie",
+      "name": "Lampuki pie",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "fergese",
+      "name": "Fërgesë",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "sarmale-moldovenesti",
+      "name": "Moldovan sarmale",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "kuurdak",
+      "name": "Kuurdak",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "tushbera",
+      "name": "Tushbera",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "chakka",
+      "name": "Chakka",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "khuushuur",
+      "name": "Khuushuur",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "ashak",
+      "name": "Ashak",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    },
+    {
+      "source_id": "bolani",
+      "name": "Bolani",
+      "reasons": [
+        "salt: missing or invalid positive quantity.",
+        "salt: unsupported measurement unit."
+      ]
+    }
+  ],
+  "not_selected": [
+    {
+      "source_id": "creme-brulee",
+      "reason": "Validated; outside the 100-recipe priority selection."
+    },
+    {
+      "source_id": "apfelstrudel",
+      "reason": "Validated; outside the 100-recipe priority selection."
+    },
+    {
+      "source_id": "pastel-de-nata",
+      "reason": "Validated; outside the 100-recipe priority selection."
+    },
+    {
+      "source_id": "rupjmaizes-kartojums",
+      "reason": "Validated; outside the 100-recipe priority selection."
+    },
+    {
+      "source_id": "lamingtons",
+      "reason": "Validated; outside the 100-recipe priority selection."
+    },
+    {
+      "source_id": "pavlova",
+      "reason": "Validated; outside the 100-recipe priority selection."
+    },
+    {
+      "source_id": "luqaimat",
+      "reason": "Validated; outside the 100-recipe priority selection."
+    },
+    {
+      "source_id": "tarte-tatin",
+      "reason": "Validated; outside the 100-recipe priority selection."
+    },
+    {
+      "source_id": "sticky-toffee-pudding",
+      "reason": "Validated; outside the 100-recipe priority selection."
+    },
+    {
+      "source_id": "alfajores",
+      "reason": "Validated; outside the 100-recipe priority selection."
+    },
+    {
+      "source_id": "fritule",
+      "reason": "Validated; outside the 100-recipe priority selection."
+    },
+    {
+      "source_id": "sel-roti",
+      "reason": "Validated; outside the 100-recipe priority selection."
+    },
+    {
+      "source_id": "kleicha",
+      "reason": "Validated; outside the 100-recipe priority selection."
+    },
+    {
+      "source_id": "anzac-biscuits",
+      "reason": "Validated; outside the 100-recipe priority selection."
+    },
+    {
+      "source_id": "afghan-biscuits",
+      "reason": "Validated; outside the 100-recipe priority selection."
+    },
+    {
+      "source_id": "butter-tarts",
+      "reason": "Validated; outside the 100-recipe priority selection."
+    },
+    {
+      "source_id": "pineapple-cake",
+      "reason": "Validated; outside the 100-recipe priority selection."
+    },
+    {
+      "source_id": "api-morado",
+      "reason": "Validated; outside the 100-recipe priority selection."
+    },
+    {
+      "source_id": "omani-halwa",
+      "reason": "Validated; outside the 100-recipe priority selection."
+    },
+    {
+      "source_id": "makroud",
+      "reason": "Validated; outside the 100-recipe priority selection."
+    },
+    {
+      "source_id": "imqaret",
+      "reason": "Validated; outside the 100-recipe priority selection."
+    },
+    {
+      "source_id": "ballokume",
+      "reason": "Validated; outside the 100-recipe priority selection."
+    }
+  ]
+}

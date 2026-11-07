@@ -26,6 +26,13 @@ class PostgresTestCase(unittest.TestCase):
             conn.execute((Path(__file__).resolve().parents[1]/'db/init/04-food-catalogue.sql').read_text())
             conn.execute((Path(__file__).resolve().parents[1]/'db/init/05-meal-planner.sql').read_text())
             conn.execute((Path(__file__).resolve().parents[1]/'db/init/06-usda-source-links.sql').read_text())
+            conn.execute((Path(__file__).resolve().parents[1]/'db/init/07-workout-drafts.sql').read_text())
+            conn.execute((Path(__file__).resolve().parents[1]/'db/init/08-nutrition-starters.sql').read_text())
+            conn.execute((Path(__file__).resolve().parents[1]/'db/init/09-recipe-retrieval.sql').read_text())
+            conn.execute((Path(__file__).resolve().parents[1]/'db/init/10-meal-swaps.sql').read_text())
+            conn.execute((Path(__file__).resolve().parents[1]/'db/init/11-exact-nutrition-limits.sql').read_text())
+            conn.execute((Path(__file__).resolve().parents[1]/'db/init/12-workout-calendar.sql').read_text())
+            conn.execute((Path(__file__).resolve().parents[1]/'db/init/13-meal-plan-names.sql').read_text())
 
     @classmethod
     def connect_db(cls):
@@ -37,7 +44,7 @@ class PostgresTestCase(unittest.TestCase):
             conn.execute(sql.SQL('DROP SCHEMA {} CASCADE').format(sql.Identifier(cls.schema)))
 
     def setUp(self):
-        for module in ['auth','main','plans','workouts','profile','admin','nutrition','food_library','meals']:
+        for module in ['auth','main','plans','workouts','profile','admin','nutrition','food_library','meals','workout_ai','workout_calendar']:
             p=patch('app.routes.'+module+'.connect',self.connect_db)
             p.start();self.addCleanup(p.stop)
         p=patch('app.cli.connect',self.connect_db)
@@ -55,6 +62,14 @@ class PostgresTestCase(unittest.TestCase):
         with self.connect_db() as conn: conn.execute('TRUNCATE app_user CASCADE')
 
     def post(self,client,path,**data):
+        # Simulate loading the current edit/save form unless a test supplies its
+        # own (possibly stale or tampered) signed preview.
+        import re
+        if 'limits_preview' not in data and re.fullmatch(r'/nutrition/meal-plans/\d+(?:/save|/meals/\d+/edit)',path):
+            form_path=path[:-5] if path.endswith('/save') else path
+            html=client.get(form_path).get_data(as_text=True)
+            token=re.search(r'name="limits_preview" value="([^"]+)"',html)
+            if token:data['limits_preview']=token.group(1)
         with client.session_transaction() as state:
             if 'csrf_token' not in state: state['csrf_token']='test-token'
             token=state['csrf_token']

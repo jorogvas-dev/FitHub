@@ -1,0 +1,19 @@
+{% if not workout.finished_at %}
+<section class="rest-timer" aria-labelledby="rest-heading" data-rest-timer>
+  <div><p class="eyebrow">BETWEEN SETS</p><h2 id="rest-heading">Rest timer</h2><p class="note">Prescribed rest starts after a new set is saved. Otherwise start a manual timer.</p></div>
+  <div class="rest-display" role="timer" aria-live="off" aria-label="Rest time remaining">01:30</div>
+  <p class="rest-status" role="status">Ready for a manual rest.</p>
+  <div class="rest-controls">
+    <button type="button" class="button" data-rest-action="toggle">Start</button>
+    <button type="button" class="button secondary" data-rest-action="reset">Reset</button>
+    <button type="button" class="button secondary" data-rest-action="skip">Skip</button>
+    <button type="button" class="button secondary" data-rest-action="minus" aria-label="Subtract 15 seconds">−15 s</button>
+    <button type="button" class="button secondary" data-rest-action="plus" aria-label="Add 15 seconds">+15 s</button>
+  </div>
+  <div class="rest-options"><label>Manual rest (seconds)<input data-rest-duration type="number" min="1" max="3600" step="1" value="90" required></label><button type="button" class="button secondary" data-rest-action="manual">Start manual rest</button>
+  <label class="rest-sound"><input type="checkbox" data-rest-sound> Completion sound (optional)</label></div>
+  <p class="note rest-audio-status">Sound is off. Visual completion is always available.</p>
+  <noscript><p class="notice">Enable JavaScript to use the timer. Set logging remains available.</p></noscript>
+</section>
+{% endif %}
+<script type="application/json" id="rest-config">{{ timer|tojson }}</script>

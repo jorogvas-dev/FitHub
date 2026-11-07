@@ -26,12 +26,16 @@ def recipe_snapshot(recipe, ingredients):
 
 
 def portion_entries(snapshot, portion):
-    """Round physical gram quantities once; planned and logged quantities are identical."""
+    """Exact Decimal quantities from stored batch grams and serving count."""
     if portion not in PORTIONS:
         raise ValueError('Choose 0.25–2 servings in steps of 0.25.')
+    if snapshot.get('catalogue_recipe'):
+        # Source recipes have mixed units, not a known serving mass. Never invent
+        # grams or per-100g nutrient rates from per-serving source nutrition.
+        return [dict(recipe_macros=snapshot['macros'],portion=portion)]
     entries = []
     for row in snapshot['ingredients']:
-        grams = (D(row['grams'])*portion/D(snapshot['servings'])).quantize(CENT, rounding=ROUND_HALF_UP)
+        grams = D(row['grams'])*portion/D(snapshot['servings'])
         if not CENT <= grams <= 10000:
             raise ValueError('This portion gives an ingredient below 0.01 g or above 10000 g.')
         entries.append(dict(food_name=row['food']['name'], grams=grams,
@@ -42,7 +46,8 @@ def portion_entries(snapshot, portion):
 
 
 def totals(entries):
-    values = [entry_totals(row) for row in entries]
+    values = [{key:None if row['recipe_macros'].get(key) is None else D(row['recipe_macros'][key])*row['portion']
+               for key,_,_ in NUTRIENTS} if 'recipe_macros' in row else entry_totals(row) for row in entries]
     return {key: None if any(row[key] is None for row in values) else sum((row[key] for row in values), D(0))
             for key, _, _ in NUTRIENTS}
 
@@ -90,64 +95,25 @@ def exclusion_reasons(snapshot, rules, require_nutrition=True):
             reasons.append('Unwanted ingredients: '+', '.join(sorted(matches))+'.')
     if not set(rules['diets']).issubset(snapshot['dietary_tags']):
         reasons.append('Missing required dietary preference tags.')
-    if require_nutrition and any(row['food'][key+'_100g'] is None
+    if require_nutrition and snapshot.get('catalogue_recipe'):
+        if any(snapshot['macros'].get(key) is None for key,_,_ in NUTRIENTS):
+            reasons.append('Unknown per-serving nutrition values.')
+    elif require_nutrition and any(row['food'][key+'_100g'] is None
                                  for row in snapshot['ingredients'] for key, _, _ in NUTRIENTS):
         reasons.append('Unknown nutrition values; automatic planning requires all four nutrients.')
     return reasons
 
 
 def differences(total, targets):
-    return {key: total[key]-D(targets[key]) for key, _, _ in NUTRIENTS}
+    return {key: None if targets.get(key) is None or total[key] is None else total[key]-D(targets[key])
+            for key, _, _ in NUTRIENTS}
 
 
 def exact_match(total, targets):
-    return all(total[key] is not None and total[key] == D(targets[key]) for key, _, _ in NUTRIENTS)
+    selected=[key for key,_,_ in NUTRIENTS if targets.get(key) is not None]
+    return bool(selected) and all(total[key] is not None and total[key] == D(targets[key]) for key in selected)
 
 
-def generate(snapshots, targets):
-    """Search a documented finite grid; never describe a heuristic result as an optimum."""
-    if any(targets.get(key) is None for key, _, _ in NUTRIENTS):
-        return None, ['Set all four manual daily targets before generating a draft.']
-    target = {key: D(targets[key]) for key, _, _ in NUTRIENTS}
-    choices = []
-    notes = []
-    for meal, label in MEALS:
-        eligible = [row for row in snapshots if meal in row['meals']]
-        if len(eligible) > MAX_RECIPES_PER_MEAL:
-            notes.append(f'{label}: search limited to the first {MAX_RECIPES_PER_MEAL} eligible recipes by name / ID.')
-        options = []
-        for snapshot in eligible[:MAX_RECIPES_PER_MEAL]:
-            for portion in PORTIONS:
-                try:
-                    value = totals(portion_entries(snapshot, portion))
-                except ValueError:
-                    continue
-                if all(value[key] is not None for key, _, _ in NUTRIENTS):
-                    options.append((snapshot, portion, value))
-        if not options:
-            notes.append(f'No eligible {label.lower()} recipe with complete nutrients and valid gram quantities at the supported portions.')
-            return None, notes
-        choices.append(options)
-    for key, label, unit in NUTRIENTS:
-        low = sum((min(option[2][key] for option in group) for group in choices), D(0))
-        high = sum((max(option[2][key] for option in group) for group in choices), D(0))
-        if not low <= target[key] <= high:
-            notes.append(f'{label} target is outside the searched portion range ({amount(low)}–{amount(high)} {unit}). Targets cannot all be met within this grid.')
-    # Keep bounded prefixes close to progressive daily targets. All arithmetic stays Decimal.
-    beam = [(D(0), (), {key: D(0) for key, _, _ in NUTRIENTS})]
-    fractions = (D('.25'), D('.60'), D('.90'), D(1))
-    for index, options in enumerate(choices):
-        expanded = []
-        for _, selected, current in beam:
-            for option_index, (_, _, value) in enumerate(options):
-                total = {key: current[key]+value[key] for key, _, _ in NUTRIENTS}
-                score = sum(((total[key]-target[key]*fractions[index])/max(target[key],D(1)))**2
-                            for key, _, _ in NUTRIENTS)
-                expanded.append((score, selected+(option_index,), total))
-        expanded.sort(key=lambda row: (row[0], row[1]))
-        beam = expanded[:BEAM_WIDTH]
-    _, selected, result = beam[0]
-    notes.append('Bounded search: up to 20 recipes per meal, 0.25–2 servings in 0.25 steps, 128 retained combinations per stage. Recipes may repeat. Global optimality is not guaranteed.')
-    notes.append('All four targets matched exactly.' if exact_match(result, target) else
-                 'Targets were not met. Review the explicit differences; this is the closest draft found in the bounded search.')
-    return [(choices[i][chosen][0],choices[i][chosen][1]) for i,chosen in enumerate(selected)], notes
+def generate(snapshots, targets, preferences=None):
+    from .nutrition_fit import fit
+    return fit(snapshots,targets,preferences)

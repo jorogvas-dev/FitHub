@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Workout calendar · FitHub{% endblock %}
+{% block content %}{% include 'workouts/_nav.html' %}
+<header class="page-heading"><div><p class="eyebrow">TRAINING / YOUR SCHEDULE</p><h1>Workout calendar</h1><p class="note">{{ calendar.timezone }} · Weeks start Monday. Completed sessions appear on their completion date.</p></div><a class="button" href="{{ url_for('workout_calendar.create') }}">{{ icon('plus') }}Schedule workout</a></header>
+<nav class="calendar-controls" aria-label="Calendar month">
+{% if calendar.previous %}<a class="button secondary" href="{{ url_for('workout_calendar.index',month=calendar.previous.strftime('%Y-%m')) }}">Previous month</a>{% endif %}
+<h2>{{ calendar.start.strftime('%B %Y') }}</h2>
+<a class="button secondary" href="{{ url_for('workout_calendar.index') }}">Today</a>
+{% if calendar.next %}<a class="button secondary" href="{{ url_for('workout_calendar.index',month=calendar.next.strftime('%Y-%m')) }}">Next month</a>{% endif %}
+</nav>
+<p><a href="#calendar-agenda">Jump to chronological agenda</a></p>
+<table class="calendar-month"><caption class="visually-hidden">{{ calendar.start.strftime('%B %Y') }} workout calendar</caption>
+<thead><tr>{% for short,long in [('Mon','Monday'),('Tue','Tuesday'),('Wed','Wednesday'),('Thu','Thursday'),('Fri','Friday'),('Sat','Saturday'),('Sun','Sunday')] %}<th scope="col"><abbr title="{{ long }}">{{ short }}</abbr></th>{% endfor %}</tr></thead>
+<tbody>{% for week in calendar.weeks %}<tr>{% for date in week %}<td class="{{ 'calendar-today' if date==calendar.today }} {{ 'calendar-padding' if date.month!=calendar.start.month }}">
+{% if date.month==calendar.start.month %}{% set events=calendar.grouped.get(date,[]) %}
+<a class="calendar-date" href="{{ '#day-'~date.isoformat() if events else url_for('workout_calendar.create',date=date.isoformat()) }}" aria-label="{{ date.strftime('%d %B %Y') }}: {{ (events|length|string)~' calendar entries' if events else 'schedule a workout' }}" {% if date==calendar.today %}aria-current="date"{% endif %}>{{ date.day }}{% if events %}<span class="calendar-count">{{ events|length }}<span class="visually-hidden"> entries</span></span>{% endif %}</a>
+{% if events %}<span class="calendar-cell-label" aria-hidden="true">{{ events[0].status }}{% if events|length>1 %} +{{ events|length-1 }}{% endif %}</span>{% endif %}
+{% endif %}</td>{% endfor %}</tr>{% endfor %}</tbody></table>
+<section id="calendar-agenda" aria-labelledby="agenda-heading"><div class="section-heading"><h2 id="agenda-heading">{{ calendar.start.strftime('%B') }} agenda</h2></div>
+{% for date,events in calendar.grouped.items() %}<section class="calendar-agenda-day" id="day-{{ date }}" aria-labelledby="date-{{ date }}"><h3 id="date-{{ date }}"><time datetime="{{ date }}">{{ date.strftime('%A, %d %B') }}</time></h3>
+<ul class="calendar-agenda-list">{% for event in events %}<li class="calendar-event"><div><span class="badge">{{ event.status }}</span><h4>{{ event.name }}</h4><p>{{ event.plan_name }}</p>
+{% if event.deleted %}<p class="note">Original plan day deleted. Cancel this entry and schedule an available day.</p>{% endif %}
+{% if event.finished_local %}<p class="note">Completed {{ event.finished_local.strftime('%H:%M %Z') }}{% if event.scheduled_on %} · Originally scheduled {{ event.scheduled_on }}{% endif %}</p>{% endif %}</div>
+<div class="actions">{% if not event.session_id and not event.deleted and event.status!='Cancelled' %}<a class="button" href="{{ url_for('workout_calendar.detail',identifier=event.schedule_id) }}">Start workout</a>{% endif %}{% if event.session_id %}<a class="button secondary" href="{{ url_for('workouts.detail',session_id=event.session_id) }}">{{ 'View workout' if event.status=='Completed' else 'Resume workout' }}</a>{% endif %}{% if event.schedule_id %}<a href="{{ url_for('workout_calendar.detail',identifier=event.schedule_id) }}">{{ 'Manage entry' if event.status!='Completed' else 'Scheduled entry' }}</a>{% endif %}</div></li>{% endfor %}</ul></section>
+{% else %}<div class="training-empty"><h3>No workouts this month</h3><p>Schedule a plan day, or complete a workout to see it here.</p><a class="button secondary" href="{{ url_for('workout_calendar.create',date=calendar.start.isoformat()) }}">Schedule workout</a></div>{% endfor %}</section>
+{% endblock %}

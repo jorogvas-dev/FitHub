@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
-{% block title %}Set up your training profile · FitHub{% endblock %}
+{% block title %}Set up your training profile · FitHub
+{% endblock %}
 {% block content %}
 <section class="form-card onboarding">
   <p class="eyebrow">YOUR STARTING POINT</p><h1>Make FitHub yours.</h1>
@@ -24,7 +25,8 @@
         <p class="field-help">20–500 kg, up to two decimal places. A new entry is dated {{ today }}.</p>
       {% endif %}
     </fieldset>
-    <div class="form-actions"><button class="button">Save and open dashboard</button><a href="{{ url_for('main.dashboard') }}">Do this later</a></div>
+    <div class="form-actions"><button class="button">Continue to training preferences</button><a href="{{ url_for('main.dashboard') }}">Do this later</a></div>
   </form>
 </section>
+<section class="form-card"><p class="eyebrow">OPTIONAL / NUTRITION</p><h2>A day of meals to review</h2><p>Use your saved dietary preferences, allergies and excluded foods. Starter recipes are available, and targets are optional.</p><a class="button secondary" href="{{ url_for('meals.plan_new',starters='yes') }}">Generate nutrition plan</a><p class="note">You can skip this and return later from Meal plans. Nothing is added to your diary.</p></section>
 {% endblock %}

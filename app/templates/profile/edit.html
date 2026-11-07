@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
-{% block title %}Fitness profile · FitHub{% endblock %}
+{% block title %}Fitness profile · FitHub
+{% endblock %}
 {% block content %}
 <section class="form-card">
   <a href="{{ url_for('main.dashboard') }}">← Dashboard</a>
@@ -13,6 +14,7 @@
     <label>Experience<select name="experience"><option value="">Not set</option>{% for value, label in experience_levels %}<option value="{{ value }}" {% if values.get('experience') == value %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>
     <button class="button">Save profile</button>
   </form>
-  <p><a href="{{ url_for('profile.history') }}">View bodyweight history</a></p>
+  <p><a href="{{ url_for('profile.history') }}">View bodyweight history</a></p><p><a href="{{ url_for('workout_ai.preferences') }}">Edit training preferences</a> · <a href="{{ url_for('workout_ai.generate') }}">Generate workout plan</a></p>
 </section>
+<p><a href="{{ url_for('meals.plan_new',starters='yes') }}">Generate nutrition plan</a></p>
 {% endblock %}

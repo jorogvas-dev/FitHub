@@ -1,0 +1,19 @@
+{% extends 'base.html' %}{% block title %}Training preferences · FitHub
+{% endblock %}
+{% block content %}<section class="form-card">
+<p class="eyebrow">OPTIONAL SETUP / TRAINING</p><h1>How do you want to train?</h1>
+<p>Your existing height, weight, goal and experience are kept. These preferences help generate a workout draft you can review and edit.</p>
+{% set values = request.form if request.method == 'POST' else preferences %}
+{% set selected_equipment = request.form.getlist('equipment') if request.method == 'POST' else preferences.get('equipment',[]) %}
+{% set selected_movements = request.form.getlist('avoid_movements') if request.method == 'POST' else preferences.get('avoid_movements',[]) %}
+<form method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+<div class="input-pair"><label>Training days per week<input type="number" name="days_per_week" min="1" max="7" step="1" required value="{{ values.get('days_per_week') or '' }}"></label>
+<label>Minutes per session<input type="number" name="minutes_per_session" min="15" max="180" step="1" required value="{{ values.get('minutes_per_session') or '' }}"></label></div>
+<fieldset><legend>Available equipment</legend><p class="note">Bodyweight movements need no equipment and are always available. Select only equipment you can use.</p>
+{% for key,label in equipment %}<label class="checkbox"><input type="checkbox" name="equipment" value="{{ key }}" {% if key in selected_equipment %}checked{% endif %}>{{ label }}</label>{% endfor %}</fieldset>
+<fieldset><legend>Movements to avoid</legend><p class="note">Choose movement groups to exclude. These are catalogue filters, not a medical assessment. You can also remove or replace individual exercises in the draft.</p>
+{% for key,label,pattern in movements %}<label class="checkbox"><input type="checkbox" name="avoid_movements" value="{{ key }}" {% if key in selected_movements %}checked{% endif %}>{{ label }}</label>{% endfor %}</fieldset>
+<div class="form-actions"><button class="button" name="action" value="save">Save training preferences</button><button class="button secondary" name="action" value="skip" formnovalidate>Skip for now</button></div></form>
+<p class="note">Editable later from <a href="{{ url_for('profile.edit') }}">Fitness profile</a> or <a href="{{ url_for('plans.index') }}">Workout plans</a>. Skipping keeps the manual plan builder available.</p>
+</section><section class="form-card"><p class="eyebrow">OPTIONAL / NUTRITION</p><h2>A day of meals to review</h2><p>Use your saved dietary preferences, allergies and excluded foods. Starter recipes are available, and targets are optional.</p><a class="button secondary" href="{{ url_for('meals.plan_new',starters='yes') }}">Generate nutrition plan</a><p class="note">You can skip this and return later from Meal plans. Nothing is added to your diary.</p></section>
+{% endblock %}

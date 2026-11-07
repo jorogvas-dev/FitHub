@@ -11,7 +11,13 @@ def create_app(test_config=None):
     app = Flask(__name__)
     app.config.update(SECRET_KEY=os.environ.get("SECRET_KEY"),
                       SESSION_COOKIE_HTTPONLY=True, SESSION_COOKIE_SAMESITE="Lax",
-                      MAX_CONTENT_LENGTH=64 * 1024)
+                      MAX_CONTENT_LENGTH=64 * 1024,
+                      WORKOUT_AI_ENDPOINT=os.environ.get('WORKOUT_AI_ENDPOINT', 'http://host.docker.internal:3000/api/chat/completions'),
+                      WORKOUT_AI_MODEL=os.environ.get('WORKOUT_AI_MODEL', 'qwen2.5-7b-nerd-uncensored-v1.0'),
+                      NUTRITION_AI_MODEL=os.environ.get('NUTRITION_AI_MODEL', 'fithub-coach'),
+                      WORKOUT_AI_TOOL_IDS=os.environ.get('WORKOUT_AI_TOOL_IDS', ''),
+                      WORKOUT_AI_API_KEY_FILE=os.environ.get('WORKOUT_AI_API_KEY_FILE', '/run/secrets/fithub/openwebui-api-key.txt'),
+                      WORKOUT_AI_TIMEOUT_SECONDS=os.environ.get('WORKOUT_AI_TIMEOUT_SECONDS', '120'))
     if test_config:
         app.config.update(test_config)
     if not app.config['SECRET_KEY']:
@@ -25,6 +31,8 @@ def create_app(test_config=None):
     app.register_blueprint(plans_bp)
     from .routes.workouts import bp as workouts_bp
     app.register_blueprint(workouts_bp)
+    from .routes.workout_calendar import bp as calendar_bp
+    app.register_blueprint(calendar_bp)
     from .routes.profile import bp as profile_bp
     app.register_blueprint(profile_bp)
     from .routes.admin import bp as admin_bp
@@ -35,6 +43,8 @@ def create_app(test_config=None):
     app.register_blueprint(food_library_bp)
     from .routes.meals import bp as meals_bp
     app.register_blueprint(meals_bp)
+    from .routes.workout_ai import bp as workout_ai_bp
+    app.register_blueprint(workout_ai_bp)
     from .cli import register_commands
     register_commands(app)
 

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}{% block title %}Generate workout plan · FitHub{% endblock %}
+{% block content %}<section class="form-card"><a href="{{ url_for('plans.index') }}">← Workout plans</a>
+<p class="eyebrow">WORKOUT / AI DRAFT</p><h1>Generate workout plan</h1>
+<p>The local AI proposes a private draft. You review and edit it before choosing <strong>Save as new plan</strong>. Generating never starts or logs a workout.</p>
+{% if error %}<p class="notice" role="alert">{{ error }}</p>{% endif %}
+{% if preferences %}<dl class="food-facts"><div><dt>Days per week</dt><dd>{{ preferences.days_per_week }}</dd></div><div><dt>Session budget</dt><dd>{{ preferences.minutes_per_session }} minutes</dd></div></dl>{% endif %}
+{% if profile %}<p class="note">Using your current profile: {{ profile.height_cm }} cm, {{ profile.weight_kg }} kg, {{ profile.goal|replace('_',' ') }}, {{ profile.experience }}.</p>{% endif %}
+<p><a href="{{ url_for('workout_ai.preferences') }}">Edit training preferences</a> · <a href="{{ url_for('profile.onboarding') }}">Complete profile setup</a></p>
+{% if preferences and profile and candidate_count %}<form method="post" data-workout-generation aria-describedby="generation-status"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="button">Generate workout draft</button></form>
+<p id="generation-status" class="note" role="status" aria-live="polite" hidden>Generating your draft. This may take a few minutes. Keep this page open; you can review everything before saving.</p>
+<p class="note">Sends these profile values, your training preferences and up to {{ candidate_count }} eligible catalogue exercises to your existing local AI. A full plan can take a few minutes. Session duration is an estimate.</p>
+<script src="{{ url_for('static',filename='js/workout-generation.js') }}" defer></script>{% endif %}
+<p><a class="button secondary" href="{{ url_for('plans.create') }}">Use manual plan builder</a></p>
+</section>{% endblock %}

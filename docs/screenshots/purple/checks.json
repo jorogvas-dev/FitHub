@@ -1,0 +1,246 @@
+{
+  "username": "ui_purple_3a22ff2a",
+  "checks": [
+    "Registered isolated synthetic browser account",
+    "kcal asc retains filters/date",
+    "kcal asc numeric order, ties, unknown last",
+    "kcal asc missing distinct from zero",
+    "kcal asc log links retain date",
+    "kcal desc retains filters/date",
+    "kcal desc numeric order, ties, unknown last",
+    "kcal desc missing distinct from zero",
+    "kcal desc log links retain date",
+    "kcal stable ID tie-breaker",
+    "protein asc retains filters/date",
+    "protein asc numeric order, ties, unknown last",
+    "protein asc missing distinct from zero",
+    "protein asc log links retain date",
+    "protein desc retains filters/date",
+    "protein desc numeric order, ties, unknown last",
+    "protein desc missing distinct from zero",
+    "protein desc log links retain date",
+    "protein stable ID tie-breaker",
+    "carbs asc retains filters/date",
+    "carbs asc numeric order, ties, unknown last",
+    "carbs asc missing distinct from zero",
+    "carbs asc log links retain date",
+    "carbs desc retains filters/date",
+    "carbs desc numeric order, ties, unknown last",
+    "carbs desc missing distinct from zero",
+    "carbs desc log links retain date",
+    "carbs stable ID tie-breaker",
+    "fat asc retains filters/date",
+    "fat asc numeric order, ties, unknown last",
+    "fat asc missing distinct from zero",
+    "fat asc log links retain date",
+    "fat desc retains filters/date",
+    "fat desc numeric order, ties, unknown last",
+    "fat desc missing distinct from zero",
+    "fat desc log links retain date",
+    "fat stable ID tie-breaker",
+    "Food Library has no external source links",
+    "Food Library has no provenance badges/citations",
+    "Library preparation survives sorting",
+    "Food Library fits 1280px",
+    "Food Library fits 375px",
+    "Library logging view hides citations",
+    "Log form retains selected diary date",
+    "Target edit retains decimal precision",
+    "Portion 100.50 displays 101 g",
+    "Exact sum 5.025 displays 5 kcal",
+    "Incomplete zero subtotal remains labelled",
+    "Incomplete totals keep remaining unknown",
+    "Complete zero remains numeric zero",
+    "Half-up target 2000.50 displays 2001",
+    "Diary fits 1280px",
+    "Diary fits 375px",
+    "Entry edit keeps grams precision",
+    "Entry edit keeps nutrient precision",
+    "Dashboard shares whole-number calorie rounding",
+    "Dashboard retains incomplete status",
+    "Dashboard fits 1280px",
+    "Dashboard fits 375px",
+    "training fits 1280px",
+    "training fits 375px",
+    "workouts fits 1280px",
+    "workouts fits 375px",
+    "exercises fits 1280px",
+    "exercises fits 375px",
+    "profile fits 1280px",
+    "profile fits 375px",
+    "meal-plans fits 1280px",
+    "meal-plans fits 375px",
+    "Keyboard focus has a visible outline",
+    "Text contrast --text on --bg",
+    "Text contrast --muted on --bg",
+    "Text contrast --accent on --bg",
+    "Text contrast --warning on --bg",
+    "Text contrast --danger on --bg",
+    "Text contrast --text on --panel",
+    "Text contrast --muted on --panel",
+    "Text contrast --accent on --panel",
+    "Text contrast --warning on --panel",
+    "Text contrast --danger on --panel",
+    "Text contrast --text on --surface",
+    "Text contrast --muted on --surface",
+    "Text contrast --accent on --surface",
+    "Text contrast --warning on --surface",
+    "Text contrast --danger on --surface",
+    "Text contrast --text on --selected",
+    "Text contrast --muted on --selected",
+    "Text contrast --accent on --selected",
+    "Text contrast --warning on --selected",
+    "Text contrast --danger on --selected",
+    "Button contrast --button-fill",
+    "Button contrast --secondary-fill",
+    "Button contrast --danger-fill",
+    "No browser JavaScript errors"
+  ],
+  "screenshots": [
+    "sorting-missing-desc-1280.png",
+    "food-library-1280.png",
+    "food-library-375.png",
+    "log-food-375.png",
+    "diary-1280.png",
+    "diary-375.png",
+    "edit-precision-375.png",
+    "dashboard-1280.png",
+    "dashboard-375.png",
+    "training-1280.png",
+    "training-375.png",
+    "workouts-1280.png",
+    "workouts-375.png",
+    "exercises-1280.png",
+    "exercises-375.png",
+    "profile-1280.png",
+    "profile-375.png",
+    "meal-plans-1280.png",
+    "meal-plans-375.png",
+    "delete-1280.png",
+    "keyboard-focus-1280.png"
+  ],
+  "errors": [],
+  "focus": {
+    "tag": "A",
+    "style": "solid",
+    "width": "3px",
+    "color": "rgb(214, 189, 245)"
+  },
+  "contrast": [
+    {
+      "foreground": "--text",
+      "background": "--bg",
+      "ratio": 16.42
+    },
+    {
+      "foreground": "--muted",
+      "background": "--bg",
+      "ratio": 9.35
+    },
+    {
+      "foreground": "--accent",
+      "background": "--bg",
+      "ratio": 11.22
+    },
+    {
+      "foreground": "--warning",
+      "background": "--bg",
+      "ratio": 11.89
+    },
+    {
+      "foreground": "--danger",
+      "background": "--bg",
+      "ratio": 11.06
+    },
+    {
+      "foreground": "--text",
+      "background": "--panel",
+      "ratio": 14.2
+    },
+    {
+      "foreground": "--muted",
+      "background": "--panel",
+      "ratio": 8.08
+    },
+    {
+      "foreground": "--accent",
+      "background": "--panel",
+      "ratio": 9.7
+    },
+    {
+      "foreground": "--warning",
+      "background": "--panel",
+      "ratio": 10.28
+    },
+    {
+      "foreground": "--danger",
+      "background": "--panel",
+      "ratio": 9.57
+    },
+    {
+      "foreground": "--text",
+      "background": "--surface",
+      "ratio": 13.15
+    },
+    {
+      "foreground": "--muted",
+      "background": "--surface",
+      "ratio": 7.48
+    },
+    {
+      "foreground": "--accent",
+      "background": "--surface",
+      "ratio": 8.98
+    },
+    {
+      "foreground": "--warning",
+      "background": "--surface",
+      "ratio": 9.52
+    },
+    {
+      "foreground": "--danger",
+      "background": "--surface",
+      "ratio": 8.86
+    },
+    {
+      "foreground": "--text",
+      "background": "--selected",
+      "ratio": 10.79
+    },
+    {
+      "foreground": "--muted",
+      "background": "--selected",
+      "ratio": 6.14
+    },
+    {
+      "foreground": "--accent",
+      "background": "--selected",
+      "ratio": 7.37
+    },
+    {
+      "foreground": "--warning",
+      "background": "--selected",
+      "ratio": 7.81
+    },
+    {
+      "foreground": "--danger",
+      "background": "--selected",
+      "ratio": 7.27
+    },
+    {
+      "foreground": "--button-text",
+      "background": "--button-fill",
+      "ratio": 7.72
+    },
+    {
+      "foreground": "--accent",
+      "background": "--secondary-fill",
+      "ratio": 8.43
+    },
+    {
+      "foreground": "--text",
+      "background": "--danger-fill",
+      "ratio": 8.11
+    }
+  ]
+}

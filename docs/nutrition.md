@@ -136,20 +136,23 @@ preferences and source nutrition are not a guarantee that a food is safe.
 
 ## Draft, review, save, then log
 
-Choose a date using your saved IANA timezone (default Europe/Sofia). Set all four
-manual calorie/macro targets first; explicit zero is valid, unset is not inferred.
+Choose a date using your saved IANA timezone (default Europe/Sofia). Calorie and macro
+targets are optional; explicit zero is valid and unset values are never inferred.
+Without targets, drafts start with one serving per meal where supported and show
+their totals for review. With partial targets, only set values guide the search.
+See [optional onboarding and starter recipes](./nutrition-generation.md) for the latest flow and verification.
 The planner chooses breakfast, lunch, dinner and snack recipes without relaxing
 exclusions. Recipes may repeat across suitable slots.
 
 The finite grid uses 0.25–2 servings in 0.25 steps, up to the first 20 eligible
-recipes per slot ordered by name/ID, and 128 retained combinations after each search
-stage. A normalized squared difference scores calorie and all three macro targets
-with equal weight; intermediate stages compare progressive fractions 25%, 60%,
+recipes per slot (private recipes in name/ID order, then starter templates), and 128 retained combinations after each search
+stage. A normalized squared difference scores the set targets with equal weight;
+intermediate stages compare progressive fractions 25%, 60%,
 90%, 100% of the daily targets. This is a bounded heuristic, not a global optimizer.
 Search limits and exclusions appear explicitly. With no eligible option for a slot,
 no draft is saved and the reason is shown. Out-of-range targets are identified;
-otherwise a closest-found draft can still miss targets. Only exact equality of all
-four totals is described as matching targets. No tolerance silently changes targets.
+otherwise a closest-found draft can still miss targets. Only exact equality of the
+set targets is described as matching targets. No tolerance silently changes targets.
 
 Review the target, planned amount and explicit over/below differences. Adjust a
 portion or swap to another eligible recipe before saving. Saving a plan with any
@@ -253,3 +256,26 @@ PostgreSQL; no existing account's permissions were changed for browser testing.
    snapshots must retain their original names, rates, provenance and quantities.
 8. Verify timezone-local Today, date navigation, empty states and a narrow/mobile
    layout. With a second account, copied recipe/plan/ingredient IDs must return 404.
+
+
+## Optional meal plan names
+
+Meal plan creation (manual and FitHub Coach) accepts an optional name of up to
+100 characters. Existing drafts and saved plans have an Add a name / Edit name
+link. Clearing the field restores the numbered fallback. Names appear in the
+plan list, detail heading/page title and dashboard. Renaming updates only owned
+plan metadata, leaving dates, meals, targets, saved status and diary snapshots
+unchanged. Names are escaped on display, and mutations require CSRF and ownership.
+
+Additive migration `013_meal_plan_names` preserves existing unnamed plans. Deploy:
+
+```powershell
+Set-Location E:\FitHub-School
+docker compose build web
+docker compose run --rm --no-deps -T web flask --app app db-upgrade
+docker compose up -d --no-deps --wait --wait-timeout 180 web
+```
+
+Four focused PostgreSQL tests pass (optional creation, rename/reset, saved plans
+and historical snapshots, ownership/CSRF/validation/escaping, repeatable migration).
+Ten Chrome browser checks pass at 1280 and 375 pixels, with no horizontal overflow.

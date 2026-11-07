@@ -1,0 +1,7 @@
+{% extends 'base.html' %}{% block title %}Schedule workout · FitHub{% endblock %}
+{% block content %}{% include 'workouts/_nav.html' %}<section class="form-card"><a href="{{ url_for('workout_calendar.index') }}">← Calendar</a><h1>Schedule workout</h1><p class="note">Choose one of your plan days. You can schedule multiple workouts on the same date. Scheduling does not create a workout session.</p>
+{% if days %}<form method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="preview" value="{{ preview }}">
+<label>Training day<select name="day_id" required><option value="">Choose a plan day</option>{% for day in days %}<option value="{{ day.day_id }}">{{ day.plan_name }} · {{ day.name }}</option>{% endfor %}</select></label>
+<label>Scheduled date<input type="date" name="scheduled_on" required min="1900-01-01" max="2100-12-31" value="{{ selected_date }}"></label>
+<div class="form-actions"><button class="button">Schedule workout</button><a href="{{ url_for('workout_calendar.index') }}">Cancel</a></div></form>
+{% else %}<p>No plan days are available. <a href="{{ url_for('plans.index') }}">Create a workout plan and add a day</a> first.</p>{% endif %}</section>{% endblock %}
